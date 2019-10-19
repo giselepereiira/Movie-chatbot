@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\Users\\Gisele\\git\\TDX-UC-NLP-DSAcademy\\ConversationalAIMovieChatbot\\Movie-Rasa-Project\\models\\movie_rasa_model\\nlu\\component_6_EmbeddingIntentClassifier.ckpt"
+all_model_checkpoint_paths: "C:\\Users\\Gisele\\git\\TDX-UC-NLP-DSAcademy\\ConversationalAIMovieChatbot\\Movie-Rasa-Project\\models\\movie_rasa_model\\nlu\\component_6_EmbeddingIntentClassifier.ckpt"
