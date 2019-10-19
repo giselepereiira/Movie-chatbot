@@ -31,6 +31,7 @@
   - utter_iamabot
 
 ## search movie by director
-* movie_search{"director": "quentin tarantino"}
-    - utter_movie_search_result
-    
+* movie_search
+    - movie_search_form
+    - form{"name":"movie_search_form"}
+    - form{"name": null}

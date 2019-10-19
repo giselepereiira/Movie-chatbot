@@ -16,6 +16,7 @@ actions:
 - utter_goodbye
 - utter_iamabot
 - utter_movie_search_result
+- utter_ask_director
 
 entities:
 - director
@@ -46,3 +47,9 @@ templates:
 
   utter_movie_search_result:
     - text: "Director name: {director};"
+
+  utter_ask_director:
+    - text: "What is the name director?"
+
+forms:
+  - movie_search_form

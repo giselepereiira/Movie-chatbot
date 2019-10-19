@@ -1,5 +1,5 @@
 actions:
-- utter_car_search_result
+- utter_ask_director
 - utter_cheer_up
 - utter_did_that_help
 - utter_goodbye
@@ -10,10 +10,9 @@ actions:
 config:
   store_entities_as_slots: true
 entities:
-- brand_name
 - director
-- year_of_manufacture
-forms: []
+forms:
+- movie_search_form
 intents:
 - greet:
     ignore_entities: []
@@ -39,25 +38,18 @@ intents:
 - movie_search:
     ignore_entities: []
     use_entities: true
-- car_search:
-    ignore_entities: []
-    use_entities: true
 slots:
-  brand_name:
-    auto_fill: true
-    initial_value: null
-    type: rasa.core.slots.TextSlot
   director:
     auto_fill: true
     initial_value: null
     type: rasa.core.slots.TextSlot
-  year_of_manufacture:
+  requested_slot:
     auto_fill: true
     initial_value: null
-    type: rasa.core.slots.TextSlot
+    type: rasa.core.slots.UnfeaturizedSlot
 templates:
-  utter_car_search_result:
-  - text: 'Brand: {brand_name}; Year of manufacture: {year_of_manufacture}'
+  utter_ask_director:
+  - text: What is the name director?
   utter_cheer_up:
   - image: https://i.imgur.com/nGF1K8f.jpg
     text: 'Here is something to cheer you up:'
