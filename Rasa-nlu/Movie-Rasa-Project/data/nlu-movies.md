@@ -55,25 +55,29 @@
 - am I talking to a bot?
 - am I talking to a human?
 
-##intent:get_movie
+## intent:get_movie
 - what movies were directed by [quentin tarantino](director)?
 - what movies had the participation of [tom cruise](actor)?
 - what were the top rated movies in [2018](year_of_movie)?
 - tell me [comedy](movie_type) movies that had the participation of [eddie murphy](actor)
 - tell me movies in [french](movie_language) that were produced between [2018](year) and [2019](year)
 
-##lookup:director
+## lookup:director
 data/lookup-tables/director.txt
 
-##lookup:actor
+## lookup:actor
 data/lookup-tables/actor.txt
 
-##lookup:movie_type
+## lookup:movie_type
 data/lookup-tables/movie_type.txt
 
-##lookup:movie_language
+## lookup:movie_language
 data/lookup-tables/movie_language.txt
 
 ## regex:year_of_movie
 - \b(19|20)\d{2}\b
+
+## synonym:movies
+- films
+
 
