@@ -29,4 +29,4 @@ def train_movie_nlu_model():
     return interpreter
 
 
-interpreter = train_movie_nlu_model()
+train_movie_nlu_model()

@@ -35,3 +35,4 @@
     - movie_search_form
     - form{"name":"movie_search_form"}
     - form{"name": null}
+    - action_search_movie

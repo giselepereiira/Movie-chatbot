@@ -1,6 +1,8 @@
 actions:
+- action_search_movie
 - utter_ask_director
 - utter_cheer_up
+- utter_default
 - utter_did_that_help
 - utter_goodbye
 - utter_greet
@@ -53,6 +55,8 @@ templates:
   utter_cheer_up:
   - image: https://i.imgur.com/nGF1K8f.jpg
     text: 'Here is something to cheer you up:'
+  utter_default:
+  - text: sorry, I didn't get that, can you rephrase it?
   utter_did_that_help:
   - text: Did that help you?
   utter_goodbye:

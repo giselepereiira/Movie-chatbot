@@ -18,6 +18,7 @@ actions:
 - utter_default
 - utter_movie_search_result
 - utter_ask_director
+- action_search_movie
 
 entities:
 - director
