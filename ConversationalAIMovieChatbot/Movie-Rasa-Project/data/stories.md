@@ -30,6 +30,7 @@
 * bot_challenge
   - utter_iamabot
 
-## find movie by director
-* get_movie{"director":"tarantino"}
+## search movie by director
+* movie_search{"director": "quentin tarantino"}
     - utter_movie_search_result
+    

@@ -8,7 +8,7 @@ from rasa.nlu import config
 import tarfile
 
 movie_project = "Movie-Rasa-Project"
-create_initial_project(movie_project)
+#create_initial_project(movie_project)
 
 movie_config_path = movie_project + "/config.yml"
 movie_training_files = movie_project + "/data/"
@@ -42,4 +42,4 @@ def train_movie_nlu_model():
 
 
 interpreter = train_movie_nlu_model()
-print(interpreter.parse("Is there any good ferrari from 2017?")) # Now the intent 'car_search' is detected
+#print(interpreter.parse("Is there any good ferrari from 2017?")) # Now the intent 'car_search' is detected

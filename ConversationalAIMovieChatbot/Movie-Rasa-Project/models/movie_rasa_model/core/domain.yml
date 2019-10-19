@@ -1,13 +1,18 @@
 actions:
+- utter_car_search_result
 - utter_cheer_up
 - utter_did_that_help
 - utter_goodbye
 - utter_greet
 - utter_happy
 - utter_iamabot
+- utter_movie_search_result
 config:
   store_entities_as_slots: true
-entities: []
+entities:
+- brand_name
+- director
+- year_of_manufacture
 forms: []
 intents:
 - greet:
@@ -31,8 +36,28 @@ intents:
 - bot_challenge:
     ignore_entities: []
     use_entities: true
-slots: {}
+- movie_search:
+    ignore_entities: []
+    use_entities: true
+- car_search:
+    ignore_entities: []
+    use_entities: true
+slots:
+  brand_name:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  director:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  year_of_manufacture:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
 templates:
+  utter_car_search_result:
+  - text: 'Brand: {brand_name}; Year of manufacture: {year_of_manufacture}'
   utter_cheer_up:
   - image: https://i.imgur.com/nGF1K8f.jpg
     text: 'Here is something to cheer you up:'
@@ -46,3 +71,5 @@ templates:
   - text: Great, carry on!
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_movie_search_result:
+  - text: 'Director name: {director};'
