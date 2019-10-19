@@ -29,7 +29,7 @@ tar.close()
 
 interpreter = Interpreter.load(movie_models_output + movie_model_name + "/nlu/")
 
-def train_example_nlu_model():
+def train_movie_nlu_model():
     example_training_data = load_data(movie_training_file_nlu)
 
     trainer = Trainer(config.load(movie_config_path))
@@ -40,5 +40,6 @@ def train_example_nlu_model():
 
     return interpreter
 
-interpreter = train_example_nlu_model()
+
+interpreter = train_movie_nlu_model()
 print(interpreter.parse("Is there any good ferrari from 2017?")) # Now the intent 'car_search' is detected

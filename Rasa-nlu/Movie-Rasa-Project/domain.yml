@@ -6,6 +6,7 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - get_movie
 
 actions:
 - utter_greet
@@ -14,6 +15,14 @@ actions:
 - utter_happy
 - utter_goodbye
 - utter_iamabot
+- utter_movie_search_result
+
+entities:
+  - director
+
+slots:
+    director:
+        type: text
 
 templates:
   utter_greet:
@@ -34,3 +43,6 @@ templates:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_movie_search_result:
+    - text: "Director name : {director}"

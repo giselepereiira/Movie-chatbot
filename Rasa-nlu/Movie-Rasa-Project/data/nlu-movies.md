@@ -63,16 +63,18 @@
 - tell me movies in [french](movie_language) that were produced between [2018](year) and [2019](year)
 
 ## lookup:director
-C:\Users\Gisele\git\TDX-UC-NLP-DSAcademy\Rasa-nlu\Movie-Rasa-Project\data\director.txt
+- quentin tarantino
 
 ## lookup:actor
-data/lookup-tables/actor.txt
-
+- tom cruise
+- eddie murphy
 ## lookup:movie_type
-data/lookup-tables/movie_type.txt
+- comedy
+- drama
 
 ## lookup:movie_language
-data/lookup-tables/movie_language.txt
+- french
+- english
 
 ## regex:year_of_movie
 - \b(19|20)\d{2}\b
