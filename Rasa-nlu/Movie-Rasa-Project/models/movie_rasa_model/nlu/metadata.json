@@ -120,6 +120,6 @@
             "class": "rasa.nlu.classifiers.embedding_intent_classifier.EmbeddingIntentClassifier"
         }
     ],
-    "trained_at": "20191019-152503",
+    "trained_at": "20191019-160310",
     "rasa_version": "1.3.10"
 }

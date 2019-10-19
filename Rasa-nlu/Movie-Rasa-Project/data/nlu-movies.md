@@ -63,7 +63,7 @@
 - tell me movies in [french](movie_language) that were produced between [2018](year) and [2019](year)
 
 ## lookup:director
-data/lookup-tables/director.txt
+C:\Users\Gisele\git\TDX-UC-NLP-DSAcademy\Rasa-nlu\Movie-Rasa-Project\data\director.txt
 
 ## lookup:actor
 data/lookup-tables/actor.txt
