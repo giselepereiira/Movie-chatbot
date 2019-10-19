@@ -8,11 +8,11 @@ from rasa.utils.endpoints import EndpointConfig
 from IPython.display import Image
 import time
 import logging
-import GetFilePaths
+import get_file_paths
 
 logging.basicConfig(level="CRITICAL")
 
-file_paths = GetFilePaths.getFilePaths()
+file_paths = get_file_paths.getFilePaths()
 
 PORT=5055
 

@@ -7,11 +7,11 @@ from rasa.core.policies.mapping_policy import MappingPolicy
 from rasa.core.policies.form_policy import FormPolicy
 from rasa.core.agent import Agent
 import asyncio
-import GetFilePaths
+import get_file_paths
 
 logging.basicConfig(level="CRITICAL")
 
-file_paths = GetFilePaths.getFilePaths()
+file_paths = get_file_paths.getFilePaths()
 
 
 def train_core():

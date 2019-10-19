@@ -4,9 +4,9 @@ from rasa.nlu.training_data import load_data
 from rasa.nlu.model import Trainer
 from rasa.nlu import config
 import tarfile
-import GetFilePaths
+import get_file_paths
 
-files_path = GetFilePaths.getFilePaths()
+files_path = get_file_paths.getFilePaths()
 
 movie_model_path = rasa.train(files_path['movie_domain_path'], files_path['movie_config_path'],[files_path['movie_training_files']],
 files_path['movie_models_output'], fixed_model_name=files_path['movie_model_name'])
@@ -29,4 +29,4 @@ def train_movie_nlu_model():
     return interpreter
 
 
-train_movie_nlu_model()
+interpreter = train_movie_nlu_model()
