@@ -15,6 +15,7 @@ actions:
 - utter_happy
 - utter_goodbye
 - utter_iamabot
+- utter_default
 - utter_movie_search_result
 - utter_ask_director
 
@@ -45,11 +46,15 @@ templates:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
+  utter_default:   # utterance sent by action_default_fallback
+    - text: "sorry, I didn't get that, can you rephrase it?"
+
   utter_movie_search_result:
     - text: "Director name: {director};"
 
   utter_ask_director:
     - text: "What is the name director?"
+
 
 forms:
   - movie_search_form
