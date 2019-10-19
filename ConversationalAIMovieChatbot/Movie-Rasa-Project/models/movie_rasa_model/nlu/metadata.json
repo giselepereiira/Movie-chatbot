@@ -49,7 +49,7 @@
         },
         {
             "name": "EntitySynonymMapper",
-            "file": null,
+            "file": "component_3_EntitySynonymMapper.json",
             "class": "rasa.nlu.extractors.entity_synonyms.EntitySynonymMapper"
         },
         {
@@ -120,6 +120,6 @@
             "class": "rasa.nlu.classifiers.embedding_intent_classifier.EmbeddingIntentClassifier"
         }
     ],
-    "trained_at": "20191019-160310",
+    "trained_at": "20191019-172713",
     "rasa_version": "1.3.10"
 }
