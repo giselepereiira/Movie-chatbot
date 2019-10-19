@@ -55,7 +55,8 @@
 - am I talking to a bot?
 - am I talking to a human?
 
-## intent:search_movie
+## intent:movie_search
+- i want a movie
 - what movies were directed by [quentin tarantino](director)?
 - what movies had the participation of [tom cruise](actor)?
 - what were the top rated movies in [2018](year_of_movie)?
