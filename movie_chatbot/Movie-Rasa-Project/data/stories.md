@@ -29,24 +29,17 @@
 ## bot challenge
 * bot_challenge
   - utter_iamabot
-
-## search movie 
-* movie_search
-    - movie_search_form
-    - form{"name":"movie_search_form"}
-    - form{"name": null}
-    - action_search_movie
     
 ## search movie by director
-* movie_search_director
-    - movie_search_form
-    - form{"name":"movie_search_form"}
+* movie_match_director
+    - movie_match_director_form
+    - form{"name":"movie_match_director_form"}
     - form{"name": null}
-    - action_search_movie
+    - action_match_director_search_movie
     
 ## search movie by actor
-* movie_search_actor
-    - movie_search_actor_form
-    - form{"name":"movie_search_actor_form"}
+* movie_match_actor
+    - movie_match_actor_form
+    - form{"name":"movie_match_actor_form"}
     - form{"name": null}
-    - action_search_movie_actor
+    - action_match_actor_search_movie

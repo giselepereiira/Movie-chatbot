@@ -61,7 +61,7 @@
 - tell me [comedy](movie_type) movies that had the participation of [eddie murphy](actor)
 - tell me movies in [french](movie_language) that were produced between [2018](year) and [2019](year)
 
-## intent:movie_search_director
+## intent:movie_match_director
 - what movies were directed by [quentin tarantino](director)?
 - what movies were directed by [ingmar bergman](director)?
 - what movies were directed by [marlon brando](director)?
@@ -73,13 +73,20 @@
 - what movies were directed by [buster keaton](director)?
 - what movies were directed by [stanley kubrick](director)?
 
-## intent:movie_search_actor
+## intent:movie_match_actor
 - what movies had the participation of [tom cruise](actor)?
 - what movies had the participation of [fred astaire](actor)?
 - what movies had the participation of [brigitte bardot](actor)?
 - what movies had the participation of [richard burton](actor)?
 - what movies had the participation of [humphrey bogart](actor)?
 - what movies had the participation of [lauren bacall](actor)?
+
+## intent:movie_match_year
+- what were the top rated movies in [2018](year_of_movie)?
+- what were the top rated movies in [2019](year_of_movie)?
+- what were the top rated movies in [1995](year_of_movie)?
+- what were the top rated movies in [1999](year_of_movie)?
+- what were the top rated movies in [1980](year_of_movie)?
 
 ## lookup:actor
 - tom cruise

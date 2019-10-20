@@ -14,16 +14,15 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction, REQUESTED_SLOT
 
-class MovieSearchForm(FormAction):
+class MovieMatchDirectorForm(FormAction):
 
     def name(self):
         # type: () -> Text
         print("i'm on the MovieSearchForm!")
-        return "movie_search_form"
+        return "movie_match_director_form"
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
-        print("i'm on the MovieSearchForm! required_slots")
         return ["director"]
 
     def submit(
@@ -33,15 +32,14 @@ class MovieSearchForm(FormAction):
             domain: Dict[Text, Any],
     ) -> List[Dict]:
         # utter submit template
-        dispatcher.utter_template("utter_movie_search_result", tracker)
-        print("i'm on the MovieSearchForm! submit")
+        dispatcher.utter_template("utter_movie_match_director_result", tracker)
         return [SlotSet("director", None)]
 
-class ActionSearchMovie(Action):
+class ActionMatchDirectorSearchMovie(Action):
 #TODO
     def name(self):
         # type: () -> Text
-        return "action_search_movie"
+        return "action_match_director_search_movie"
 
     def run(self,
             dispatcher: CollectingDispatcher,
@@ -96,11 +94,11 @@ class ActionSearchMovie(Action):
     #     return cars_dataset
     #
 
-class MovieSearchFormActor(FormAction):
+class MovieMatchActorForm(FormAction):
 
     def name(self):
         # type: () -> Text
-        return "movie_search_actor_form"
+        return "movie_match_actor_form"
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
@@ -113,18 +111,18 @@ class MovieSearchFormActor(FormAction):
             domain: Dict[Text, Any],
     ) -> List[Dict]:
         # utter submit template
-        dispatcher.utter_template("utter_movie_search_actor_result", tracker)
+        dispatcher.utter_template("utter_movie_match_actor_result", tracker)
         return [SlotSet("actor", None)]
 
-class ActionSearchMovieActor(Action):
+class ActionMatchActorSearchMovie(Action):
 #TODO
     def name(self):
         # type: () -> Text
-        return "action_search_movie_actor"
+        return "action_match_actor_search_movie"
 
     def run(self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print( "i'm on the action_search_movie_actor!")
+        print( "i'm on the action_match_actor_search_movie!")

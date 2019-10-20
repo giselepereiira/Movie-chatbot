@@ -6,9 +6,10 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-  - movie_search
-  - movie_search_director
-  - movie_search_actor
+
+  - movie_match_director
+
+  - movie_match_actor
 
 actions:
 - utter_greet
@@ -18,12 +19,14 @@ actions:
 - utter_goodbye
 - utter_iamabot
 - utter_default
-- utter_movie_search_result
+
+- utter_movie_match_director_result
 - utter_ask_director
-- action_search_movie
-- utter_movie_search_actor_result
+- action_match_director_search_movie
+
+- utter_movie_match_actor_result
 - utter_ask_actor
-- action_search_movie_actor
+- action_match_actor_search_movie
 
 entities:
 - director
@@ -58,13 +61,13 @@ templates:
   utter_default:   # utterance sent by action_default_fallback
     - text: "sorry, I didn't get that, can you rephrase it?"
 
-  utter_movie_search_result:
+  utter_movie_match_director_result:
     - text: "Detected Director name: {director};"
 
   utter_ask_director:
     - text: "What is the name director?"
 
-  utter_movie_search_actor_result:
+  utter_movie_match_actor_result:
     - text: "Detected Actor name: {actor};"
 
   utter_ask_actor:
@@ -72,5 +75,5 @@ templates:
 
 
 forms:
-  - movie_search_form
-  - movie_search_actor_form
+  - movie_match_director_form
+  - movie_match_actor_form
