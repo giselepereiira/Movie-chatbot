@@ -32,7 +32,7 @@ class MovieMatchDirectorForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_director_result", tracker)
-        return [SlotSet("director", None)]
+        return []#[SlotSet("director", None)]
 
 class ActionMatchDirectorSearchMovie(Action):
 #TODO
@@ -45,7 +45,7 @@ class ActionMatchDirectorSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print( "i'm on the action_search_movie!")
+        dispatcher.utter_message("Recommended movie: The avengers")
 
         # import os
         # cwd = os.getcwd()
@@ -111,7 +111,7 @@ class MovieMatchActorForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_actor_result", tracker)
-        return [SlotSet("actor", None)]
+        return []#[SlotSet("actor", None)]
 
 class ActionMatchActorSearchMovie(Action):
 #TODO
@@ -124,7 +124,7 @@ class ActionMatchActorSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print( "i'm on the action_match_actor_search_movie!")
+        dispatcher.utter_message("Recommended movie: The avengers")
 
 class MovieMatchYearForm(FormAction):
 
@@ -144,7 +144,7 @@ class MovieMatchYearForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_year_result", tracker)
-        return [SlotSet("year", None)]
+        return []#[SlotSet("year", None)]
 
 class ActionMatchYearSearchMovie(Action):
 #TODO
@@ -157,7 +157,7 @@ class ActionMatchYearSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print( "i'm on the action_match_year_search_movie!")
+        dispatcher.utter_message("Recommended movie: The avengers")
 
 class MovieMatchGenreForm(FormAction):
 
@@ -177,7 +177,7 @@ class MovieMatchGenreForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_genre_result", tracker)
-        return [SlotSet("genre", None)]
+        return []#[SlotSet("genre", None)]
 
 class ActionMatchGenreSearchMovie(Action):
 #TODO
@@ -190,7 +190,7 @@ class ActionMatchGenreSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print( "i'm on the action_match_genre_search_movie!")
+        dispatcher.utter_message("Recommended movie: The avengers")
 
 class MovieMatchLanguageForm(FormAction):
 
@@ -210,7 +210,7 @@ class MovieMatchLanguageForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_language_result", tracker)
-        return [SlotSet("language", None)]
+        return []#[SlotSet("language", None)]
 
 class ActionMatchLanguageSearchMovie(Action):
 #TODO
@@ -223,7 +223,7 @@ class ActionMatchLanguageSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print( "i'm on the action_match_language_search_movie!")
+        dispatcher.utter_message("Recommended movie: The avengers")
 
 
 
@@ -296,13 +296,14 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("i'm on the action_match_several_criteria_search_movie!")
 
         value_actor = tracker.get_slot('actor')
         value_director = tracker.get_slot('director')
         value_language = tracker.get_slot('language')
         value_genre = tracker.get_slot('genre')
         value_year = tracker.get_slot('year')
+
+        dispatcher.utter_message("Recommended movie: The avengers")
 
         #TODO querys
 
@@ -374,7 +375,6 @@ class ActionMatchRatingSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("i'm on the action_match_several_criteria_search_movie!")
 
         dispatcher.utter_message("Recommended movie: The avengers")
 
