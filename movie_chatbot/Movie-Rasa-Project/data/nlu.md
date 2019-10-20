@@ -95,6 +95,11 @@
 - give me [action](genre) movies
 - give me [horror](genre) movies
 
+## intent:movie_match_language
+- tell me movies in [french](language)
+- tell me movies in [english](language)
+- tell me movies in [portuguese](language)
+
 ## lookup:actor
 - tom cruise
 - fred astaire
@@ -127,8 +132,12 @@
 - horror
 - drama
 
-## lookup:movie_language
+## lookup:language
 - french
+- portuguese
+- english
+- spanish
+
 
 ## regex:year
 - \b(19|20)\d{2}\b

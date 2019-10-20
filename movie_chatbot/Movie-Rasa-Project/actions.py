@@ -192,3 +192,36 @@ class ActionMatchGenreSearchMovie(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         print( "i'm on the action_match_genre_search_movie!")
+
+class MovieMatchLanguageForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "movie_match_language_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["language"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_movie_match_language_result", tracker)
+        return [SlotSet("language", None)]
+
+class ActionMatchLanguageSearchMovie(Action):
+#TODO
+    def name(self):
+        # type: () -> Text
+        return "action_match_language_search_movie"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        print( "i'm on the action_match_language_search_movie!")
