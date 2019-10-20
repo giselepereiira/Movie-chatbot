@@ -160,3 +160,21 @@
 
 ## regex:rating
 - top \b[0-9]+\b
+
+## synonyms:directed
+- leaded
+- coordinated
+- orchestrated
+
+##synonyms:participation
+- involvement
+- part
+- engagement
+- contribution
+
+##synonyms:made
+- produced
+- created
+- formed
+
+
