@@ -7,6 +7,7 @@ intents:
   - mood_unhappy
   - bot_challenge
   - movie_search
+  - movie_search_director
 
 actions:
 - utter_greet

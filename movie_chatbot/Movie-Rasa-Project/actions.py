@@ -18,10 +18,12 @@ class MovieSearchForm(FormAction):
 
     def name(self):
         # type: () -> Text
+        print("i'm on the MovieSearchForm!")
         return "movie_search_form"
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
+        print("i'm on the MovieSearchForm! required_slots")
         return ["director"]
 
     def submit(
@@ -32,7 +34,7 @@ class MovieSearchForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_search_result", tracker)
-
+        print("i'm on the MovieSearchForm! submit")
         return [SlotSet("director", None)]
 
 class ActionSearchMovie(Action):

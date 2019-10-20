@@ -3,7 +3,7 @@ def getFilePaths():
 
     movie_config_path = movie_project + "/config.yml"
     movie_training_files = movie_project + "/data/"
-    movie_training_file_nlu = movie_project + "/data/nlu-movies.md"
+    movie_training_file_nlu = movie_project + "/data/nlu.md"
     movie_training_file_stories = movie_project + "/data/stories.md"
     movie_domain_path = movie_project + "/domain.yml"
     movie_models_output = movie_project + "/models/"

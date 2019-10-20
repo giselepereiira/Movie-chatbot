@@ -30,9 +30,17 @@
 * bot_challenge
   - utter_iamabot
 
-## search movie by director
+## search movie 
 * movie_search
     - movie_search_form
+    - form{"name":"movie_search_form"}
+    - form{"name": null}
+    - action_search_movie
+    
+## search movie by director
+* movie_search_director
+    - movie_search_form
+    - slot{"requested_slot”": "director"}
     - form{"name":"movie_search_form"}
     - form{"name": null}
     - action_search_movie
