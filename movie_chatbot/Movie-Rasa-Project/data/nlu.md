@@ -55,11 +55,6 @@
 - am I talking to a bot?
 - am I talking to a human?
 
-## intent:movie_search
-- i want a movie
-- tell me [comedy](movie_type) movies that had the participation of [eddie murphy](actor)
-- tell me movies in [french](movie_language) that were produced between [2018](year) and [2019](year)
-
 ## intent:movie_match_director
 - what movies were directed by [quentin tarantino](director)?
 - what movies were directed by [ingmar bergman](director)?
@@ -99,6 +94,10 @@
 - tell me movies in [french](language)
 - tell me movies in [english](language)
 - tell me movies in [portuguese](language)
+
+## intent:movie_match_several_criteria
+- tell me [comedy](genre) movies that had the participation of [tom cruise](actor)
+- tell me [drama](genre) movies that had the participation of [fred astaire](actor)
 
 ## lookup:actor
 - tom cruise

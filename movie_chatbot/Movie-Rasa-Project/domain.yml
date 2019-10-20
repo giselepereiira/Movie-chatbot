@@ -12,6 +12,7 @@ intents:
   - movie_match_top_rated_year
   - movie_match_genre
   - movie_match_language
+  - movie_match_several_criteria
 
 actions:
 - utter_greet
@@ -41,6 +42,9 @@ actions:
 - utter_movie_match_language_result
 - utter_ask_language
 - action_match_language_search_movie
+
+- utter_movie_match_several_criteria_result
+- action_match_several_criteria_search_movie
 
 entities:
 - director
@@ -114,6 +118,9 @@ templates:
   utter_ask_language:
     - text: "What is the language?"
 
+  utter_movie_match_several_criteria_result:
+    - text: "Detected several criteria"
+
 
 
 forms:
@@ -122,3 +129,4 @@ forms:
   - movie_match_top_rated_year_form
   - movie_match_genre_form
   - movie_match_language_form
+  - movie_match_several_criteria_form

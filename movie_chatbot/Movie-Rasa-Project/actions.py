@@ -18,7 +18,6 @@ class MovieMatchDirectorForm(FormAction):
 
     def name(self):
         # type: () -> Text
-        print("i'm on the MovieSearchForm!")
         return "movie_match_director_form"
 
     @staticmethod
@@ -225,3 +224,78 @@ class ActionMatchLanguageSearchMovie(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         print( "i'm on the action_match_language_search_movie!")
+
+
+
+class MovieMatchSeveralCriteriaForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "movie_match_several_criteria_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        print(tracker.slots)
+        list_available_slots = list()
+        for criteria, criteria_value in tracker.slots.items():
+            if criteria_value is not None:
+                list_available_slots.append(criteria)
+        print(list_available_slots)
+        return list_available_slots
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_movie_match_several_criteria_result", tracker)
+
+        value_actor = tracker.get_slot('actor')
+        value_director = tracker.get_slot('director')
+        value_language = tracker.get_slot('language')
+        value_genre = tracker.get_slot('genre')
+        value_year = tracker.get_slot('year')
+
+        if tracker.get_slot('actor') is not None:
+            dispatcher.utter_template("utter_movie_match_actor_result", tracker)
+
+        if tracker.get_slot('director') is not None:
+            dispatcher.utter_template("utter_movie_match_director_result", tracker)
+
+        if tracker.get_slot('language') is not None:
+            dispatcher.utter_template("utter_movie_match_language_result", tracker)
+
+        if tracker.get_slot('genre') is not None:
+            dispatcher.utter_template("utter_movie_match_genre_result", tracker)
+
+        if tracker.get_slot('year') is not None:
+            dispatcher.utter_template("utter_movie_match_year_result", tracker)
+
+        print([SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
+                SlotSet("genre", value_genre), SlotSet("year", value_year)])
+
+        return [SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
+                SlotSet("genre", value_genre), SlotSet("year", value_year)]
+
+class ActionMatchSeveralCriteriaSearchMovie(Action):
+#TODO
+    def name(self):
+        # type: () -> Text
+        return "action_match_several_criteria_search_movie"
+
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print("i'm on the action_match_several_criteria_search_movie!")
+
+        value_actor = tracker.get_slot('actor')
+        value_director = tracker.get_slot('director')
+        value_language = tracker.get_slot('language')
+        value_genre = tracker.get_slot('genre')
+        value_year = tracker.get_slot('year')
+
+        #TODO querys

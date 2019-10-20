@@ -64,3 +64,10 @@
    - form{"name":"movie_match_language_form"}
    - form{"name": null}
    - action_match_language_search_movie
+   
+ ## search movie by several criteria  
+* movie_match_several_criteria
+   - movie_match_several_criteria_form
+   - form{"name":"movie_match_several_criteria_form"}
+   - form{"name": null}
+   - action_match_several_criteria_search_movie
