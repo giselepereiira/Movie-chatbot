@@ -51,3 +51,9 @@
     - form{"name": null}
     - action_match_top_rated_year_search_movie
 
+## search movie genre
+* movie_match_genre
+    - movie_match_genre_form
+    - form{"name":"movie_match_genre_form"}
+    - form{"name": null}
+    - action_match_genre_search_movie

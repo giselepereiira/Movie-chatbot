@@ -57,7 +57,6 @@
 
 ## intent:movie_search
 - i want a movie
-- what were the top rated movies in [2018](year_of_movie)?
 - tell me [comedy](movie_type) movies that had the participation of [eddie murphy](actor)
 - tell me movies in [french](movie_language) that were produced between [2018](year) and [2019](year)
 
@@ -88,6 +87,14 @@
 - what were the top rated movies in [1999](year)?
 - what were the top rated movies in [1980](year)?
 
+## intent:movie_match_genre
+- tell me [comedy](genre) movies
+- tell me [action](genre) movies
+- tell me [horror](genre) movies
+- give me [comedy](genre) movies
+- give me [action](genre) movies
+- give me [horror](genre) movies
+
 ## lookup:actor
 - tom cruise
 - fred astaire
@@ -114,8 +121,11 @@
 - stanley kubrick
 - gisele pereira
 
-## lookup:movie_type
+## lookup:genre
 - comedy
+- action
+- horror
+- drama
 
 ## lookup:movie_language
 - french

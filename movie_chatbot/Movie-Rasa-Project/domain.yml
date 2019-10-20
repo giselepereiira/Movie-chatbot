@@ -13,6 +13,8 @@ intents:
 
   - movie_match_top_rated_year
 
+  - movie_match_genre
+
 actions:
 - utter_greet
 - utter_cheer_up
@@ -30,12 +32,19 @@ actions:
 - utter_ask_actor
 - action_match_actor_search_movie
 
+- utter_movie_match_top_rated_year_result
+- utter_ask_year
 - action_match_top_rated_year_search_movie
+
+- utter_movie_match_genre_result
+- utter_ask_genre
+- action_match_genre_search_movie
 
 entities:
 - director
 - actor
 - year
+- genre
 
 slots:
     director:
@@ -43,6 +52,8 @@ slots:
     actor:
       type: text
     year:
+      type: text
+    genre:
       type: text
 
 templates:
@@ -86,8 +97,15 @@ templates:
   utter_ask_year:
     - text: "What is the year?"
 
+  utter_movie_match_genre_result:
+    - text: "Detected genre: {genre};"
+
+  utter_ask_genre:
+    - text: "What is the genre?"
+
 
 forms:
   - movie_match_director_form
   - movie_match_actor_form
   - movie_match_top_rated_year_form
+  - movie_match_genre_form
