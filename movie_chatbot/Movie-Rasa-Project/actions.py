@@ -159,6 +159,7 @@ class ActionMatchTopRatedYearSearchMovie(Action):
 
         print( "i'm on the action_match_top_rated_year_search_movie!")
 
+
 class MovieMatchGenreForm(FormAction):
 
     def name(self):
@@ -257,6 +258,8 @@ class MovieMatchSeveralCriteriaForm(FormAction):
         value_language = tracker.get_slot('language')
         value_genre = tracker.get_slot('genre')
         value_year = tracker.get_slot('year')
+        value_year_start = tracker.get_slot('year_start')
+        value_year_end = tracker.get_slot('year_end')
 
         if tracker.get_slot('actor') is not None:
             dispatcher.utter_template("utter_movie_match_actor_result", tracker)
@@ -273,8 +276,11 @@ class MovieMatchSeveralCriteriaForm(FormAction):
         if tracker.get_slot('year') is not None:
             dispatcher.utter_template("utter_movie_match_year_result", tracker)
 
-        print([SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
-                SlotSet("genre", value_genre), SlotSet("year", value_year)])
+        if tracker.get_slot('year_start') is not None:
+            dispatcher.utter_template("utter_movie_match_year_start_result", tracker)
+
+        if tracker.get_slot('year_end') is not None:
+            dispatcher.utter_template("utter_movie_match_year_end_result", tracker)
 
         return [SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
                 SlotSet("genre", value_genre), SlotSet("year", value_year)]

@@ -46,12 +46,17 @@ actions:
 - utter_movie_match_several_criteria_result
 - action_match_several_criteria_search_movie
 
+- utter_movie_match_year_start_result
+- utter_movie_match_year_end_result
+
 entities:
 - director
 - actor
 - year
 - genre
 - language
+- year_start
+- year_end
 
 slots:
     director:
@@ -63,6 +68,10 @@ slots:
     genre:
       type: text
     language:
+      type: text
+    year_start:
+      type: text
+    year_end:
       type: text
 
 templates:
@@ -107,7 +116,7 @@ templates:
     - text: "What is the year?"
 
   utter_movie_match_genre_result:
-    - text: "Detected genre: {genre};"
+    - text: "Detected genre: {genre}"
 
   utter_ask_genre:
     - text: "What is the genre?"
@@ -120,6 +129,12 @@ templates:
 
   utter_movie_match_several_criteria_result:
     - text: "Detected several criteria"
+
+  utter_movie_match_year_start_result:
+    - text: "Detected year start: {year_start}"
+
+  utter_movie_match_year_end_result:
+    - text: "Detected year end: {year_end}"
 
 
 

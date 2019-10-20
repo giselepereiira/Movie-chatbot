@@ -98,6 +98,10 @@
 ## intent:movie_match_several_criteria
 - tell me [comedy](genre) movies that had the participation of [tom cruise](actor)
 - tell me [drama](genre) movies that had the participation of [fred astaire](actor)
+- tell me movies in [french](language) that were produced between [2018](year_start) and [2019](year_end)
+- tell me movies in [english](language) that were produced between [1999](year_start) and [2019](year_end)
+- tell me movies in [spanish](language) that were produced between [1990](year_start) and [2002](year_end)
+
 
 ## lookup:actor
 - tom cruise
@@ -139,6 +143,12 @@
 
 
 ## regex:year
+- \b(19|20)\d{2}\b
+
+## regex:year_start
+- \b(19|20)\d{2}\b
+
+## regex:year_end
 - \b(19|20)\d{2}\b
 
 ## synonym:movies
