@@ -24,34 +24,31 @@ actions:
 - utter_iamabot
 - utter_default
 
-- utter_movie_match_director_result
 - utter_ask_director
-- action_match_director_search_movie
-
-- utter_movie_match_actor_result
 - utter_ask_actor
-- action_match_actor_search_movie
-
-- utter_movie_match_year_result
 - utter_ask_year
-- action_match_year_search_movie
-
-- utter_movie_match_genre_result
 - utter_ask_genre
-- action_match_genre_search_movie
-
-- utter_movie_match_language_result
 - utter_ask_language
-- action_match_language_search_movie
+- utter_ask_rating
+- utter_ask_year_start
+- utter_ask_year_end
 
+- utter_movie_match_director_result
+- utter_movie_match_actor_result
+- utter_movie_match_year_result
+- utter_movie_match_genre_result
+- utter_movie_match_language_result
 - utter_movie_match_several_criteria_result
-- action_match_several_criteria_search_movie
-
 - utter_movie_match_year_start_result
 - utter_movie_match_year_end_result
-
 - utter_movie_match_rating_result
-- utter_ask_rating
+
+- action_match_director_search_movie
+- action_match_actor_search_movie
+- action_match_year_search_movie
+- action_match_genre_search_movie
+- action_match_language_search_movie
+- action_match_several_criteria_search_movie
 - action_match_rating_search_movie
 
 entities:
@@ -105,50 +102,57 @@ templates:
   utter_default:   # utterance sent by action_default_fallback
     - text: "sorry, I didn't get that, can you rephrase it?"
 
-  utter_movie_match_director_result:
-    - text: "Detected Director name: {director}"
-
   utter_ask_director:
     - text: "What is the name director?"
-
-  utter_movie_match_actor_result:
-    - text: "Detected Actor name: {actor}"
 
   utter_ask_actor:
     - text: "What is the name actor?"
 
-  utter_movie_match_year_result:
-    - text: "Detected year: {year}"
-
   utter_ask_year:
-    - text: "Which year?"
+    - text: "What is the year?"
 
-  utter_movie_match_genre_result:
-    - text: "Detected genre: {genre}"
+  utter_ask_year_start:
+    - text: "What is the year start for the range?"
+
+  utter_ask_year_end:
+    - text: "What is the year end for the range?"
 
   utter_ask_genre:
     - text: "What is the genre?"
 
-  utter_movie_match_language_result:
-    - text: "Detected language: {language}"
-
   utter_ask_language:
     - text: "What is the language?"
+
+  utter_ask_rating:
+    - text: "What is the rating?"
+
+
+  utter_movie_match_director_result:
+    - text: "Director name: {director}"
+
+  utter_movie_match_actor_result:
+    - text: "Actor name: {actor}"
+
+  utter_movie_match_year_result:
+    - text: "Year: {year}"
+
+  utter_movie_match_genre_result:
+    - text: "Genre: {genre}"
+
+  utter_movie_match_language_result:
+    - text: "Language: {language}"
 
   utter_movie_match_several_criteria_result:
     - text: "Detected several criteria"
 
   utter_movie_match_year_start_result:
-    - text: "Detected year start: {year_start}"
+    - text: "Year start: {year_start}"
 
   utter_movie_match_year_end_result:
-    - text: "Detected year end: {year_end}"
-
-  utter_ask_rating:
-    - text: "What is the rating?"
+    - text: "Year end: {year_end}"
 
   utter_movie_match_rating_result:
-    - text: "Detected rating: {rating}"
+    - text: "Rating: {rating}"
 
 
 forms:
