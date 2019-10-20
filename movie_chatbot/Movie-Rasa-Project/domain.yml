@@ -9,6 +9,7 @@ intents:
 
   - movie_match_director
   - movie_match_actor
+  - movie_match_year
   - movie_match_top_rated_year
   - movie_match_genre
   - movie_match_language
@@ -31,8 +32,11 @@ actions:
 - utter_ask_actor
 - action_match_actor_search_movie
 
-- utter_movie_match_top_rated_year_result
+- utter_movie_match_year_result
 - utter_ask_year
+- action_match_year_search_movie
+
+- utter_movie_match_top_rated_year_result
 - action_match_top_rated_year_search_movie
 
 - utter_movie_match_genre_result
@@ -98,22 +102,25 @@ templates:
     - text: "sorry, I didn't get that, can you rephrase it?"
 
   utter_movie_match_director_result:
-    - text: "Detected Director name: {director};"
+    - text: "Detected Director name: {director}"
 
   utter_ask_director:
     - text: "What is the name director?"
 
   utter_movie_match_actor_result:
-    - text: "Detected Actor name: {actor};"
+    - text: "Detected Actor name: {actor}"
 
   utter_ask_actor:
     - text: "What is the name actor?"
 
-  utter_movie_match_top_rated_year_result:
-    - text: "Detected year: {year};"
+  utter_movie_match_year_result:
+    - text: "Detected year: {year}"
 
   utter_ask_year:
-    - text: "What is the year?"
+    - text: "Which year?"
+
+  utter_movie_match_top_rated_year_result:
+    - text: "Detected year: {year}"
 
   utter_movie_match_genre_result:
     - text: "Detected genre: {genre}"
@@ -141,6 +148,7 @@ templates:
 forms:
   - movie_match_director_form
   - movie_match_actor_form
+  - movie_match_year_form
   - movie_match_top_rated_year_form
   - movie_match_genre_form
   - movie_match_language_form

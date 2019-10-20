@@ -44,6 +44,13 @@
     - form{"name": null}
     - action_match_actor_search_movie
     
+## search movie by year
+* movie_match_year
+    - movie_match_year_form
+    - form{"name":"movie_match_year_form"}
+    - form{"name": null}
+    - action_match_year_search_movie
+    
 ## search movie top rated by year
 * movie_match_top_rated_year
     - movie_match_top_rated_year_form

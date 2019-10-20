@@ -75,6 +75,13 @@
 - what movies had the participation of [humphrey bogart](actor)?
 - what movies had the participation of [lauren bacall](actor)?
 
+## intent:movie_match_year
+- what were the movies made in [2018](year)?
+- what were the movies made in [2019](year)?
+- what were the movies made in[1995](year)?
+- what were the movies made in [1999](year)?
+- what were the movies made in [1980](year)?
+
 ## intent:movie_match_top_rated_year
 - what were the top rated movies in [2018](year)?
 - what were the top rated movies in [2019](year)?
