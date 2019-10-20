@@ -10,10 +10,10 @@ intents:
   - movie_match_director
   - movie_match_actor
   - movie_match_year
-  - movie_match_top_rated_year
   - movie_match_genre
   - movie_match_language
   - movie_match_several_criteria
+  - movie_match_rating
 
 actions:
 - utter_greet
@@ -36,9 +36,6 @@ actions:
 - utter_ask_year
 - action_match_year_search_movie
 
-- utter_movie_match_top_rated_year_result
-- action_match_top_rated_year_search_movie
-
 - utter_movie_match_genre_result
 - utter_ask_genre
 - action_match_genre_search_movie
@@ -53,6 +50,10 @@ actions:
 - utter_movie_match_year_start_result
 - utter_movie_match_year_end_result
 
+- utter_movie_match_rating_result
+- utter_ask_rating
+- action_match_rating_search_movie
+
 entities:
 - director
 - actor
@@ -61,6 +62,7 @@ entities:
 - language
 - year_start
 - year_end
+- rating
 
 slots:
     director:
@@ -76,6 +78,8 @@ slots:
     year_start:
       type: text
     year_end:
+      type: text
+    rating:
       type: text
 
 templates:
@@ -119,9 +123,6 @@ templates:
   utter_ask_year:
     - text: "Which year?"
 
-  utter_movie_match_top_rated_year_result:
-    - text: "Detected year: {year}"
-
   utter_movie_match_genre_result:
     - text: "Detected genre: {genre}"
 
@@ -129,7 +130,7 @@ templates:
     - text: "What is the genre?"
 
   utter_movie_match_language_result:
-    - text: "Detected language: {language};"
+    - text: "Detected language: {language}"
 
   utter_ask_language:
     - text: "What is the language?"
@@ -143,13 +144,18 @@ templates:
   utter_movie_match_year_end_result:
     - text: "Detected year end: {year_end}"
 
+  utter_ask_rating:
+    - text: "What is the rating?"
+
+  utter_movie_match_rating_result:
+    - text: "Detected rating: {rating}"
 
 
 forms:
   - movie_match_director_form
   - movie_match_actor_form
   - movie_match_year_form
-  - movie_match_top_rated_year_form
   - movie_match_genre_form
   - movie_match_language_form
   - movie_match_several_criteria_form
+  - movie_match_rating_form

@@ -82,13 +82,6 @@
 - what were the movies made in [1999](year)?
 - what were the movies made in [1980](year)?
 
-## intent:movie_match_top_rated_year
-- what were the top rated movies in [2018](year)?
-- what were the top rated movies in [2019](year)?
-- what were the top rated movies in [1995](year)?
-- what were the top rated movies in [1999](year)?
-- what were the top rated movies in [1980](year)?
-
 ## intent:movie_match_genre
 - tell me [comedy](genre) movies
 - tell me [action](genre) movies
@@ -109,6 +102,10 @@
 - tell me movies in [english](language) that were produced between [1999](year_start) and [2019](year_end)
 - tell me movies in [spanish](language) that were produced between [1990](year_start) and [2002](year_end)
 
+##intent: movie_rating
+- what were the [top 5](rating) rated movies in [2018](year)?
+- what were the [top 2](rating) rated movies in [2019](year)?
+- what were the [top 10](rating) rated movies in [1990](year)?
 
 ## lookup:actor
 - tom cruise
@@ -160,3 +157,6 @@
 
 ## synonym:movies
 - films
+
+## regex:rating
+- top \b[0-9]+\b

@@ -51,13 +51,6 @@
     - form{"name": null}
     - action_match_year_search_movie
     
-## search movie top rated by year
-* movie_match_top_rated_year
-    - movie_match_top_rated_year_form
-    - form{"name":"movie_match_top_rated_year_form"}
-    - form{"name": null}
-    - action_match_top_rated_year_search_movie
-
 ## search movie by genre
 * movie_match_genre
     - movie_match_genre_form
@@ -78,3 +71,10 @@
    - form{"name":"movie_match_several_criteria_form"}
    - form{"name": null}
    - action_match_several_criteria_search_movie
+
+ ## search movie with rating
+* movie_rating
+   - movie_match_rating_form
+   - form{"name":"movie_match_rating_form"}
+   - form{"name": null}
+   - action_match_rating_search_movie
