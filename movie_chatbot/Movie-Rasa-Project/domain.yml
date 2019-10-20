@@ -11,6 +11,8 @@ intents:
 
   - movie_match_actor
 
+  - movie_match_top_rated_year
+
 actions:
 - utter_greet
 - utter_cheer_up
@@ -28,14 +30,19 @@ actions:
 - utter_ask_actor
 - action_match_actor_search_movie
 
+- action_match_top_rated_year_search_movie
+
 entities:
 - director
 - actor
+- year
 
 slots:
     director:
       type: text
     actor:
+      type: text
+    year:
       type: text
 
 templates:
@@ -73,7 +80,14 @@ templates:
   utter_ask_actor:
     - text: "What is the name actor?"
 
+  utter_movie_match_top_rated_year_result:
+    - text: "Detected year: {year};"
+
+  utter_ask_year:
+    - text: "What is the year?"
+
 
 forms:
   - movie_match_director_form
   - movie_match_actor_form
+  - movie_match_top_rated_year_form

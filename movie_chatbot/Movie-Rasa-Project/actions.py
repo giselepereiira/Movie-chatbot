@@ -126,3 +126,36 @@ class ActionMatchActorSearchMovie(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         print( "i'm on the action_match_actor_search_movie!")
+
+class MovieMatchTopRatedYearForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "movie_match_top_rated_year_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["year"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_movie_match_top_rated_year_result", tracker)
+        return [SlotSet("year", None)]
+
+class ActionMatchTopRatedYearSearchMovie(Action):
+#TODO
+    def name(self):
+        # type: () -> Text
+        return "action_match_top_rated_year_search_movie"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        print( "i'm on the action_match_top_rated_year_search_movie!")

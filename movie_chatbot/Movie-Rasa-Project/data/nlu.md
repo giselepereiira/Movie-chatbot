@@ -81,12 +81,12 @@
 - what movies had the participation of [humphrey bogart](actor)?
 - what movies had the participation of [lauren bacall](actor)?
 
-## intent:movie_match_year
-- what were the top rated movies in [2018](year_of_movie)?
-- what were the top rated movies in [2019](year_of_movie)?
-- what were the top rated movies in [1995](year_of_movie)?
-- what were the top rated movies in [1999](year_of_movie)?
-- what were the top rated movies in [1980](year_of_movie)?
+## intent:movie_match_top_rated_year
+- what were the top rated movies in [2018](year)?
+- what were the top rated movies in [2019](year)?
+- what were the top rated movies in [1995](year)?
+- what were the top rated movies in [1999](year)?
+- what were the top rated movies in [1980](year)?
 
 ## lookup:actor
 - tom cruise
@@ -114,14 +114,13 @@
 - stanley kubrick
 - gisele pereira
 
-
-
 ## lookup:movie_type
 - comedy
+
 ## lookup:movie_language
 - french
 
-## regex:year_of_movie
+## regex:year
 - \b(19|20)\d{2}\b
 
 ## synonym:movies
