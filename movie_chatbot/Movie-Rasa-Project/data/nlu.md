@@ -62,10 +62,9 @@
 - what movies were directed by [james cagney](director)?
 - what movies were directed by [federico fellini](director)?
 - what movies were directed by [john gielgud](director)?
-- what movies were directed by [charlton heston](director)?
-- what movies were directed by [alfred hitchcock](director)?
-- what movies were directed by [buster keaton](director)?
-- what movies were directed by [stanley kubrick](director)?
+- what are the movies by [stanley kubrick](director)?
+- what are the movies by [quentin tarantino](director)?
+- what are the movies by [gene kelly](director)?
 
 ## intent:movie_match_actor
 - what movies had the participation of [tom cruise](actor)?
@@ -74,6 +73,9 @@
 - what movies had the participation of [richard burton](actor)?
 - what movies had the participation of [humphrey bogart](actor)?
 - what movies had the participation of [lauren bacall](actor)?
+- what movies has [lauren bacall](actor) worked on?
+- what movies has [brigitte bardot](actor) worked on?
+- what movies has [richard burton](actor) worked on?
 
 ## intent:movie_match_year
 - what were the movies made in [2018](year)?
@@ -81,6 +83,9 @@
 - what were the movies made in[1995](year)?
 - what were the movies made in [1999](year)?
 - what were the movies made in [1980](year)?
+- what movies have been released in [2018](year)?
+- what movies have been released in [1990](year)?
+- what movies have been released in [2000](year)?
 
 ## intent:movie_match_genre
 - tell me [comedy](genre) movies
@@ -173,6 +178,8 @@
 - contribution
 
 ##synonyms:made
+- released
+- filmed
 - produced
 - created
 - formed
