@@ -95,3 +95,36 @@ class ActionSearchMovie(Action):
     #         cars_dataset = pd.DataFrame(dataset_rows)
     #     return cars_dataset
     #
+
+class MovieSearchFormActor(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "movie_search_actor_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["actor"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_movie_search_actor_result", tracker)
+        return [SlotSet("actor", None)]
+
+class ActionSearchMovieActor(Action):
+#TODO
+    def name(self):
+        # type: () -> Text
+        return "action_search_movie_actor"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        print( "i'm on the action_search_movie_actor!")

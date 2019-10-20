@@ -40,7 +40,13 @@
 ## search movie by director
 * movie_search_director
     - movie_search_form
-    - slot{"requested_slot”": "director"}
     - form{"name":"movie_search_form"}
     - form{"name": null}
     - action_search_movie
+    
+## search movie by actor
+* movie_search_actor
+    - movie_search_actor_form
+    - form{"name":"movie_search_actor_form"}
+    - form{"name": null}
+    - action_search_movie_actor

@@ -8,6 +8,7 @@ intents:
   - bot_challenge
   - movie_search
   - movie_search_director
+  - movie_search_actor
 
 actions:
 - utter_greet
@@ -20,12 +21,18 @@ actions:
 - utter_movie_search_result
 - utter_ask_director
 - action_search_movie
+- utter_movie_search_actor_result
+- utter_ask_actor
+- action_search_movie_actor
 
 entities:
 - director
+- actor
 
 slots:
     director:
+      type: text
+    actor:
       type: text
 
 templates:
@@ -52,11 +59,18 @@ templates:
     - text: "sorry, I didn't get that, can you rephrase it?"
 
   utter_movie_search_result:
-    - text: "Director name: {director};"
+    - text: "Detected Director name: {director};"
 
   utter_ask_director:
     - text: "What is the name director?"
 
+  utter_movie_search_actor_result:
+    - text: "Detected Actor name: {actor};"
+
+  utter_ask_actor:
+    - text: "What is the name actor?"
+
 
 forms:
   - movie_search_form
+  - movie_search_actor_form
