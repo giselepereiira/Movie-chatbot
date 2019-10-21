@@ -521,3 +521,73 @@ class ActionGetGenreByMovieTitle(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message("Genre: Dummy genre")
+
+
+class GetLanguageByMovieTitleForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_language_by_movie_title_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_title"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_get_language_by_movie_title_result", tracker)
+        return []#[SlotSet("director", None)]
+
+
+class ActionGetLanguageByMovieTitle(Action):
+
+    def name(self):
+        # type: () -> Text
+        return "action_get_language_by_movie_title"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("Language: Dummy language")
+
+
+class GetRatingByMovieTitleForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_rating_by_movie_title_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_title"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_get_rating_by_movie_title_result", tracker)
+        return []#[SlotSet("director", None)]
+
+
+class ActionGetRatingByMovieTitle(Action):
+
+    def name(self):
+        # type: () -> Text
+        return "action_get_rating_by_movie_title"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("Rating: Dummy rating")
