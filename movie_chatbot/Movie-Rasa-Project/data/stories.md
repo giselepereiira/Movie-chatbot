@@ -95,3 +95,19 @@
    - form{"name": null}
    - action_get_actor_by_movie_title
    
+## search year with movie title
+* get_year_by_movie_title
+   - get_year_by_movie_title_form
+   - slot{"movie_title": "joker"}
+   - form{"name":"get_year_by_movie_title_form"}
+   - form{"name": null}
+   - action_get_year_by_movie_title
+
+## search genre with movie title
+* get_genre_by_movie_title
+   - get_genre_by_movie_title_form
+   - slot{"movie_title": "joker"}
+   - form{"name":"get_genre_by_movie_title_form"}
+   - form{"name": null}
+   - action_get_genre_by_movie_title
+   

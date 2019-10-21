@@ -65,6 +65,8 @@
 - what are the movies by [stanley kubrick](director)?
 - what are the movies by [quentin tarantino](director)?
 - what are the movies by [gene kelly](director)?
+- what is [gene kelly](director) known for?
+- what did [gene kelly](director) create?
 
 ## intent:movie_match_actor
 - what movies had the participation of [tom cruise](actor)?
@@ -190,6 +192,7 @@
 - who was the director of [soldiers of the cross](movie_title)?
 - who was the director of [the story of the kelly gang](movie_title)?
 - who was the director of [robbery under arms](movie_title)?
+- who created [miss jerry](movie_title)?
 
 ##intent:get_actor_by_movie_title
 - who were the star actors in [the godfather](movie_title)?
@@ -197,6 +200,21 @@
 - who were the star actors in [soldiers of the cross](movie_title)?
 - who were the star actors in [the story of the kelly gang](movie_title)?
 - who were the star actors in [robbery under arms](movie_title)?
+
+##intent:get_year_by_movie_title
+- when was released [the godfather](movie_title)?
+- when was released [miss jerry](movie_title)?
+- when was released [soldiers of the cross](movie_title)?
+- when was released [the story of the kelly gang](movie_title)?
+- when was released [robbery under arms](movie_title)?
+- what year did [miss jerry](movie_title) come out?
+
+##intent:get_genre_by_movie_title
+- what is the genre of [the godfather](movie_title)?
+- what is the genre of [miss jerry](movie_title)?
+- what is the genre of [soldiers of the cross](movie_title)?
+- what is the genre of [the story of the kelly gang](movie_title)?
+- what is the genre of [robbery under arms](movie_title)?
 
 ##lookup:movie_title
 - the godfather

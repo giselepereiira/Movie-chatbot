@@ -417,6 +417,7 @@ class ActionGetDirectorByMovieTitle(Action):
 
         dispatcher.utter_message("Director: Dummy director")
 
+
 class GetActorByMovieTitleForm(FormAction):
 
     def name(self):
@@ -450,3 +451,73 @@ class ActionGetActorByMovieTitle(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message("Actor: Dummy actor")
+
+
+class GetYearByMovieTitleForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_year_by_movie_title_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_title"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_get_year_by_movie_title_result", tracker)
+        return []#[SlotSet("director", None)]
+
+
+class ActionGetYearByMovieTitle(Action):
+
+    def name(self):
+        # type: () -> Text
+        return "action_get_year_by_movie_title"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("Year: Dummy year")
+
+
+class GetGenreByMovieTitleForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_genre_by_movie_title_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_title"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_get_genre_by_movie_title_result", tracker)
+        return []#[SlotSet("director", None)]
+
+
+class ActionGetGenreByMovieTitle(Action):
+
+    def name(self):
+        # type: () -> Text
+        return "action_get_genre_by_movie_title"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("Genre: Dummy genre")
