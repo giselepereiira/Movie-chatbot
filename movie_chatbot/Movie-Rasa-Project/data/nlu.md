@@ -55,7 +55,7 @@
 - am I talking to a bot?
 - am I talking to a human?
 
-## intent:movie_match_director
+## intent:movie_match_director 
 - what movies were directed by [quentin tarantino](director)?
 - what movies were directed by [ingmar bergman](director)?
 - what movies were directed by [marlon brando](director)?
@@ -184,4 +184,17 @@
 - created
 - formed
 
+##intent:get_director_by_movie_title
+- who was the director of [the godfather](movie_title)?
+- who was the director of [miss jerry](movie_title)?
+- who was the director of [soldiers of the cross](movie_title)?
+- who was the director of [the story of the kelly gang](movie_title)?
+- who was the director of [robbery under arms](movie_title)?
 
+##lookup:movie_title
+- the godfather
+- miss jerry
+- soldiers of the cross
+- the story of the kelly gang
+- robbery under arms
+- joker

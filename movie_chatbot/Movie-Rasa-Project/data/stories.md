@@ -78,3 +78,12 @@
    - form{"name":"movie_match_rating_form"}
    - form{"name": null}
    - action_match_rating_search_movie
+
+ ## search director with movie title
+* get_director_by_movie_title
+   - get_director_by_movie_title_form
+   - slot{"movie_title": "joker"}
+   - form{"name":"get_director_by_movie_title_form"}
+   - form{"name": null}
+   - action_get_director_by_movie_title
+   

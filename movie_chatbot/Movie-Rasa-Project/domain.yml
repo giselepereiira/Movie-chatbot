@@ -15,6 +15,8 @@ intents:
   - movie_match_several_criteria
   - movie_match_rating
 
+  - get_director_by_movie_title
+
 actions:
 - utter_greet
 - utter_cheer_up
@@ -32,6 +34,8 @@ actions:
 - utter_ask_rating
 - utter_ask_year_start
 - utter_ask_year_end
+- utter_ask_movie_title
+
 
 - utter_movie_match_director_result
 - utter_movie_match_actor_result
@@ -43,6 +47,8 @@ actions:
 - utter_movie_match_year_end_result
 - utter_movie_match_rating_result
 
+- utter_get_director_by_movie_title_result
+
 - action_match_director_search_movie
 - action_match_actor_search_movie
 - action_match_year_search_movie
@@ -50,6 +56,8 @@ actions:
 - action_match_language_search_movie
 - action_match_several_criteria_search_movie
 - action_match_rating_search_movie
+
+- action_get_director_by_movie_title
 
 entities:
 - director
@@ -60,6 +68,7 @@ entities:
 - year_start
 - year_end
 - rating
+- movie_title
 
 slots:
     director:
@@ -77,6 +86,8 @@ slots:
     year_end:
       type: text
     rating:
+      type: text
+    movie_title:
       type: text
 
 templates:
@@ -126,6 +137,9 @@ templates:
   utter_ask_rating:
     - text: "What is the rating?"
 
+  utter_ask_movie_title:
+    - text: "What is the title of the movie?"
+
 
   utter_movie_match_director_result:
     - text: "Director name: {director}"
@@ -154,6 +168,9 @@ templates:
   utter_movie_match_rating_result:
     - text: "Rating: {rating}"
 
+  utter_get_director_by_movie_title_result:
+    - text: "Movie title: {movie_title}"
+
 
 forms:
   - movie_match_director_form
@@ -163,3 +180,4 @@ forms:
   - movie_match_language_form
   - movie_match_several_criteria_form
   - movie_match_rating_form
+  - get_director_by_movie_title_form

@@ -14,6 +14,7 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction, REQUESTED_SLOT
 
+
 class MovieMatchDirectorForm(FormAction):
 
     def name(self):
@@ -33,6 +34,7 @@ class MovieMatchDirectorForm(FormAction):
         # utter submit template
         dispatcher.utter_template("utter_movie_match_director_result", tracker)
         return []#[SlotSet("director", None)]
+
 
 class ActionMatchDirectorSearchMovie(Action):
 #TODO
@@ -379,3 +381,38 @@ class ActionMatchRatingSearchMovie(Action):
         dispatcher.utter_message("Recommended movie: The avengers")
 
         #TODO querys
+
+
+class GetDirectorByMovieTitleForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_director_by_movie_title_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_title"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_get_director_by_movie_title_result", tracker)
+        return []#[SlotSet("director", None)]
+
+
+class ActionGetDirectorByMovieTitle(Action):
+#TODO
+    def name(self):
+        # type: () -> Text
+        return "action_get_director_by_movie_title"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("Director: Dummy director")
