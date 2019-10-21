@@ -86,4 +86,12 @@
    - form{"name":"get_director_by_movie_title_form"}
    - form{"name": null}
    - action_get_director_by_movie_title
+
+ ## search actor with movie title
+* get_actor_by_movie_title
+   - get_actor_by_movie_title_form
+   - slot{"movie_title": "joker"}
+   - form{"name":"get_actor_by_movie_title_form"}
+   - form{"name": null}
+   - action_get_actor_by_movie_title
    

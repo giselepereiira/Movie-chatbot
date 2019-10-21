@@ -416,3 +416,37 @@ class ActionGetDirectorByMovieTitle(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message("Director: Dummy director")
+
+class GetActorByMovieTitleForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_actor_by_movie_title_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_title"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        # utter submit template
+        dispatcher.utter_template("utter_get_actor_by_movie_title_result", tracker)
+        return []#[SlotSet("director", None)]
+
+
+class ActionGetActorByMovieTitle(Action):
+
+    def name(self):
+        # type: () -> Text
+        return "action_get_actor_by_movie_title"
+
+    def run(self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("Actor: Dummy actor")

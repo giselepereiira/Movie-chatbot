@@ -16,6 +16,7 @@ intents:
   - movie_match_rating
 
   - get_director_by_movie_title
+  - get_actor_by_movie_title
 
 actions:
 - utter_greet
@@ -48,6 +49,7 @@ actions:
 - utter_movie_match_rating_result
 
 - utter_get_director_by_movie_title_result
+- utter_get_actor_by_movie_title_result
 
 - action_match_director_search_movie
 - action_match_actor_search_movie
@@ -58,6 +60,7 @@ actions:
 - action_match_rating_search_movie
 
 - action_get_director_by_movie_title
+- action_get_actor_by_movie_title
 
 entities:
 - director
@@ -171,6 +174,9 @@ templates:
   utter_get_director_by_movie_title_result:
     - text: "Movie title: {movie_title}"
 
+  utter_get_actor_by_movie_title_result:
+    - text: "Movie title: {movie_title}"
+
 
 forms:
   - movie_match_director_form
@@ -181,3 +187,4 @@ forms:
   - movie_match_several_criteria_form
   - movie_match_rating_form
   - get_director_by_movie_title_form
+  - get_actor_by_movie_title_form

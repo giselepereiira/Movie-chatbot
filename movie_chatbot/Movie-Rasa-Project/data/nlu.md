@@ -191,6 +191,13 @@
 - who was the director of [the story of the kelly gang](movie_title)?
 - who was the director of [robbery under arms](movie_title)?
 
+##intent:get_actor_by_movie_title
+- who were the star actors in [the godfather](movie_title)?
+- who were the star actors in [miss jerry](movie_title)?
+- who were the star actors in [soldiers of the cross](movie_title)?
+- who were the star actors in [the story of the kelly gang](movie_title)?
+- who were the star actors in [robbery under arms](movie_title)?
+
 ##lookup:movie_title
 - the godfather
 - miss jerry
