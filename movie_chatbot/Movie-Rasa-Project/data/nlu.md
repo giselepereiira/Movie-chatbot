@@ -222,6 +222,8 @@
 - what is the language of [soldiers of the cross](movie_title)?
 - what is the language of [the story of the kelly gang](movie_title)?
 - what is the language of [robbery under arms](movie_title)?
+- what language is [the godfather](movie_title) in?
+
 
 ##intent:get_rating_by_movie_title
 - what is the rating of [the godfather](movie_title)?
@@ -229,6 +231,7 @@
 - what is the rating of [soldiers of the cross](movie_title)?
 - what is the rating of [the story of the kelly gang](movie_title)?
 - what is the rating of [robbery under arms](movie_title)?
+- what is [miss jerry](movie_title) rated?
 
 ##lookup:movie_title
 - the godfather
