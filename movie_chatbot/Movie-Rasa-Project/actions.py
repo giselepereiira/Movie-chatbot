@@ -15,6 +15,8 @@ from rasa_sdk.forms import FormAction
 
 import urllib.request
 
+ENDPOINT_DATABASE_PATH = "http://localhost:9001"
+ENDPOINT_GET_MOVIE = "/movie"
 
 def call_endpoint_get_movie(tracker, dispatcher):
     """
@@ -22,7 +24,7 @@ def call_endpoint_get_movie(tracker, dispatcher):
     :param tracker: Tracker
     :param dispatcher: Dispatcher
     """
-    endpoint = "http://localhost:9001/movie"
+    endpoint_get_movie_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE
     filter_endpoint = []
 
     for key, value in tracker.slots.items():
@@ -32,17 +34,16 @@ def call_endpoint_get_movie(tracker, dispatcher):
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
             if idx == 0:
-                endpoint = endpoint + "?" + val
+                endpoint_get_movie_path = endpoint_get_movie_path + "?" + val
             else:
-                endpoint = endpoint + "&" + val
+                endpoint_get_movie_path = endpoint_get_movie_path + "&" + val
 
-        response = urllib.request.urlopen(endpoint).read()
+        response = urllib.request.urlopen(endpoint_get_movie_path).read()
         # TODO: handle the case response is empty
         dispatcher.utter_message("Recommended movies are:" + response.decode())
 
     else:
-        print("No criteria found print") #TODO: pass to utter message
-
+        dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
 class MovieMatchDirectorForm(FormAction):
 
