@@ -7,12 +7,12 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-from typing import Any, Text, Dict, List, Union, Optional
+from typing import Any, Text, Dict, List
 
 from rasa_sdk import Tracker, Action
-from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormAction, REQUESTED_SLOT
+from rasa_sdk.forms import FormAction
+
 
 
 class MovieMatchDirectorForm(FormAction):
@@ -159,7 +159,12 @@ class ActionMatchYearSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message("Recommended movie: The avengers")
+        import urllib.request
+        contents = urllib.request.urlopen("http://localhost:9001/movie?year=1890").read()
+        print(contents)
+
+
+
 
 class MovieMatchGenreForm(FormAction):
 

@@ -154,13 +154,13 @@
 
 
 ## regex:year
-- \b(19|20)\d{2}\b
+- \b(18|19|20)\d{2}\b
 
 ## regex:year_start
-- \b(19|20)\d{2}\b
+- \b(18|19|20)\d{2}\b
 
 ## regex:year_end
-- \b(19|20)\d{2}\b
+- \b(18|19|20)\d{2}\b
 
 ## synonym:movies
 - films
