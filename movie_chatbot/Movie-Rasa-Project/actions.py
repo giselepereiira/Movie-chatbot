@@ -13,6 +13,35 @@ from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
+import urllib.request
+
+
+def call_endpoint_get_movie(tracker, dispatcher):
+    """
+    Method to invoke endpoints that returns the movie titles that match the entities detected on the user interaction
+    :param tracker: Tracker
+    :param dispatcher: Dispatcher
+    """
+    endpoint = "http://localhost:9001/movie"
+    filter_endpoint = []
+
+    for key, value in tracker.slots.items():
+        if value is not None:
+            filter_endpoint.append(key + "=" + value)
+
+    if len(filter_endpoint) >= 1:
+        for idx, val in enumerate(filter_endpoint):
+            if idx == 0:
+                endpoint = endpoint + "?" + val
+            else:
+                endpoint = endpoint + "&" + val
+
+        response = urllib.request.urlopen(endpoint).read()
+        # TODO: handle the case response is empty
+        dispatcher.utter_message("Recommended movies are:" + response.decode())
+
+    else:
+        print("No criteria found print") #TODO: pass to utter message
 
 
 class MovieMatchDirectorForm(FormAction):
@@ -33,11 +62,11 @@ class MovieMatchDirectorForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_director_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionMatchDirectorSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_director_search_movie"
@@ -46,7 +75,6 @@ class ActionMatchDirectorSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Recommended movie: The avengers")
 
         # import os
@@ -95,6 +123,7 @@ class ActionMatchDirectorSearchMovie(Action):
     #     return cars_dataset
     #
 
+
 class MovieMatchActorForm(FormAction):
 
     def name(self):
@@ -113,10 +142,11 @@ class MovieMatchActorForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_actor_result", tracker)
-        return []#[SlotSet("actor", None)]
+        return []  # [SlotSet("actor", None)]
+
 
 class ActionMatchActorSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_actor_search_movie"
@@ -125,8 +155,8 @@ class ActionMatchActorSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Recommended movie: The avengers")
+
 
 class MovieMatchYearForm(FormAction):
 
@@ -146,10 +176,11 @@ class MovieMatchYearForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_year_result", tracker)
-        return []#[SlotSet("year", None)]
+        return []  # [SlotSet("year", None)]
+
 
 class ActionMatchYearSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_year_search_movie"
@@ -159,11 +190,7 @@ class ActionMatchYearSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        import urllib.request
-        contents = urllib.request.urlopen("http://localhost:9001/movie?year=1890").read()
-        print(contents)
-
-
+        call_endpoint_get_movie(tracker, dispatcher)
 
 
 class MovieMatchGenreForm(FormAction):
@@ -184,10 +211,11 @@ class MovieMatchGenreForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_genre_result", tracker)
-        return []#[SlotSet("genre", None)]
+        return []  # [SlotSet("genre", None)]
+
 
 class ActionMatchGenreSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_genre_search_movie"
@@ -196,8 +224,8 @@ class ActionMatchGenreSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Recommended movie: The avengers")
+
 
 class MovieMatchLanguageForm(FormAction):
 
@@ -217,10 +245,11 @@ class MovieMatchLanguageForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_language_result", tracker)
-        return []#[SlotSet("language", None)]
+        return []  # [SlotSet("language", None)]
+
 
 class ActionMatchLanguageSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_language_search_movie"
@@ -229,9 +258,7 @@ class ActionMatchLanguageSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Recommended movie: The avengers")
-
 
 
 class MovieMatchSeveralCriteriaForm(FormAction):
@@ -288,22 +315,21 @@ class MovieMatchSeveralCriteriaForm(FormAction):
         if tracker.get_slot('year_end') is not None:
             dispatcher.utter_template("utter_movie_match_year_end_result", tracker)
 
-        return []#[SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
-               # SlotSet("genre", value_genre), SlotSet("year", value_year),
-               # SlotSet("year_start", value_year_start), SlotSet("year_end", value_year_end)]
+        return []  # [SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
+        # SlotSet("genre", value_genre), SlotSet("year", value_year),
+        # SlotSet("year_start", value_year_start), SlotSet("year_end", value_year_end)]
+
 
 class ActionMatchSeveralCriteriaSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_several_criteria_search_movie"
-
 
     def run(self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         value_actor = tracker.get_slot('actor')
         value_director = tracker.get_slot('director')
         value_language = tracker.get_slot('language')
@@ -312,7 +338,8 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
 
         dispatcher.utter_message("Recommended movie: The avengers")
 
-        #TODO querys
+        # TODO querys
+
 
 class MovieMatchRatingForm(FormAction):
 
@@ -366,26 +393,25 @@ class MovieMatchRatingForm(FormAction):
         if tracker.get_slot('rating') is not None:
             dispatcher.utter_template("utter_movie_match_rating_result", tracker)
 
-        return []#[SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
-               # SlotSet("genre", value_genre), SlotSet("year", value_year),
-               # SlotSet("year_start", value_year_start), SlotSet("year_end", value_year_end),
-               # SlotSet("rating", value_rating)]
+        return []  # [SlotSet("language", value_language), SlotSet("actor", value_actor), SlotSet("director", value_director),
+        # SlotSet("genre", value_genre), SlotSet("year", value_year),
+        # SlotSet("year_start", value_year_start), SlotSet("year_end", value_year_end),
+        # SlotSet("rating", value_rating)]
+
 
 class ActionMatchRatingSearchMovie(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_rating_search_movie"
-
 
     def run(self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Recommended movie: The avengers")
 
-        #TODO querys
+        # TODO querys
 
 
 class GetDirectorByMovieTitleForm(FormAction):
@@ -406,11 +432,11 @@ class GetDirectorByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_director_by_movie_title_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionGetDirectorByMovieTitle(Action):
-#TODO
+    # TODO
     def name(self):
         # type: () -> Text
         return "action_get_director_by_movie_title"
@@ -419,7 +445,6 @@ class ActionGetDirectorByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Director: Dummy director")
 
 
@@ -441,7 +466,7 @@ class GetActorByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_actor_by_movie_title_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionGetActorByMovieTitle(Action):
@@ -454,7 +479,6 @@ class ActionGetActorByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Actor: Dummy actor")
 
 
@@ -476,7 +500,7 @@ class GetYearByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_year_by_movie_title_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionGetYearByMovieTitle(Action):
@@ -489,7 +513,6 @@ class ActionGetYearByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Year: Dummy year")
 
 
@@ -511,7 +534,7 @@ class GetGenreByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_genre_by_movie_title_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionGetGenreByMovieTitle(Action):
@@ -524,7 +547,6 @@ class ActionGetGenreByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Genre: Dummy genre")
 
 
@@ -546,7 +568,7 @@ class GetLanguageByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_language_by_movie_title_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionGetLanguageByMovieTitle(Action):
@@ -559,7 +581,6 @@ class ActionGetLanguageByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Language: Dummy language")
 
 
@@ -581,7 +602,7 @@ class GetRatingByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_rating_by_movie_title_result", tracker)
-        return []#[SlotSet("director", None)]
+        return []  # [SlotSet("director", None)]
 
 
 class ActionGetRatingByMovieTitle(Action):
@@ -594,5 +615,4 @@ class ActionGetRatingByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         dispatcher.utter_message("Rating: Dummy rating")
