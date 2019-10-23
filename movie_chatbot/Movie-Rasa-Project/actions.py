@@ -33,14 +33,16 @@ def call_endpoint_get_movie(tracker, dispatcher):
 
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
-            to_add = val[0] + "=" + urllib.parse.quote(val[1])
+            parsed_query_parameter = val[0] + "=" + urllib.parse.quote(val[1])
             if idx == 0:
-                endpoint_get_movie_path = endpoint_get_movie_path + "?" + to_add
+                endpoint_get_movie_path = endpoint_get_movie_path + "?" + parsed_query_parameter
             else:
-                endpoint_get_movie_path = endpoint_get_movie_path + "&" + to_add
+                endpoint_get_movie_path = endpoint_get_movie_path + "&" + parsed_query_parameter
 
         print(endpoint_get_movie_path)
         response = urllib.request.urlopen(endpoint_get_movie_path).read()
+        print(response)
+        print(type(response))
         # TODO: handle the case response is empty
         dispatcher.utter_message("Recommended movies are:" + response.decode())
     else:
@@ -218,33 +220,6 @@ class ActionMatchLanguageSearchMovie(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         call_endpoint_get_movie(tracker, dispatcher)
-
-#TODO: the match several criteria doesn't need a form, i think
-#class MovieMatchSeveralCriteriaForm(FormAction):
-
-#    def name(self):
-#        # type: () -> Text
-#        return "movie_match_several_criteria_form"
-
-#    @staticmethod
-#    def required_slots(tracker: Tracker) -> List[Text]:
-3        #TODO: see this
-#        print(tracker.slots)
-#        list_available_slots = list()
-#        for criteria, criteria_value in tracker.slots.items():
-#            if criteria_value is not None:
-#                list_available_slots.append(criteria)
-#        print(list_available_slots)
-#        return list_available_slots
-
-#    def submit(
-#            self,
-#            dispatcher: CollectingDispatcher,
-#            tracker: Tracker,
-#            domain: Dict[Text, Any],
-#    ) -> List[Dict]:
-#        dispatcher.utter_template("utter_movie_match_several_criteria_result", tracker)
-#        return []
 
 
 class ActionMatchSeveralCriteriaSearchMovie(Action):
