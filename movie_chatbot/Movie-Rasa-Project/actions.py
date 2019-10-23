@@ -13,10 +13,12 @@ from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
-import urllib
+import urllib.parse
+import urllib.request
 
 ENDPOINT_DATABASE_PATH = "http://localhost:9001"
 ENDPOINT_GET_MOVIE = "/movie"
+
 
 def call_endpoint_get_movie(tracker, dispatcher):
     """
@@ -40,7 +42,7 @@ def call_endpoint_get_movie(tracker, dispatcher):
                 endpoint_get_movie_path = endpoint_get_movie_path + "&" + parsed_query_parameter
 
         print(endpoint_get_movie_path)
-        response = urllib.request.urlopen(endpoint_get_movie_path).read()
+        response = urllib.request.urlopen(endpoint_get_movie_path).read()  # TODO see the read byte response
         print(response)
         print(type(response))
         # TODO: handle the case response is empty
@@ -64,7 +66,6 @@ class MovieMatchDirectorForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-
         dispatcher.utter_template("utter_movie_match_director_result", tracker)
         return []
 
@@ -79,7 +80,6 @@ class ActionMatchDirectorSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         call_endpoint_get_movie(tracker, dispatcher)
 
 
@@ -98,7 +98,6 @@ class MovieMatchActorForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-
         dispatcher.utter_template("utter_movie_match_actor_result", tracker)
         return []
 
@@ -106,14 +105,12 @@ class MovieMatchActorForm(FormAction):
 class ActionMatchActorSearchMovie(Action):
 
     def name(self):
-
         return "action_match_actor_search_movie"
 
     def run(self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         call_endpoint_get_movie(tracker, dispatcher)
 
 
@@ -148,7 +145,6 @@ class ActionMatchYearSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         call_endpoint_get_movie(tracker, dispatcher)
 
 
@@ -168,7 +164,6 @@ class MovieMatchGenreForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-
         dispatcher.utter_template("utter_movie_match_genre_result", tracker)
         return []
 
@@ -183,7 +178,6 @@ class ActionMatchGenreSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         call_endpoint_get_movie(tracker, dispatcher)
 
 
@@ -203,7 +197,6 @@ class MovieMatchLanguageForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-
         dispatcher.utter_template("utter_movie_match_language_result", tracker)
         return []
 
@@ -218,7 +211,6 @@ class ActionMatchLanguageSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         call_endpoint_get_movie(tracker, dispatcher)
 
 
@@ -233,11 +225,29 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         print(tracker.slots)
+
+        # These messages are for the user knowing what the chatbot is looking for
+        if tracker.get_slot('director') is not None:
+            dispatcher.utter_template("utter_movie_match_director_result", tracker)
+        if tracker.get_slot('actor') is not None:
+            dispatcher.utter_template("utter_movie_match_actor_result", tracker)
+        if tracker.get_slot('year') is not None:
+            dispatcher.utter_template("utter_movie_match_year_result", tracker)
+        if tracker.get_slot('genre') is not None:
+            dispatcher.utter_template("utter_movie_match_genre_result", tracker)
+        if tracker.get_slot('language') is not None:
+            dispatcher.utter_template("utter_movie_match_language_result", tracker)
+        if tracker.get_slot('year_start') is not None:
+            dispatcher.utter_template("utter_movie_match_year_start_result", tracker)
+        if tracker.get_slot('year_end') is not None:
+            dispatcher.utter_template("utter_movie_match_year_end_result", tracker)
+        if tracker.get_slot('rating') is not None:
+            dispatcher.utter_template("utter_movie_match_rating_result", tracker)
+
         call_endpoint_get_movie(tracker, dispatcher)
 
 
-
-#TODO: this is level 2
+# TODO: this is level 2
 class MovieMatchRatingForm(FormAction):
 
     def name(self):
@@ -257,7 +267,6 @@ class MovieMatchRatingForm(FormAction):
         # utter submit template
         dispatcher.utter_template("utter_movie_match_several_criteria_result", tracker)
 
-
         return []
 
 
@@ -271,7 +280,6 @@ class ActionMatchRatingSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         call_endpoint_get_movie(tracker, dispatcher)
 
 

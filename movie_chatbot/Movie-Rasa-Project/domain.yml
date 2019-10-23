@@ -47,7 +47,6 @@ actions:
 - utter_movie_match_year_result
 - utter_movie_match_genre_result
 - utter_movie_match_language_result
-- utter_movie_match_several_criteria_result
 - utter_movie_match_year_start_result
 - utter_movie_match_year_end_result
 - utter_movie_match_rating_result
@@ -157,31 +156,28 @@ templates:
 
 
   utter_movie_match_director_result:
-    - text: "Director name: {director}"
+    - text: "Finding movies with Director name: {director}"
 
   utter_movie_match_actor_result:
-    - text: "Actor name: {actor}"
+    - text: "Finding movies with Actor name: {actor}"
 
   utter_movie_match_year_result:
-    - text: "Year: {year}"
+    - text: "Finding movies of this Year: {year}"
 
   utter_movie_match_genre_result:
-    - text: "Genre: {genre}"
+    - text: "Finding movies of this Genre: {genre}"
 
   utter_movie_match_language_result:
-    - text: "Language: {language}"
-
-  utter_movie_match_several_criteria_result:
-    - text: "Detected several criteria"
+    - text: "Finding movies of this Language: {language}"
 
   utter_movie_match_year_start_result:
-    - text: "Year start: {year_start}"
+    - text: "Finding movies between Year start: {year_start}"
 
   utter_movie_match_year_end_result:
-    - text: "Year end: {year_end}"
+    - text: "Finding movies until Year end: {year_end}"
 
   utter_movie_match_rating_result:
-    - text: "Rating: {rating}"
+    - text: "Finding movies with the Rating: {rating}"
 
   utter_get_director_by_movie_title_result:
     - text: "Movie title: {movie_title}"
