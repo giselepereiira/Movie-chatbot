@@ -208,7 +208,6 @@ forms:
   - movie_match_year_form
   - movie_match_genre_form
   - movie_match_language_form
-  - movie_match_several_criteria_form
   - movie_match_rating_form
   - get_director_by_movie_title_form
   - get_actor_by_movie_title_form

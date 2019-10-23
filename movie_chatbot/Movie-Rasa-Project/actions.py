@@ -13,7 +13,7 @@ from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
-import urllib.request
+import urllib
 
 ENDPOINT_DATABASE_PATH = "http://localhost:9001"
 ENDPOINT_GET_MOVIE = "/movie"
@@ -29,15 +29,17 @@ def call_endpoint_get_movie(tracker, dispatcher):
 
     for key, value in tracker.slots.items():
         if value is not None:
-            filter_endpoint.append(key + "=" + value)
+            filter_endpoint.append((key, value))
 
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
+            to_add = val[0] + "=" + urllib.parse.quote(val[1])
             if idx == 0:
-                endpoint_get_movie_path = endpoint_get_movie_path + "?" + val
+                endpoint_get_movie_path = endpoint_get_movie_path + "?" + to_add
             else:
-                endpoint_get_movie_path = endpoint_get_movie_path + "&" + val
+                endpoint_get_movie_path = endpoint_get_movie_path + "&" + to_add
 
+        print(endpoint_get_movie_path)
         response = urllib.request.urlopen(endpoint_get_movie_path).read()
         # TODO: handle the case response is empty
         dispatcher.utter_message("Recommended movies are:" + response.decode())
@@ -255,12 +257,12 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
+        print(tracker.slots)
         call_endpoint_get_movie(tracker, dispatcher)
 
 
 
-
+#TODO: this is level 2
 class MovieMatchRatingForm(FormAction):
 
     def name(self):
