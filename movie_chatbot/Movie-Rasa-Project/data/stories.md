@@ -33,6 +33,7 @@
 ## search movie by director
 * movie_match_director
     - movie_match_director_form
+    - slot{"director": "quentin tarantino"}
     - form{"name":"movie_match_director_form"}
     - form{"name": null}
     - action_match_director_search_movie

@@ -82,7 +82,7 @@
 ## intent:movie_match_year
 - what were the movies made in [2018](year)?
 - what were the movies made in [2019](year)?
-- what were the movies made in[1995](year)?
+- what were the movies made in [1995](year)?
 - what were the movies made in [1999](year)?
 - what were the movies made in [1980](year)?
 - what movies have been released in [2018](year)?
