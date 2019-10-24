@@ -297,7 +297,6 @@ def call_endpoint_get_movie_info(tracker):
     if value_movie_title is not None:
 
         endpoint_path = endpoint_path + "?movie_title=" + urllib.parse.quote(value_movie_title)
-
         response = urllib.request.urlopen(endpoint_path)
         response_json = json.loads(response.read().decode('utf-8'))
 
@@ -369,7 +368,7 @@ class GetActorByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_actor_by_movie_title_result", tracker)
-        return []  # [SlotSet("director", None)]
+        return []
 
 
 class ActionGetActorByMovieTitle(Action):
@@ -411,7 +410,7 @@ class GetYearByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_year_by_movie_title_result", tracker)
-        return []  # [SlotSet("director", None)]
+        return []
 
 
 class ActionGetYearByMovieTitle(Action):
