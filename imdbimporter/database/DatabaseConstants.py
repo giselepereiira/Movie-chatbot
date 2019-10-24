@@ -19,3 +19,11 @@ Session = sessionmaker()
 Session.configure(bind=engine)
 session = Session()
 Base = declarative_base()
+
+
+def connection_from():
+    if hasattr(engine, 'cursor'):
+        return engine, False
+    if hasattr(engine, 'connection'):
+        return engine.connection, False
+    return engine.raw_connection(), True
