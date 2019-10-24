@@ -15,6 +15,7 @@ from rasa_sdk.forms import FormAction
 
 import urllib.parse
 import urllib.request
+import json
 
 ENDPOINT_DATABASE_PATH = "http://localhost:9001"
 ENDPOINT_GET_MOVIE = "/movie"
@@ -41,12 +42,12 @@ def call_endpoint_get_movie(tracker, dispatcher):
             else:
                 endpoint_get_movie_path = endpoint_get_movie_path + "&" + parsed_query_parameter
 
-        print(endpoint_get_movie_path)
-        response = urllib.request.urlopen(endpoint_get_movie_path).read()  # TODO see the read byte response
-        print(response)
-        print(type(response))
+        response = urllib.request.urlopen(endpoint_get_movie_path)
+        response_json = json.loads(response.read().decode('utf-8'))
         # TODO: handle the case response is empty
-        dispatcher.utter_message("Recommended movies are:" + response.decode())
+        dispatcher.utter_message("Recommended movies are:")
+        for idx, result in enumerate(response_json):
+            dispatcher.utter_message(str(idx+1) + ". " + result[0])
     else:
         dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
