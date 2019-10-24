@@ -1,8 +1,8 @@
-from imdbimporter.database.DatabaseConstants import session
-
 import json
+
 from flask import Flask, Response, request
 
+from imdbimporter.database.DatabaseConstants import session
 from imdbimporter.models.Title import Title
 
 app = Flask(__name__)
@@ -10,16 +10,17 @@ app = Flask(__name__)
 
 @app.route("/movie", methods=['GET'])
 def get_movie():
+    result = []
+    http_resp_empty = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                               status=200,
+                               mimetype="application/json; charset=utf-8")
     accepted_keys = ['year', 'genre', 'director', 'actor', 'language', 'year_start', 'year_end', 'rating']
+
 
     for key in request.args.to_dict().keys():
         # the request comes with a parameter not allowed
         if key not in accepted_keys:
-            result = []
-            http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
-                                 status=200,
-                                 mimetype="application/json; charset=utf-8")
-            return http_resp
+            return http_resp_empty
 
     year = request.args.get('year')
     genre = request.args.get('genre')
@@ -60,6 +61,41 @@ def get_movie():
                          status=200,
                          mimetype="application/json; charset=utf-8")
     return http_resp
+
+
+@app.route("/movieInfo", methods=['GET'])
+def get_movie_info():
+    result = []
+    http_resp_empty = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                               status=200,
+                               mimetype="application/json; charset=utf-8")
+
+    if 'movie_title' not in request.args.to_dict().keys():
+        return http_resp_empty
+    else:
+        filter = list()
+        movie_title = request.args.get('movie_title')
+
+        filter.append(Title.title == movie_title)
+        x = session.query(Title.title)
+        result = x.filter(Title.title == movie_title).all()
+        if not result:
+            # the movie does not exists
+            return http_resp_empty
+        else:
+            accepted_keys = ['year', 'genre', 'director', 'actor', 'language', 'year_start', 'year_end', 'rating']
+
+            for key in request.args.to_dict().keys():
+                # the request comes with a parameter not allowed
+                if key not in accepted_keys:
+                    result = []
+                    http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                                         status=200,
+                                         mimetype="application/json; charset=utf-8")
+                    return http_resp
+
+
+
 
 
 app.run(host='127.0.0.1', port=9001)
