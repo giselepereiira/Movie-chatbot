@@ -7,18 +7,18 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
+import json
+import urllib.parse
+import urllib.request
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
-import urllib.parse
-import urllib.request
-import json
-
 ENDPOINT_DATABASE_PATH = "http://localhost:9001"
 ENDPOINT_GET_MOVIE = "/movie"
+ENDPOINT_GET_MOVIE_INFO = "/movieInfo"
 
 
 def call_endpoint_get_movie(tracker, dispatcher):
@@ -43,11 +43,10 @@ def call_endpoint_get_movie(tracker, dispatcher):
                 endpoint_get_movie_path = endpoint_get_movie_path + "&" + parsed_query_parameter
 
         response = urllib.request.urlopen(endpoint_get_movie_path)
-        print(response)
         response_json = json.loads(response.read().decode('utf-8'))
-        print(response_json)
 
-        if not response_json: #case the response is empty
+        if not response_json:
+            # case the response is empty
             dispatcher.utter_message("No movies found")
         else:
             dispatcher.utter_message("Recommended movies are:")
@@ -253,7 +252,6 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
         call_endpoint_get_movie(tracker, dispatcher)
 
 
-# TODO: this is level 2
 class MovieMatchRatingForm(FormAction):
 
     def name(self):
@@ -289,6 +287,29 @@ class ActionMatchRatingSearchMovie(Action):
         call_endpoint_get_movie(tracker, dispatcher)
 
 
+# TODO: this is level 2
+
+def call_endpoint_get_movie_info(tracker):
+    endpoint_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE_INFO
+
+    value_movie_title = tracker.get_slot('movie_title')
+
+    if value_movie_title is not None:
+
+        endpoint_path = endpoint_path + "?movie_title=" + urllib.parse.quote(value_movie_title)
+
+        response = urllib.request.urlopen(endpoint_path)
+        response_json = json.loads(response.read().decode('utf-8'))
+
+        if not response_json:
+            # case the response is empty
+            return "MovieTitleNotFound"
+        else:
+            return response_json
+    else:
+        return "NoMovieTitleDetected"
+
+
 class GetDirectorByMovieTitleForm(FormAction):
 
     def name(self):
@@ -307,11 +328,10 @@ class GetDirectorByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_director_by_movie_title_result", tracker)
-        return []  # [SlotSet("director", None)]
+        return []
 
 
 class ActionGetDirectorByMovieTitle(Action):
-    # TODO
     def name(self):
         # type: () -> Text
         return "action_get_director_by_movie_title"
@@ -320,7 +340,15 @@ class ActionGetDirectorByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Director: Dummy director")
+
+        response = call_endpoint_get_movie_info(tracker)
+        if response == "MovieTitleNotFound":
+            dispatcher.utter_message("This movie title was not found")
+        elif response == "NoMovieTitleDetected":
+            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
+        else:
+            # TODO: response get
+            dispatcher.utter_message("Director: Dummy director")
 
 
 class GetActorByMovieTitleForm(FormAction):
@@ -354,7 +382,15 @@ class ActionGetActorByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Actor: Dummy actor")
+
+        response = call_endpoint_get_movie_info(tracker)
+        if response == "MovieTitleNotFound":
+            dispatcher.utter_message("This movie title was not found")
+        elif response == "NoMovieTitleDetected":
+            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
+        else:
+            # TODO: response get
+            dispatcher.utter_message("Actor: Dummy actor")
 
 
 class GetYearByMovieTitleForm(FormAction):
@@ -388,7 +424,15 @@ class ActionGetYearByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Year: Dummy year")
+
+        response = call_endpoint_get_movie_info(tracker)
+        if response == "MovieTitleNotFound":
+            dispatcher.utter_message("This movie title was not found")
+        elif response == "NoMovieTitleDetected":
+            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
+        else:
+            # TODO: response get
+            dispatcher.utter_message("Year: Dummy year")
 
 
 class GetGenreByMovieTitleForm(FormAction):
@@ -409,7 +453,7 @@ class GetGenreByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_genre_by_movie_title_result", tracker)
-        return []  # [SlotSet("director", None)]
+        return []
 
 
 class ActionGetGenreByMovieTitle(Action):
@@ -422,7 +466,15 @@ class ActionGetGenreByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Genre: Dummy genre")
+
+        response = call_endpoint_get_movie_info(tracker)
+        if response == "MovieTitleNotFound":
+            dispatcher.utter_message("This movie title was not found")
+        elif response == "NoMovieTitleDetected":
+            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
+        else:
+            # TODO: response get
+            dispatcher.utter_message("Genre: Dummy genre")
 
 
 class GetLanguageByMovieTitleForm(FormAction):
@@ -443,7 +495,7 @@ class GetLanguageByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_language_by_movie_title_result", tracker)
-        return []  # [SlotSet("director", None)]
+        return []
 
 
 class ActionGetLanguageByMovieTitle(Action):
@@ -456,7 +508,15 @@ class ActionGetLanguageByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Language: Dummy language")
+
+        response = call_endpoint_get_movie_info(tracker)
+        if response == "MovieTitleNotFound":
+            dispatcher.utter_message("This movie title was not found")
+        elif response == "NoMovieTitleDetected":
+            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
+        else:
+            # TODO: response get
+            dispatcher.utter_message("Language: Dummy language")
 
 
 class GetRatingByMovieTitleForm(FormAction):
@@ -477,7 +537,7 @@ class GetRatingByMovieTitleForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_get_rating_by_movie_title_result", tracker)
-        return []  # [SlotSet("director", None)]
+        return []
 
 
 class ActionGetRatingByMovieTitle(Action):
@@ -490,4 +550,12 @@ class ActionGetRatingByMovieTitle(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message("Rating: Dummy rating")
+
+        response = call_endpoint_get_movie_info(tracker)
+        if response == "MovieTitleNotFound":
+            dispatcher.utter_message("This movie title was not found")
+        elif response == "NoMovieTitleDetected":
+            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
+        else:
+            # TODO: response get
+            dispatcher.utter_message("Rating: Dummy rating")
