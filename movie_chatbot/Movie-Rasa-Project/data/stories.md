@@ -41,6 +41,7 @@
 ## search movie by actor
 * movie_match_actor
     - movie_match_actor_form
+    - slot{"actor": "tom cruise"}
     - form{"name":"movie_match_actor_form"}
     - form{"name": null}
     - action_match_actor_search_movie
@@ -48,6 +49,7 @@
 ## search movie by year
 * movie_match_year
     - movie_match_year_form
+    - slot{"year": "1995"}
     - form{"name":"movie_match_year_form"}
     - form{"name": null}
     - action_match_year_search_movie
@@ -55,6 +57,7 @@
 ## search movie by genre
 * movie_match_genre
     - movie_match_genre_form
+    - slot{"genre": "comedy"}
     - form{"name":"movie_match_genre_form"}
     - form{"name": null}
     - action_match_genre_search_movie
@@ -62,6 +65,7 @@
 ## search movie by language  
 * movie_match_language
    - movie_match_language_form
+   - slot{"language": "english"}
    - form{"name":"movie_match_language_form"}
    - form{"name": null}
    - action_match_language_search_movie
@@ -73,6 +77,7 @@
  ## search movie with rating
 * movie_match_rating
    - movie_match_rating_form
+   - slot{"rating": "top 4"}
    - form{"name":"movie_match_rating_form"}
    - form{"name": null}
    - action_match_rating_search_movie
