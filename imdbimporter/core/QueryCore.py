@@ -16,7 +16,6 @@ def get_movie():
                                mimetype="application/json; charset=utf-8")
     accepted_keys = ['year', 'genre', 'director', 'actor', 'language', 'year_start', 'year_end', 'rating']
 
-
     for key in request.args.to_dict().keys():
         # the request comes with a parameter not allowed
         if key not in accepted_keys:
@@ -24,43 +23,67 @@ def get_movie():
 
     year = request.args.get('year')
     genre = request.args.get('genre')
-    director = request.args.get('director')
-    actor = request.args.get('actor')
+    director_name = request.args.get('director')
+    actor_name = request.args.get('actor')
     language = request.args.get('language')
     year_start = request.args.get('year_start')
     year_end = request.args.get('year_end')
     rating = request.args.get('rating')
 
-    filter = list()
-    if year is not None:
-        filter.append(Title.year == int(year))
-    if genre is not None:
-        filter.append(Title.genre.ilike("%" + genre + "%"))  # ilike is case insensitive
-    # TODO implement others filters when DB is ready
-    # if director is not None:
-    #   filter.append(Title.year == int(year))
+    if actor_name is None and director_name is None:
+        if year is not None:
+            filter.append(Title.year == int(year))
+        if genre is not None:
+            filter.append(Title.genre.ilike("%" + genre + "%"))  # ilike is case insensitive
 
-    if year_start is not None and year_end is None:
-        # lower range value
-        filter.append(Title.year == int(year_start))
-    if year_start is not None and year_end is not None:
-        # TODO add between
-        print()
-    if year_start is None and year_end is not None:
-        filter.append(Title.year == int(year_end))
+        if year_start is not None and year_end is None:
+            # lower range value
+            filter.append(Title.year == int(year_start))
+        if year_start is not None and year_end is not None:
+            # TODO add between
+            print()
+        if year_start is None and year_end is not None:
+            filter.append(Title.year == int(year_end))
 
-    x = session.query(Title.title)
-    session.close()
+        x = session.query(Title.title)
 
-    for i in filter:
-        x = x.filter(i)
+        for i in filter:
+            x = x.filter(i)
+    else:
+        query = "\"originalTitle\" from title " \
+                "inner join people_title on (title.tconst = people_title.id_titles)  " \
+                "inner join people on (people.nconst = people_title.id_names) "
 
-    result = x.all()
+        if actor_name is not None:
+            filter.append("people.\"primaryName\" ilike '%" + actor_name + "%'")
+        if director_name is not None:
+            filter.append("people.\"primaryName\" ilike '%" + actor_name + "%'")
+        if year is not None:
+            filter.append("title.\"startYear\" = " + str(year))
+        if genre is not None:
+            filter.append("title.\"genres\" ilike '%" + genre + "%'")
 
-    http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
-                         status=200,
-                         mimetype="application/json; charset=utf-8")
-    return http_resp
+        count = 0
+        for i in filter:
+            if count == 0:
+                query = query + " WHERE "
+            else:
+                query = query + " AND "
+
+            query = query + i + " "
+            count = count + 1
+
+        x = session.query(query)
+
+        result = x.all()
+
+        http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                             status=200,
+                             mimetype="application/json; charset=utf-8")
+        return http_resp
+
+
+
 
 
 @app.route("/movieInfo", methods=['GET'])
