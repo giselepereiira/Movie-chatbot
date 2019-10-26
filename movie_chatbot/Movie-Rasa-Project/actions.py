@@ -20,7 +20,6 @@ ENDPOINT_DATABASE_PATH = "http://localhost:9001"
 ENDPOINT_GET_MOVIE = "/movie"
 ENDPOINT_GET_MOVIE_INFO = "/movieInfo"
 
-
 def call_endpoint_get_movie(tracker, dispatcher):
     """
     Method to invoke endpoints that returns the movie titles that match the entities detected on the user interaction
@@ -275,7 +274,6 @@ class MovieMatchRatingForm(FormAction):
 
 
 class ActionMatchRatingSearchMovie(Action):
-    # TODO
     def name(self):
         # type: () -> Text
         return "action_match_rating_search_movie"
