@@ -243,9 +243,15 @@
 
 
 ##intent:get_movie_characteristics
-- do you have any movie from last year with awesome special effect?
-- do you have any movie from two years ago with awesome special effect?
-- do you have any movie from three years ago with awesome special effect?
-- tell me [drama](genre) movie that people love fr the love story 
-- tell me movies that have incredible landscapes and nature scenes
-- what films do you have that include space travel and aliens?
+- do you have any movie from last year with [awesome special effect](movie_characteristic)?
+- do you have any movie from two years ago with [awesome special effect](movie_characteristic)?
+- do you have any movie from three years ago with [awesome special effect](movie_characteristic)?
+- tell me [drama](genre) movie that [people love for the love story](movie_characteristic)
+- tell me movies that have [incredible landscapes and nature scenes](movie_characteristic)
+- what films do you have that include [space travel and aliens](movie_characteristic)?
+
+##lookup:movie_characteristic
+- awesome special effect
+- people love for the love story
+- incredible landscapes and nature scenes
+- space travel and aliens

@@ -89,6 +89,7 @@ entities:
 - movie_title
 
 - time #from duckling extractor
+- movie_characteristic
 
 slots:
     director:
@@ -110,6 +111,8 @@ slots:
     movie_title:
       type: text
     time:
+      type: text
+    movie_characteristic:
       type: text
 
 templates:

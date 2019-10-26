@@ -570,10 +570,15 @@ class ActionDummyLevel3Test(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
         time_duckling_value = tracker.get_slot("time")
+        movie_characteristic_value = tracker.get_slot("movie_characteristic")
+
         if time_duckling_value is not None:
             dispatcher.utter_message("duckling detected year:" + time_duckling_value['from'])
             # granularity that matters is only year in that case
             year_to_search = time_duckling_value['from'][0:4]  # example: '2018-01-01T00:00:00.000-08:00'
             print(year_to_search)
             # TODO: query with year
+        if movie_characteristic_value is not None:
+            print(movie_characteristic_value)
