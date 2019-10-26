@@ -11,6 +11,7 @@ app = Flask(__name__)
 @app.route("/movie", methods=['GET'])
 def get_movie():
     result = []
+    filter = []
     http_resp_empty = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
                                status=200,
                                mimetype="application/json; charset=utf-8")
@@ -75,12 +76,12 @@ def get_movie():
 
         x = session.query(query)
 
-        result = x.all()
+    result = x.all()
 
-        http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+    http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
                              status=200,
                              mimetype="application/json; charset=utf-8")
-        return http_resp
+    return http_resp
 
 
 
