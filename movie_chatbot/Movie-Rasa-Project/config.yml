@@ -8,7 +8,10 @@ pipeline:
   - name: "RegexFeaturizer"
   - name: "CRFEntityExtractor"
   - name: "DucklingHTTPExtractor"
+    # url of the running duckling server
     url: "http://localhost:8000"
+    # dimensions to extract
+    #dimensions: ["time"]
   - name: "EntitySynonymMapper"
   - name: "SklearnIntentClassifier"
 

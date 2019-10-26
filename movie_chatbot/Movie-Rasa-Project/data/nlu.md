@@ -240,3 +240,12 @@
 - the story of the kelly gang
 - robbery under arms
 - joker
+
+
+##intent:get_movie_characteristics
+- do you have any movie from last year with awesome special effect?
+- do you have any movie from two years ago with awesome special effect?
+- do you have any movie from three years ago with awesome special effect?
+- tell me [drama](genre) movie that people love fr the love story 
+- tell me movies that have incredible landscapes and nature scenes
+- what films do you have that include space travel and aliens?

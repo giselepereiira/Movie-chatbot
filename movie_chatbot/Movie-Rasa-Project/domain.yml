@@ -22,6 +22,8 @@ intents:
   - get_language_by_movie_title
   - get_rating_by_movie_title
 
+  - get_movie_characteristics
+
 actions:
 - utter_greet
 - utter_cheer_up
@@ -73,6 +75,8 @@ actions:
 - action_get_language_by_movie_title
 - action_get_rating_by_movie_title
 
+- action_dummy_level_3_test
+
 entities:
 - director
 - actor
@@ -83,6 +87,8 @@ entities:
 - year_end
 - rating
 - movie_title
+
+- time #from duckling extractor
 
 slots:
     director:
@@ -102,6 +108,8 @@ slots:
     rating:
       type: text
     movie_title:
+      type: text
+    time:
       type: text
 
 templates:
