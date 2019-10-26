@@ -37,3 +37,14 @@ def get_data():
     movies['clean_plot'] = movies['clean_plot'].apply(lambda x: remove_stopwords(x))
 
     return movies
+
+
+def get_data_movies():
+    meta = pd.read_csv("movie.metadata.tsv", sep='\t', header=None)
+
+    # rename columns
+    meta.columns = ["movie_id", 1, "movie_name", "date", "revenue", "runtime", "languages", "countries", "genre"]
+    meta.to_pickle("movie_all_data.pkl")
+
+
+get_data_movies()
