@@ -16,7 +16,7 @@ NUMBER_MOVIES_RETURN = 3
 @app.route("/level3", methods=['GET'])
 def get_level_3():
     time = request.args.get('time')
-    movie_characteristics = request.args.get('movie_characteristics')
+    movie_characteristics = request.args.get('movie_characteristic')
 
     scores = ranked_retrieval(inverted_index, LEN_MOVIES_DATASET, movie_characteristics)
     doc_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)

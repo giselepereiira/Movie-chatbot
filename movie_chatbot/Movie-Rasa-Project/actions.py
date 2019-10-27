@@ -560,6 +560,48 @@ class ActionGetRatingByMovieTitle(Action):
 
 # This is level 3
 
+def call_endpoint_level3(tracker, dispatcher):
+    """
+    Method to invoke endpoints that returns the movie titles that match the entities detected on the user interaction
+    :param tracker: Tracker
+    :param dispatcher: Dispatcher
+    """
+    endpoint_get_movie_path = ENDPOINT_DATABASE_PATH + "/level3"
+    filter_endpoint = []
+
+    time_duckling_value = tracker.get_slot("time")
+    movie_characteristic_value = tracker.get_slot("movie_characteristic")
+    if time_duckling_value is not None:
+        year_to_search = time_duckling_value['from'][0:4]
+        filter_endpoint.append(("time", year_to_search))
+    if movie_characteristic_value is not None:
+        filter_endpoint.append(('movie_characteristic', movie_characteristic_value))
+    # for key, value in tracker.slots.items():
+    #   if value is not None:
+    #      filter_endpoint.append((key, value))
+
+    if len(filter_endpoint) >= 1:
+        for idx, val in enumerate(filter_endpoint):
+            parsed_query_parameter = val[0] + "=" + urllib.parse.quote(val[1])
+            if idx == 0:
+                endpoint_get_movie_path = endpoint_get_movie_path + "?" + parsed_query_parameter
+            else:
+                endpoint_get_movie_path = endpoint_get_movie_path + "&" + parsed_query_parameter
+
+        print(endpoint_get_movie_path)
+        response = urllib.request.urlopen(endpoint_get_movie_path)
+        response_json = json.loads(response.read().decode('utf-8'))
+
+        if not response_json:
+            # case the response is empty
+            dispatcher.utter_message("No movies found")
+        else:
+            dispatcher.utter_message("Recommended movies are:")
+            for idx, result in enumerate(response_json):
+                dispatcher.utter_message(str(idx + 1) + ". " + result)
+    else:
+        dispatcher.utter_message("No entity was detected. Please reformulate your search.")
+
 class ActionDummyLevel3Test(Action):
 
     def name(self):
@@ -579,6 +621,7 @@ class ActionDummyLevel3Test(Action):
             # granularity that matters is only year in that case
             year_to_search = time_duckling_value['from'][0:4]  # example: '2018-01-01T00:00:00.000-08:00'
             print(year_to_search)
-            # TODO: query with year
         if movie_characteristic_value is not None:
             print(movie_characteristic_value)
+
+            call_endpoint_level3(tracker, dispatcher)
