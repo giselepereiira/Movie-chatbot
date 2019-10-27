@@ -1,4 +1,5 @@
 import csv
+import json
 
 import pandas as pd
 from tqdm import tqdm
@@ -44,6 +45,18 @@ def get_data_movies():
 
     # rename columns
     meta.columns = ["movie_id", 1, "movie_name", "date", "revenue", "runtime", "languages", "countries", "genre"]
+
+    # process date
+    meta['date'] = meta['date'].str[0:4]
+
+    # process genres
+    genres = []
+    for i in meta['genre']:
+        genres.append(list(json.loads(i).values()))
+
+        # add to 'movies' dataframe
+    meta['genre'] = genres
+
     meta.to_pickle("movie_all_data.pkl")
 
 
