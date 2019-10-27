@@ -4,8 +4,7 @@ import json
 import pandas as pd
 from tqdm import tqdm
 
-from cmudatabase.TextProcessingUtils import clean_text
-from cmudatabase.TextProcessingUtils import remove_stopwords
+from TextProcessingUtils import clean_text
 
 
 def get_data():
@@ -34,8 +33,6 @@ def get_data():
     meta['movie_id'] = meta['movie_id'].astype(str)
 
     movies['clean_plot'] = movies['plot'].apply(lambda x: clean_text(x))
-
-    movies['clean_plot'] = movies['clean_plot'].apply(lambda x: remove_stopwords(x))
 
     return movies
 
