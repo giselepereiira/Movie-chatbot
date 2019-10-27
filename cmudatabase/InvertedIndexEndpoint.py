@@ -24,7 +24,7 @@ def get_level_3():
     result = pd.DataFrame()
     for value in doc_scores:
         id = str(value[0])
-        movie_info = movie_data.loc[(movie_data['movie_id'] == int(id)) & (movie_data['date'] == str(time))]
+        movie_info = movie_data.loc[(movie_data['movie_id'] == int(id))(movie_data['date'] == str(time))]
         if not movie_info.empty:
             result = result.append(movie_info)
         if len(result) == NUMBER_MOVIES_RETURN:
@@ -85,4 +85,4 @@ with open('movie_plot_index' + '.pkl', 'rb') as f:
 with open('movie_all_data' + '.pkl', 'rb') as f:
     movie_data = pickle.load(f)
 
-app.run(host='127.0.0.1', port=9001)
+app.run(host='127.0.0.1', port=9002)
