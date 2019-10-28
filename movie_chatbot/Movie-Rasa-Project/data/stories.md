@@ -106,14 +106,6 @@
    - form{"name": null}
    - action_get_genre_by_movie_title
    
-## search language with movie title
-* get_language_by_movie_title
-   - get_language_by_movie_title_form
-   - slot{"movie_title": "joker"}
-   - form{"name":"get_language_by_movie_title_form"}
-   - form{"name": null}
-   - action_get_language_by_movie_title
-
 ## search rating with movie title
 * get_rating_by_movie_title
    - get_rating_by_movie_title_form
