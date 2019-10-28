@@ -249,8 +249,12 @@ def get_level_3():
 
         result = pd.DataFrame()
         for value in doc_scores:
-            id = str(value[0])
-            movie_info = movie_data.loc[(movie_data['movie_id'] == int(id))]  # & (movie_data['date'] == str(time))]
+            movie_info = movie_data.loc[(movie_data['movie_id'] == int(str(value[0])))]
+            if year_start is not None:
+                movie_info = movie_info.loc[movie_data['date'] == str(year_start)]
+            if genre is not None:
+                movie_info = movie_info.loc[movie_data['genre'].contains(genre)]  # todo: to lower case genre
+
             if not movie_info.empty:
                 result = result.append(movie_info)
             if len(result) == number_movies_return:
