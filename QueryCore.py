@@ -62,9 +62,11 @@ def get_movie():
         filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + actor_name.replace(" ", "&") + "')")
     if director_name is not None:
         filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + director_name.replace(" ", "&") + "')")
-    if year_start is not None:
+    if year_start is not None and year_end is not None:
         filter.append("title.\"startYear\" >= " + str(year_start) +
                       " AND title.\"startYear\" <= " + str(year_end))
+    elif year_start is not None:
+        filter.append("title.\"startYear\" = " + str(year_start))
     if genre is not None:
         filter.append("title.\"genres\" ilike '%%" + genre + "%%'")
 
@@ -155,9 +157,11 @@ def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year
         filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + actor_name.replace(" ", "&") + "')")
     if director_name is not None:
         filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + director_name.replace(" ", "&") + "')")
-    if year_start is not None:
+    if year_start is not None and year_end is not None:
         filter.append("title.\"startYear\" >= " + str(year_start) +
                       " AND title.\"startYear\" <= " + str(year_end))
+    elif year_start is not None:
+        filter.append("title.\"startYear\" >= " + str(year_start))
     if genre is not None:
         filter.append("title.\"genres\" ilike '%%" + genre + "%%'")
 
