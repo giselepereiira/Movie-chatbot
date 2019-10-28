@@ -2,8 +2,7 @@ import json
 
 from flask import Flask, Response, request
 
-from imdbimporter.database.DatabaseConstants import session
-from imdbimporter.models.Title import Title
+from imdbimporter.database.DatabaseConstants import engine
 
 app = Flask(__name__)
 
@@ -22,7 +21,6 @@ def get_movie():
         if key not in accepted_keys:
             return http_resp_empty
 
-    year = request.args.get('year')
     genre = request.args.get('genre')
     director_name = request.args.get('director')
     actor_name = request.args.get('actor')
@@ -31,61 +29,46 @@ def get_movie():
     year_end = request.args.get('year_end')
     rating = request.args.get('rating')
 
+    filter = []
+
     if actor_name is None and director_name is None:
-        if year is not None:
-            filter.append(Title.year == int(year))
-        if genre is not None:
-            filter.append(Title.genre.ilike("%" + genre + "%"))  # ilike is case insensitive
+        query = "SELECT \"originalTitle\" FROM title "
 
-        if year_start is not None and year_end is None:
-            # lower range value
-            filter.append(Title.year == int(year_start))
-        if year_start is not None and year_end is not None:
-            # TODO add between
-            print()
-        if year_start is None and year_end is not None:
-            filter.append(Title.year == int(year_end))
-
-        x = session.query(Title.title)
-
-        for i in filter:
-            x = x.filter(i)
     else:
-        query = "\"originalTitle\" from title " \
-                "inner join people_title on (title.tconst = people_title.id_titles)  " \
-                "inner join people on (people.nconst = people_title.id_names) "
+        query = "SELECT \"originalTitle\" FROM title " \
+                "INNER JOIN people_title ON (title.tconst = people_title.id_titles)  " \
+                "INNER JOIN people ON (people.nconst = people_title.id_names) "
 
-        if actor_name is not None:
-            filter.append("people.\"primaryName\" ilike '%" + actor_name + "%'")
-        if director_name is not None:
-            filter.append("people.\"primaryName\" ilike '%" + actor_name + "%'")
-        if year is not None:
-            filter.append("title.\"startYear\" = " + str(year))
-        if genre is not None:
-            filter.append("title.\"genres\" ilike '%" + genre + "%'")
+    if actor_name is not None:
+        filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + actor_name.replace(" ", "&") + "')")
+    if director_name is not None:
+        filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + director_name.replace(" ", "&") + "')")
+    if year_start is not None:
+        filter.append("title.\"startYear\" >= " + str(year_start) +
+                      " AND title.\"startYear\" <= " + str(year_end))
+    if genre is not None:
+        filter.append("title.\"genres\" ilike '%%" + genre + "%%'")
+    # language has many null's
 
-        count = 0
-        for i in filter:
-            if count == 0:
-                query = query + " WHERE "
-            else:
-                query = query + " AND "
+    count = 0
+    for i in filter:
+        if count == 0:
+            query = query + " WHERE "
+        else:
+            query = query + " AND "
 
-            query = query + i + " "
-            count = count + 1
+        query = query + i + " "
+        count = count + 1
 
-        x = session.query(query)
+    rs = connection.execute(query)
 
-    result = x.all()
+    result = []
+    for rowproxy in rs:
+        result.append(rowproxy.values())
 
-    http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
-                             status=200,
-                             mimetype="application/json; charset=utf-8")
-    return http_resp
-
-
-
-
+    return Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                    status=200,
+                    mimetype="application/json; charset=utf-8")
 
 @app.route("/movieInfo", methods=['GET'])
 def get_movie_info():
@@ -100,26 +83,73 @@ def get_movie_info():
         filter = list()
         movie_title = request.args.get('movie_title')
 
-        filter.append(Title.title == movie_title)
-        x = session.query(Title.title)
-        result = x.filter(Title.title == movie_title).all()
+        query = "SELECT t.rating, t.language, t.\"primaryTitle\", t.\"genres\", p.\"primaryProfession\", p.\"primaryName\" " \
+                "from title as t " \
+                "inner join people_title on (t.tconst = people_title.id_titles)  " \
+                "inner join people as p on (p.nconst = people_title.id_names) " \
+                "where t.\"primary_title_vector\" @@ to_tsquery('" + movie_title.replace(" ", "&") + "')"
+
+        rs = connection.execute(query)
+
+        d, result, result_film = {}, {}, {"actors": set(), "directors": set()},
+        for rowproxy in rs:
+            for column, value in rowproxy.items():
+                d = {**d, **{column: value}}
+
+            primary_title = d.get("primaryTitle")
+            if result.get(primary_title) is None:
+                result.update({primary_title: result_film})
+
+            result.get(primary_title).update({"rating": d.get("rating")})
+            result.get(primary_title).update({"language": d.get("language")})
+            if 'director' in d.get("primaryProfession"):
+                result.get(primary_title).get("directors").add(d.get("primaryName"))
+            else:
+                result.get(primary_title).get("actors").add(d.get("primaryName"))
+
+        for i in result:
+            directors = result.get(i).get("directors")
+            actors = result.get(i).get("actors")
+
+            result.get(i).update({"directors": list(directors)})
+            result.get(i).update({"actors": list(actors)})
+
         if not result:
             # the movie does not exists
             return http_resp_empty
         else:
-            accepted_keys = ['year', 'genre', 'director', 'actor', 'language', 'year_start', 'year_end', 'rating']
+            return Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                            status=200,
+                            mimetype="application/json; charset=utf-8")
 
-            for key in request.args.to_dict().keys():
-                # the request comes with a parameter not allowed
-                if key not in accepted_keys:
-                    result = []
-                    http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
-                                         status=200,
-                                         mimetype="application/json; charset=utf-8")
-                    return http_resp
+    return http_resp_empty
 
 
+@app.route("/movie/<id>")
+def get_movie_by_id(id):
+    query = "select \"originalTitle\" FROM title WHERE tconst = '" + id + "'"
+    rs = connection.execute(query)
+
+    result = []
+    for rowproxy in rs:
+        result.append(rowproxy.values())
+
+    http_resp = Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
+                         status=200,
+                         mimetype="application/json; charset=utf-8")
+    return http_resp
 
 
+@app.route("/level3", methods=['GET'])
+def get_level_3():
+    year = request.args.get('time')
+    year = request.args.get('movie_characteristics')
 
+    # TODO: implement the search
+    # process characteristic : remove stopwrods...
+
+    return 'ola'
+
+
+connection = engine.connect()
 app.run(host='127.0.0.1', port=9001)

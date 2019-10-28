@@ -10,7 +10,7 @@ db_config = {'drivername': 'postgres',
              'password': 'challenge_nlp',
              'host': 'localhost',
              'database': 'chatbot',
-             'port':5432}
+             'port': 5432}
 db_string = URL(**db_config)
 # Create all tables defined before.
 engine = create_engine(db_string)

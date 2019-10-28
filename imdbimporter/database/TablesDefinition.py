@@ -1,4 +1,4 @@
-from sqlalchemy import func, Column, Table, MetaData, String, Integer, Boolean, Text, ForeignKey, orm, create_engine
+from sqlalchemy import Column, Table, MetaData, String, Integer, Boolean, Text, Float
 
 from imdbimporter.database.DatabaseConstants import engine
 
@@ -36,5 +36,27 @@ title_crew_table = Table('title_crew', metadata,
 
 crew = {"file": "C:\\Users\\Gisele\\git\\TDX-UC-NLP-DSAcademy\\dataset\\title.crew.tsv",
          "name": title_crew_table.name}
+
+title_rating_table = Table('title_ratings', metadata,
+                           Column('tconst', String),
+                           Column('averageRating', Float),
+                           Column('numVotes', String))
+
+rating = {"file": "..\\dataset\\title_ratings.tsv",
+          "name": title_rating_table.name}
+
+title_akas_table = Table('title_akas', metadata,
+                         Column('titleId', String),
+                         Column('ordering', String),
+                         Column('title', String),
+                         Column('region', String),
+                         Column('language', String),
+                         Column('types', String),
+                         Column('attributes', String),
+                         Column('isOriginalType', Integer))
+
+akas = {"file": "..\\dataset\\title.akas.tsv.tsv",
+        "name": title_akas_table.name}
+
 
 metadata.create_all(engine)
