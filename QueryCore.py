@@ -21,23 +21,32 @@ HTTP_REST_EMPTY = Response(response=json.dumps([], ensure_ascii=False).encode('u
                            status=200,
                            mimetype="application/json; charset=utf-8")
 
+# Filters name
+GENRE = 'genre'
+YEAR_START = 'year_start'
+DIRECTOR_NAME = 'director'
+ACTOR_NAME = 'actor'
+YEAR_END = 'year_end'
+TOP_RATED = 'rating'
+MOVIE_TITLE = 'movie_title'
+MOVIE_CHARACTERISTIC = 'movie_characteristic'
+
 
 @app.route("/movie", methods=['GET'])
 def get_movie():
-
-    accepted_keys = ['year', 'genre', 'director', 'actor', 'language', 'year_start', 'year_end', 'rating']
+    accepted_keys = [YEAR_START, GENRE, DIRECTOR_NAME, ACTOR_NAME, YEAR_END, TOP_RATED]
 
     for key in request.args.to_dict().keys():
         # the request comes with a parameter not allowed
         if key not in accepted_keys:
             return HTTP_REST_EMPTY
 
-    genre = request.args.get('genre')
-    director_name = request.args.get('director')
-    actor_name = request.args.get('actor')
-    year_start = request.args.get('year_start')
-    year_end = request.args.get('year_end')
-    top_rated = request.args.get('rating')
+    genre = request.args.get(GENRE)
+    director_name = request.args.get(DIRECTOR_NAME)
+    actor_name = request.args.get(ACTOR_NAME)
+    year_start = request.args.get(YEAR_START)
+    year_end = request.args.get(YEAR_END)
+    top_rated = request.args.get(TOP_RATED)
 
     filter = []
 
@@ -82,14 +91,14 @@ def get_movie():
                     status=200,
                     mimetype="application/json; charset=utf-8")
 
+
 @app.route("/movieInfo", methods=['GET'])
 def get_movie_info():
-
-    if 'movie_title' not in request.args.to_dict().keys():
+    if MOVIE_TITLE not in request.args.to_dict().keys():
         return HTTP_REST_EMPTY
     else:
 
-        movie_title = request.args.get('movie_title')
+        movie_title = request.args.get(MOVIE_TITLE)
 
         query = "SELECT t.rating, t.language, t.\"primaryTitle\", t.\"genres\", p.\"primaryProfession\", p.\"primaryName\" " \
                 "from title as t " \
@@ -180,14 +189,14 @@ def get_level_3():
     number_movies_return = 5
     len_movies_dataset_kaggle = 12500
 
-    movie_characteristics = request.args.get('movie_characteristic')
+    movie_characteristics = request.args.get(MOVIE_CHARACTERISTIC)
 
-    year_start = request.args.get('time')
-    year_end = request.args.get('year_end')
-    genre = request.args.get('genre')
-    director_name = request.args.get('director')
-    actor_name = request.args.get('actor')
-    top_rated = request.args.get('rating')
+    year_start = request.args.get(YEAR_START)
+    year_end = request.args.get(YEAR_END)
+    genre = request.args.get(GENRE)
+    director_name = request.args.get(DIRECTOR_NAME)
+    actor_name = request.args.get(ACTOR_NAME)
+    top_rated = request.args.get(TOP_RATED)
 
     sentiment_scores = sid.polarity_scores(movie_characteristics)
 
