@@ -126,7 +126,7 @@ class MovieMatchYearForm(FormAction):
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
-        return ["year"]
+        return ["year_start"]
 
     def submit(
             self,
@@ -185,39 +185,6 @@ class ActionMatchGenreSearchMovie(Action):
         call_endpoint_get_movie(tracker, dispatcher)
 
 
-class MovieMatchLanguageForm(FormAction):
-
-    def name(self):
-        # type: () -> Text
-        return "movie_match_language_form"
-
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
-        return ["language"]
-
-    def submit(
-            self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> List[Dict]:
-        dispatcher.utter_template("utter_movie_match_language_result", tracker)
-        return []
-
-
-class ActionMatchLanguageSearchMovie(Action):
-
-    def name(self):
-        # type: () -> Text
-        return "action_match_language_search_movie"
-
-    def run(self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        call_endpoint_get_movie(tracker, dispatcher)
-
-
 class ActionMatchSeveralCriteriaSearchMovie(Action):
 
     def name(self):
@@ -235,12 +202,8 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             dispatcher.utter_template("utter_movie_match_director_result", tracker)
         if tracker.get_slot('actor') is not None:
             dispatcher.utter_template("utter_movie_match_actor_result", tracker)
-        if tracker.get_slot('year') is not None:
-            dispatcher.utter_template("utter_movie_match_year_result", tracker)
         if tracker.get_slot('genre') is not None:
             dispatcher.utter_template("utter_movie_match_genre_result", tracker)
-        if tracker.get_slot('language') is not None:
-            dispatcher.utter_template("utter_movie_match_language_result", tracker)
         if tracker.get_slot('year_start') is not None:
             dispatcher.utter_template("utter_movie_match_year_start_result", tracker)
         if tracker.get_slot('year_end') is not None:
@@ -285,7 +248,7 @@ class ActionMatchRatingSearchMovie(Action):
         call_endpoint_get_movie(tracker, dispatcher)
 
 
-# TODO: this is level 2
+# This is level 2
 
 def call_endpoint_get_movie_info(tracker):
     endpoint_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE_INFO
@@ -573,7 +536,7 @@ def call_endpoint_level3(tracker, dispatcher):
     movie_characteristic_value = tracker.get_slot("movie_characteristic")
     if time_duckling_value is not None:
         year_to_search = time_duckling_value['from'][0:4]
-        filter_endpoint.append(("time", year_to_search))
+        filter_endpoint.append(("year_start", year_to_search))
     if movie_characteristic_value is not None:
         filter_endpoint.append(('movie_characteristic', movie_characteristic_value))
     # for key, value in tracker.slots.items():

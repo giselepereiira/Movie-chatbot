@@ -80,14 +80,14 @@
 - what movies has [richard burton](actor) worked on?
 
 ## intent:movie_match_year
-- what were the movies made in [2018](year)?
-- what were the movies made in [2019](year)?
-- what were the movies made in [1995](year)?
-- what were the movies made in [1999](year)?
-- what were the movies made in [1980](year)?
-- what movies have been released in [2018](year)?
-- what movies have been released in [1990](year)?
-- what movies have been released in [2000](year)?
+- what were the movies made in [2018](year_start)?
+- what were the movies made in [2019](year_start)?
+- what were the movies made in [1995](year_start)?
+- what were the movies made in [1999](year_start)?
+- what were the movies made in [1980](year_start)?
+- what movies have been released in [2018](year_start)?
+- what movies have been released in [1990](year_start)?
+- what movies have been released in [2000](year_start)?
 
 ## intent:movie_match_genre
 - tell me [comedy](genre) movies
@@ -97,11 +97,6 @@
 - give me [action](genre) movies
 - give me [horror](genre) movies
 
-## intent:movie_match_language
-- tell me movies in [french](language)
-- tell me movies in [english](language)
-- tell me movies in [portuguese](language)
-
 ## intent:movie_match_several_criteria
 - tell me [comedy](genre) movies that had the participation of [tom cruise](actor)
 - tell me [drama](genre) movies that had the participation of [fred astaire](actor)
@@ -110,9 +105,9 @@
 - tell me movies in [spanish](language) that were produced between [1990](year_start) and [2002](year_end)
 
 ##intent: movie_match_rating
-- what were the [top 5](rating) rated movies in [2018](year)?
-- what were the [top 2](rating) rated movies in [2019](year)?
-- what were the [top 10](rating) rated movies in [1990](year)?
+- what were the [top 5](rating) rated movies in [2018](year_start)?
+- what were the [top 2](rating) rated movies in [2019](year_start)?
+- what were the [top 10](rating) rated movies in [1990](year_start)?
 
 ## lookup:actor
 - tom cruise
@@ -145,16 +140,6 @@
 - action
 - horror
 - drama
-
-## lookup:language
-- french
-- portuguese
-- english
-- spanish
-
-
-## regex:year
-- \b(18|19|20)\d{2}\b
 
 ## regex:year_start
 - \b(18|19|20)\d{2}\b

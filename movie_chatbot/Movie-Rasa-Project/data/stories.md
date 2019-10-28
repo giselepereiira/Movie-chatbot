@@ -49,7 +49,7 @@
 ## search movie by year
 * movie_match_year
     - movie_match_year_form
-    - slot{"year": "1995"}
+    - slot{"year_start": "1995"}
     - form{"name":"movie_match_year_form"}
     - form{"name": null}
     - action_match_year_search_movie
@@ -62,14 +62,6 @@
     - form{"name": null}
     - action_match_genre_search_movie
 
-## search movie by language  
-* movie_match_language
-   - movie_match_language_form
-   - slot{"language": "english"}
-   - form{"name":"movie_match_language_form"}
-   - form{"name": null}
-   - action_match_language_search_movie
-   
  ## search movie by several criteria  
 * movie_match_several_criteria
    - action_match_several_criteria_search_movie
