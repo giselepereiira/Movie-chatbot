@@ -143,13 +143,16 @@ def get_movie_info():
 
 
 def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year_end, top_rated):
-    filter = ["title.tconst IN " + str(movie_id).replace('[', '(').replace(']', ')')]
+    filter = []
+
+    join = "JOIN (VALUES " + str(movie_id).replace('[', '').replace(']', '') + \
+           ") AS x(id, ordering) ON title.tconst = x.id "
 
     if actor_name is None and director_name is None:
-        query = "SELECT \"originalTitle\" FROM title "
+        query = "SELECT \"originalTitle\" FROM title " + join
 
     else:
-        query = "SELECT \"originalTitle\" FROM title " \
+        query = "SELECT \"originalTitle\" FROM title " + join + \
                 "INNER JOIN people_title ON (title.tconst = people_title.id_titles)  " \
                 "INNER JOIN people ON (people.nconst = people_title.id_names) "
 
@@ -161,7 +164,7 @@ def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year
         filter.append("title.\"startYear\" >= " + str(year_start) +
                       " AND title.\"startYear\" <= " + str(year_end))
     elif year_start is not None:
-        filter.append("title.\"startYear\" >= " + str(year_start))
+        filter.append("title.\"startYear\" = " + str(year_start))
     if genre is not None:
         filter.append("title.\"genres\" ilike '%%" + genre + "%%'")
 
@@ -175,8 +178,7 @@ def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year
         query = query + i + " "
         count = count + 1
 
-    if top_rated is not None:
-        query = query + " ORDER BY RATING DESC NULLS LAST LIMIT " + str(top_rated)
+    query = query + " ORDER BY x.ordering"
 
     rs = connection.execute(query)
 
@@ -229,8 +231,8 @@ def get_level_3():
         doc_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 
         input_get_movies = list()
-        for value in doc_scores:
-            input_get_movies.append(str(value[0]))
+        for index, value in enumerate(doc_scores):
+            input_get_movies.append((str(value[0]), index))
 
         movie_list = get_movie_by_id(input_get_movies, genre, director_name, actor_name, year_start, year_end,
                                      top_rated)
