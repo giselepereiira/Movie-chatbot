@@ -437,48 +437,6 @@ class ActionGetGenreByMovieTitle(Action):
             dispatcher.utter_message("Genre: Dummy genre")
 
 
-class GetLanguageByMovieTitleForm(FormAction):
-
-    def name(self):
-        # type: () -> Text
-        return "get_language_by_movie_title_form"
-
-    @staticmethod
-    def required_slots(tracker: Tracker) -> List[Text]:
-        return ["movie_title"]
-
-    def submit(
-            self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any],
-    ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_get_language_by_movie_title_result", tracker)
-        return []
-
-
-class ActionGetLanguageByMovieTitle(Action):
-
-    def name(self):
-        # type: () -> Text
-        return "action_get_language_by_movie_title"
-
-    def run(self,
-            dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        response = call_endpoint_get_movie_info(tracker)
-        if response == "MovieTitleNotFound":
-            dispatcher.utter_message("This movie title was not found")
-        elif response == "NoMovieTitleDetected":
-            dispatcher.utter_message("No movie title detected. Please reformulate your search.")
-        else:
-            # TODO: response get
-            dispatcher.utter_message("Language: Dummy language")
-
-
 class GetRatingByMovieTitleForm(FormAction):
 
     def name(self):
