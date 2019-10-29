@@ -142,6 +142,9 @@ templates:
   utter_ask_movie_title:
     - text: "What is the title of the movie?"
 
+  utter_ask_movie_attribute:
+    - text: "What is the attributes of the movie?"
+
   utter_movie_match_director_result:
     - text: "Finding movies with Director name: {director}"
 
@@ -175,3 +178,4 @@ forms:
   - get_year_by_movie_title_form
   - get_genre_by_movie_title_form
   - get_rating_by_movie_title_form
+  - get_movie_based_attribute_form

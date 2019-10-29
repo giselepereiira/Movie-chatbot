@@ -543,6 +543,24 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
         dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
 
+class GetMovieBasedAttributeForm(FormAction):
+
+    def name(self):
+        # type: () -> Text
+        return "get_movie_based_attribute_form"
+
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        return ["movie_attribute"]
+
+    def submit(
+            self,
+            dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        return []
+
 class ActionGetMovieBasedAttribute(Action):
 
     def name(self):

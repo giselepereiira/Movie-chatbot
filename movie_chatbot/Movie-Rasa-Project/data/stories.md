@@ -117,4 +117,7 @@
    
 ##search for movies based on its attributes
 * get_movie_attributes
+    - get_movie_based_attribute_form
+    - form{"name":"get_movie_based_attribute_form"}
+    - form{"name": null}
     - action_get_movie_based_attribute
