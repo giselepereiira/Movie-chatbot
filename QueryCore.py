@@ -32,6 +32,7 @@ MOVIE_TITLE = 'movie_title'
 MOVIE_CHARACTERISTIC = 'movie_characteristic'
 
 
+# Return a movie given criteria
 @app.route("/movie", methods=['GET'])
 def get_movie():
     accepted_keys = [YEAR_START, GENRE, DIRECTOR_NAME, ACTOR_NAME, YEAR_END, TOP_RATED]
@@ -86,16 +87,18 @@ def get_movie():
     rs = connection.execute(query)
 
     result = []
-    for rowproxy in rs:
-        result.append(rowproxy.values())
+    for row_proxy in rs:
+        result.append(row_proxy.values())
 
     return Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
                     status=200,
                     mimetype="application/json; charset=utf-8")
 
 
+# Return info movie given the movie title
 @app.route("/movieInfo", methods=['GET'])
 def get_movie_info():
+
     if MOVIE_TITLE not in request.args.to_dict().keys():
         return HTTP_REST_EMPTY
     else:
@@ -111,8 +114,8 @@ def get_movie_info():
         rs = connection.execute(query)
 
         d, result, result_film = {}, {}, {"actors": set(), "directors": set()},
-        for rowproxy in rs:
-            for column, value in rowproxy.items():
+        for row_proxy in rs:
+            for column, value in row_proxy.items():
                 d = {**d, **{column: value}}
 
             primary_title = d.get("primaryTitle")

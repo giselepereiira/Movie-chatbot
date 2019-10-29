@@ -20,6 +20,7 @@ ENDPOINT_DATABASE_PATH = "http://localhost:9001"
 ENDPOINT_GET_MOVIE = "/movie"
 ENDPOINT_GET_MOVIE_INFO = "/movieInfo"
 
+
 def call_endpoint_get_movie(tracker, dispatcher):
     """
     Method to invoke endpoints that returns the movie titles that match the entities detected on the user interaction
@@ -249,7 +250,6 @@ class ActionMatchRatingSearchMovie(Action):
 
 
 # This is level 2
-
 def call_endpoint_get_movie_info(tracker):
     endpoint_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE_INFO
 
@@ -307,8 +307,14 @@ class ActionGetDirectorByMovieTitle(Action):
         elif response == "NoMovieTitleDetected":
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
-            # TODO: response get
-            dispatcher.utter_message("Director: Dummy director")
+            for item in response.items():
+                dispatcher.utter_message("Movie title:" + item[0])
+                dispatcher.utter_message("Director(s):")
+                directors_list = item[1]['directors']
+
+                for index, director in enumerate(directors_list):
+                    dispatcher.utter_message(str(index + 1) + ". " + director)
+
 
 
 class GetActorByMovieTitleForm(FormAction):
