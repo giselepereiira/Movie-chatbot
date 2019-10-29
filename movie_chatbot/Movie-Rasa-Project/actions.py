@@ -286,8 +286,6 @@ class GetDirectorByMovieTitleForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_get_director_by_movie_title_result", tracker)
         return []
 
 
@@ -333,8 +331,6 @@ class GetActorByMovieTitleForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_get_actor_by_movie_title_result", tracker)
         return []
 
 
@@ -381,8 +377,6 @@ class GetYearByMovieTitleForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_get_year_by_movie_title_result", tracker)
         return []
 
 
@@ -427,8 +421,6 @@ class GetGenreByMovieTitleForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_get_genre_by_movie_title_result", tracker)
         return []
 
 
@@ -475,8 +467,6 @@ class GetRatingByMovieTitleForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_get_rating_by_movie_title_result", tracker)
         return []
 
 

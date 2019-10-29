@@ -49,12 +49,6 @@ actions:
 - utter_movie_match_year_end_result
 - utter_movie_match_rating_result
 
-- utter_get_director_by_movie_title_result
-- utter_get_actor_by_movie_title_result
-- utter_get_year_by_movie_title_result
-- utter_get_genre_by_movie_title_result
-- utter_get_rating_by_movie_title_result
-
 - action_match_director_search_movie
 - action_match_actor_search_movie
 - action_match_year_search_movie
@@ -169,21 +163,6 @@ templates:
 
   utter_movie_match_rating_result:
     - text: "Finding movies with the Rating: {rating}"
-
-  utter_get_director_by_movie_title_result:
-    - text: "Movie title: {movie_title}"
-
-  utter_get_actor_by_movie_title_result:
-    - text: "Movie title: {movie_title}"
-
-  utter_get_year_by_movie_title_result:
-    - text: "Movie title: {movie_title}"
-
-  utter_get_genre_by_movie_title_result:
-    - text: "Movie title: {movie_title}"
-
-  utter_get_rating_by_movie_title_result:
-    - text: "Movie title: {movie_title}"
 
 
 forms:
