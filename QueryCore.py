@@ -33,7 +33,7 @@ MOVIE_CHARACTERISTIC = 'movie_characteristic'
 
 
 # Return a movie given criteria
-@app.route("/movie", methods=['GET'])
+@app.route("/list-movie", methods=['GET'])
 def get_movie():
     accepted_keys = [YEAR_START, GENRE, DIRECTOR_NAME, ACTOR_NAME, YEAR_END, TOP_RATED]
 
@@ -96,7 +96,7 @@ def get_movie():
 
 
 # Return info movie given the movie title
-@app.route("/movieInfo", methods=['GET'])
+@app.route("/movie-info", methods=['GET'])
 def get_movie_info():
 
     if MOVIE_TITLE not in request.args.to_dict().keys():
@@ -192,8 +192,8 @@ def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year
     return result
 
 
-@app.route("/level3", methods=['GET'])
-def get_level_3():
+@app.route("/movie-with-attribute", methods=['GET'])
+def get_movie_based_on_attribute():
     len_movies_dataset_cmu = 42303
     number_movies_return = 5
     len_movies_dataset_kaggle = 12500

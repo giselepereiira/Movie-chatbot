@@ -17,8 +17,9 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
 ENDPOINT_DATABASE_PATH = "http://localhost:9001"
-ENDPOINT_GET_MOVIE = "/movie"
-ENDPOINT_GET_MOVIE_INFO = "/movieInfo"
+ENDPOINT_GET_MOVIE = "/list-movie"
+ENDPOINT_GET_MOVIE_INFO = "/movie-info"
+ENDPOINT_GET_MOVIE_WITH_ATTRIBUTES = "/movie-with-attribute"
 
 
 def call_endpoint_get_movie(tracker, dispatcher):
@@ -249,7 +250,6 @@ class ActionMatchRatingSearchMovie(Action):
         call_endpoint_get_movie(tracker, dispatcher)
 
 
-# This is level 2
 def call_endpoint_get_movie_info(tracker):
     endpoint_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE_INFO
 
@@ -509,10 +509,6 @@ class ActionGetRatingByMovieTitle(Action):
                 else:
                     dispatcher.utter_message("Rating not found")
 
-
-
-
-# This is level 3
 
 def call_endpoint_level3(tracker, dispatcher):
     """
