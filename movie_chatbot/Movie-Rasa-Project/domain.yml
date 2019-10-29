@@ -20,7 +20,7 @@ intents:
   - get_genre_by_movie_title
   - get_rating_by_movie_title
 
-  - get_movie_characteristics
+  - get_movie_attributes
 
 actions:
 - utter_greet
@@ -74,7 +74,7 @@ entities:
 - movie_title
 
 - time #from duckling extractor
-- movie_characteristic
+- movie_attribute
 
 slots:
     director:
@@ -93,7 +93,7 @@ slots:
       type: text
     time:
       type: text
-    movie_characteristic:
+    movie_attribute:
       type: text
 
 templates:

@@ -510,25 +510,17 @@ class ActionGetRatingByMovieTitle(Action):
                     dispatcher.utter_message("Rating not found")
 
 
-def call_endpoint_level3(tracker, dispatcher):
-    """
-    Method to invoke endpoints that returns the movie titles that match the entities detected on the user interaction
-    :param tracker: Tracker
-    :param dispatcher: Dispatcher
-    """
-    endpoint_get_movie_path = ENDPOINT_DATABASE_PATH + "/level3"
+def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
+    endpoint_get_movie_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE_WITH_ATTRIBUTES
     filter_endpoint = []
 
     time_duckling_value = tracker.get_slot("time")
-    movie_characteristic_value = tracker.get_slot("movie_characteristic")
+    movie_attribute_value = tracker.get_slot("movie_attribute")
     if time_duckling_value is not None:
-        year_to_search = time_duckling_value['from'][0:4]
-        filter_endpoint.append(("year_start", year_to_search))
-    if movie_characteristic_value is not None:
-        filter_endpoint.append(('movie_characteristic', movie_characteristic_value))
-    # for key, value in tracker.slots.items():
-    #   if value is not None:
-    #      filter_endpoint.append((key, value))
+        year_start = time_duckling_value['from'][0:4]
+        filter_endpoint.append(("year_start", year_start))
+    if movie_attribute_value is not None:
+        filter_endpoint.append(('movie_attribute', movie_attribute_value))
 
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
@@ -564,14 +556,14 @@ class ActionDummyLevel3Test(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         time_duckling_value = tracker.get_slot("time")
-        movie_characteristic_value = tracker.get_slot("movie_characteristic")
+        movie_attribute_value = tracker.get_slot("movie_attribute")
 
         if time_duckling_value is not None:
             dispatcher.utter_message("duckling detected year:" + time_duckling_value['from'])
             # granularity that matters is only year in that case
             year_to_search = time_duckling_value['from'][0:4]  # example: '2018-01-01T00:00:00.000-08:00'
             print(year_to_search)
-        if movie_characteristic_value is not None:
-            print(movie_characteristic_value)
+        if movie_attribute_value is not None:
+            print(movie_attribute_value)
 
-            call_endpoint_level3(tracker, dispatcher)
+            call_endpoint_get_movie_based_on_attributes(tracker, dispatcher)

@@ -228,15 +228,15 @@
 - top gun
 
 
-##intent:get_movie_characteristics
-- do you have any movie from last year with [awesome special effect](movie_characteristic)?
-- do you have any movie from two years ago with [awesome special effect](movie_characteristic)?
-- do you have any movie from three years ago with [awesome special effect](movie_characteristic)?
-- tell me [drama](genre) movie that [people love for the love story](movie_characteristic)
-- tell me movies that have [incredible landscapes and nature scenes](movie_characteristic)
-- what films do you have that include [space travel and aliens](movie_characteristic)?
+##intent:get_movie_attributes
+- do you have any movie from last year with [awesome special effect](movie_attribute)?
+- do you have any movie from two years ago with [awesome special effect](movie_attribute)?
+- do you have any movie from three years ago with [awesome special effect](movie_attribute)?
+- tell me [drama](genre) movie that [people love for the love story](movie_attribute)
+- tell me movies that have [incredible landscapes and nature scenes](movie_attribute)
+- what films do you have that include [space travel and aliens](movie_attribute)?
 
-##lookup:movie_characteristic
+##lookup:movie_attribute
 - awesome special effect
 - people love for the love story
 - incredible landscapes and nature scenes

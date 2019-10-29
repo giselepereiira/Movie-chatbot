@@ -115,6 +115,6 @@
    - action_get_rating_by_movie_title
    
    
-##search for movies based on its characteristics
-* get_movie_characteristics
+##search for movies based on its attributes
+* get_movie_attributes
     - action_dummy_level_3_test

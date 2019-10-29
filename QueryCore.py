@@ -29,7 +29,7 @@ ACTOR_NAME = 'actor'
 YEAR_END = 'year_end'
 TOP_RATED = 'rating'
 MOVIE_TITLE = 'movie_title'
-MOVIE_CHARACTERISTIC = 'movie_characteristic'
+MOVIE_ATTRIBUTE = 'movie_attribute'
 
 
 # Return a movie given criteria
@@ -198,7 +198,7 @@ def get_movie_based_on_attribute():
     number_movies_return = 5
     len_movies_dataset_kaggle = 12500
 
-    movie_characteristics = request.args.get(MOVIE_CHARACTERISTIC)
+    movie_attribute = request.args.get(MOVIE_ATTRIBUTE)
 
     year_start = request.args.get(YEAR_START)
     year_end = request.args.get(YEAR_END)
@@ -207,11 +207,11 @@ def get_movie_based_on_attribute():
     actor_name = request.args.get(ACTOR_NAME)
     top_rated = request.args.get(TOP_RATED)
 
-    sentiment_scores = sid.polarity_scores(movie_characteristics)
+    sentiment_scores = sid.polarity_scores(movie_attribute)
 
     if sentiment_scores['neg'] > sentiment_scores['pos'] and sentiment_scores['neg'] > sentiment_scores['neu']:
         # This is negative feeling
-        scores = ranked_retrieval(inverted_index_kaggle_neg, len_movies_dataset_kaggle, movie_characteristics)
+        scores = ranked_retrieval(inverted_index_kaggle_neg, len_movies_dataset_kaggle, movie_attribute)
         doc_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 
         input_get_movies = list()
@@ -230,7 +230,7 @@ def get_movie_based_on_attribute():
 
     if sentiment_scores['pos'] > sentiment_scores['neg'] and sentiment_scores['pos'] > sentiment_scores['neu']:
         # This is positive feeling
-        scores = ranked_retrieval(inverted_index_kaggle_pos, len_movies_dataset_kaggle, movie_characteristics)
+        scores = ranked_retrieval(inverted_index_kaggle_pos, len_movies_dataset_kaggle, movie_attribute)
         doc_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 
         input_get_movies = list()
@@ -249,7 +249,7 @@ def get_movie_based_on_attribute():
 
     if sentiment_scores['neu'] > sentiment_scores['neg'] and sentiment_scores['neu'] > sentiment_scores['pos']:
         # This is neutral feeling
-        scores = ranked_retrieval(inverted_index_cmu, len_movies_dataset_cmu, movie_characteristics)
+        scores = ranked_retrieval(inverted_index_cmu, len_movies_dataset_cmu, movie_attribute)
         doc_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 
         result = pd.DataFrame()
