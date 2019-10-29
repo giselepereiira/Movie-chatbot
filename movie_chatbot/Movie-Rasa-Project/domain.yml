@@ -62,7 +62,7 @@ actions:
 - action_get_genre_by_movie_title
 - action_get_rating_by_movie_title
 
-- action_dummy_level_3_test
+- action_get_movie_based_attribute
 
 entities:
 - director
@@ -72,7 +72,6 @@ entities:
 - year_end
 - rating
 - movie_title
-
 - time #from duckling extractor
 - movie_attribute
 

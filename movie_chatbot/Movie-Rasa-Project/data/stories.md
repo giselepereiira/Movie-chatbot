@@ -117,4 +117,4 @@
    
 ##search for movies based on its attributes
 * get_movie_attributes
-    - action_dummy_level_3_test
+    - action_get_movie_based_attribute

@@ -514,13 +514,12 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
     endpoint_get_movie_path = ENDPOINT_DATABASE_PATH + ENDPOINT_GET_MOVIE_WITH_ATTRIBUTES
     filter_endpoint = []
 
-    time_duckling_value = tracker.get_slot("time")
-    movie_attribute_value = tracker.get_slot("movie_attribute")
-    if time_duckling_value is not None:
-        year_start = time_duckling_value['from'][0:4]
-        filter_endpoint.append(("year_start", year_start))
-    if movie_attribute_value is not None:
-        filter_endpoint.append(('movie_attribute', movie_attribute_value))
+    for key, value in tracker.slots.items():
+        if key == "time":
+            year_start = tracker.get_slot("time")['from'][0:4]
+            filter_endpoint.append(("year_start", year_start))
+        if value is not None and key != "time":
+            filter_endpoint.append((key, value))
 
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
@@ -530,7 +529,6 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
             else:
                 endpoint_get_movie_path = endpoint_get_movie_path + "&" + parsed_query_parameter
 
-        print(endpoint_get_movie_path)
         response = urllib.request.urlopen(endpoint_get_movie_path)
         response_json = json.loads(response.read().decode('utf-8'))
 
@@ -544,26 +542,15 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
     else:
         dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
-class ActionDummyLevel3Test(Action):
+
+class ActionGetMovieBasedAttribute(Action):
 
     def name(self):
         # type: () -> Text
-        return "action_dummy_level_3_test"
+        return "action_get_movie_based_attribute"
 
     def run(self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        time_duckling_value = tracker.get_slot("time")
-        movie_attribute_value = tracker.get_slot("movie_attribute")
-
-        if time_duckling_value is not None:
-            dispatcher.utter_message("duckling detected year:" + time_duckling_value['from'])
-            # granularity that matters is only year in that case
-            year_to_search = time_duckling_value['from'][0:4]  # example: '2018-01-01T00:00:00.000-08:00'
-            print(year_to_search)
-        if movie_attribute_value is not None:
-            print(movie_attribute_value)
-
-            call_endpoint_get_movie_based_on_attributes(tracker, dispatcher)
+        call_endpoint_get_movie_based_on_attributes(tracker, dispatcher)
