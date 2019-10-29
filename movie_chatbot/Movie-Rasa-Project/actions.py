@@ -407,7 +407,7 @@ class ActionGetYearByMovieTitle(Action):
                 dispatcher.utter_message("Movie title: " + item[0])
                 if 'year_start' in item[1]:
                     if item[1]['year_start'] is not None:
-                        dispatcher.utter_message("Year: " + item[1]['year_start'])
+                        dispatcher.utter_message("Year: " + str(item[1]['year_start']))
                     else:
                         dispatcher.utter_message("Year not found")
                 else:
@@ -503,7 +503,7 @@ class ActionGetRatingByMovieTitle(Action):
                 dispatcher.utter_message("Movie title: " + item[0])
                 if 'rating' in item[1]:
                     if item[1]['rating'] is not None:
-                        dispatcher.utter_message("Rating: " + item[1]['rating'])
+                        dispatcher.utter_message("Rating: " + str(item[1]['rating']))
                     else:
                         dispatcher.utter_message("Rating not found")
                 else:
