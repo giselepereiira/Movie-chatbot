@@ -306,8 +306,8 @@ class ActionGetDirectorByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
+                dispatcher.utter_message("Movie title: " + item[0])
                 if 'directors' in item[1]:
-                    dispatcher.utter_message("Movie title: " + item[0])
                     if item[1]['directors'] is not None:
                         dispatcher.utter_message("Director(s):")
                         for index, element in enumerate(item[1]['directors']):
@@ -355,8 +355,8 @@ class ActionGetActorByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
+                dispatcher.utter_message("Movie title: " + item[0])
                 if 'actors' in item[1]:
-                    dispatcher.utter_message("Movie title: " + item[0])
                     if item[1]['actors'] is not None:
                         dispatcher.utter_message("Actor(s):")
                         for index, element in enumerate(item[1]['actors']):
@@ -404,8 +404,8 @@ class ActionGetYearByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
+                dispatcher.utter_message("Movie title: " + item[0])
                 if 'year_start' in item[1]:
-                    dispatcher.utter_message("Movie title: " + item[0])
                     if item[1]['year_start'] is not None:
                         dispatcher.utter_message("Year: " + item[1]['year_start'])
                     else:
@@ -451,8 +451,8 @@ class ActionGetGenreByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
+                dispatcher.utter_message("Movie title: " + item[0])
                 if 'genres' in item[1]:
-                    dispatcher.utter_message("Movie title: " + item[0])
                     if item[1]['genres'] is not None:
                         dispatcher.utter_message("Genre(s):")
                         for index, element in enumerate(item[1]['genres']):
@@ -500,8 +500,8 @@ class ActionGetRatingByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
+                dispatcher.utter_message("Movie title: " + item[0])
                 if 'rating' in item[1]:
-                    dispatcher.utter_message("Movie title: " + item[0])
                     if item[1]['rating'] is not None:
                         dispatcher.utter_message("Rating: " + item[1]['rating'])
                     else:
