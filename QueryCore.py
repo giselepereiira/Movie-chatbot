@@ -105,7 +105,7 @@ def get_movie_info():
 
         movie_title = request.args.get(MOVIE_TITLE)
 
-        query = "SELECT t.rating, t.language, t.\"primaryTitle\", t.\"genres\", p.\"primaryProfession\", p.\"primaryName\" " \
+        query = "SELECT t.rating, t.\"startYear\", t.language, t.\"primaryTitle\", t.\"genres\", p.\"primaryProfession\", p.\"primaryName\" " \
                 "from title as t " \
                 "inner join people_title on (t.tconst = people_title.id_titles)  " \
                 "inner join people as p on (p.nconst = people_title.id_names) " \
@@ -113,8 +113,9 @@ def get_movie_info():
 
         rs = connection.execute(query)
 
-        d, result, result_film = {}, {}, {"actors": set(), "directors": set()},
+        result = {}
         for row_proxy in rs:
+            d, result_film = {}, {"actors": set(), "directors": set()}
             for column, value in row_proxy.items():
                 d = {**d, **{column: value}}
 
@@ -124,6 +125,8 @@ def get_movie_info():
 
             result.get(primary_title).update({"rating": d.get("rating")})
             result.get(primary_title).update({"language": d.get("language")})
+            result.get(primary_title).update({"genres": d.get("genres")})
+            result.get(primary_title).update({"year_start": d.get("startYear")})
             if 'director' in d.get("primaryProfession"):
                 result.get(primary_title).get("directors").add(d.get("primaryName"))
             else:
