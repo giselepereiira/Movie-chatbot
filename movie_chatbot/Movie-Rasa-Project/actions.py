@@ -308,13 +308,13 @@ class ActionGetDirectorByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
-                dispatcher.utter_message("Movie title:" + item[0])
-                dispatcher.utter_message("Director(s):")
-                directors_list = item[1]['directors']
-
-                for index, director in enumerate(directors_list):
-                    dispatcher.utter_message(str(index + 1) + ". " + director)
-
+                if item[1]['directors'] is not None:
+                    dispatcher.utter_message("Movie title: " + item[0])
+                    dispatcher.utter_message("Director(s):")
+                    for index, element in enumerate(item[1]['directors']):
+                        dispatcher.utter_message(str(index + 1) + ". " + element)
+                else:
+                    dispatcher.utter_message("Directors not found")
 
 
 class GetActorByMovieTitleForm(FormAction):
@@ -355,8 +355,14 @@ class ActionGetActorByMovieTitle(Action):
         elif response == "NoMovieTitleDetected":
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
-            # TODO: response get
-            dispatcher.utter_message("Actor: Dummy actor")
+            for item in response.items():
+                if item[1]['actors'] is not None:
+                    dispatcher.utter_message("Movie title: " + item[0])
+                    dispatcher.utter_message("Actor(s):")
+                    for index, element in enumerate(item[1]['actors']):
+                        dispatcher.utter_message(str(index + 1) + ". " + element)
+                else:
+                    dispatcher.utter_message("Actors not found")
 
 
 class GetYearByMovieTitleForm(FormAction):
@@ -397,8 +403,12 @@ class ActionGetYearByMovieTitle(Action):
         elif response == "NoMovieTitleDetected":
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
-            # TODO: response get
-            dispatcher.utter_message("Year: Dummy year")
+            for item in response.items():
+                if item[1]['year_start'] is not None:
+                    dispatcher.utter_message("Movie title: " + item[0])
+                    dispatcher.utter_message("Year: " + item[1]['year_start'])
+                else:
+                    dispatcher.utter_message("Year not found")
 
 
 class GetGenreByMovieTitleForm(FormAction):
@@ -439,8 +449,14 @@ class ActionGetGenreByMovieTitle(Action):
         elif response == "NoMovieTitleDetected":
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
-            # TODO: response get
-            dispatcher.utter_message("Genre: Dummy genre")
+            for item in response.items():
+                if item[1]['genres'] is not None:
+                    dispatcher.utter_message("Movie title: " + item[0])
+                    dispatcher.utter_message("Genre(s):")
+                    for index, element in enumerate(item[1]['genres']):
+                        dispatcher.utter_message(str(index + 1) + ". " + element)
+                else:
+                    dispatcher.utter_message("Genre not found")
 
 
 class GetRatingByMovieTitleForm(FormAction):
@@ -481,8 +497,14 @@ class ActionGetRatingByMovieTitle(Action):
         elif response == "NoMovieTitleDetected":
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
-            # TODO: response get
-            dispatcher.utter_message("Rating: Dummy rating")
+            for item in response.items():
+                dispatcher.utter_message("Movie title: " + item[0])
+                if item[1]['rating'] is not None:
+                    dispatcher.utter_message("Rating: " + item[1]['rating'])
+                else:
+                    dispatcher.utter_message("Rating not found")
+
+
 
 
 # This is level 3
