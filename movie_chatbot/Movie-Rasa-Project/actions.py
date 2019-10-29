@@ -306,11 +306,14 @@ class ActionGetDirectorByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
-                if item[1]['directors'] is not None:
+                if 'directors' in item[1]:
                     dispatcher.utter_message("Movie title: " + item[0])
-                    dispatcher.utter_message("Director(s):")
-                    for index, element in enumerate(item[1]['directors']):
-                        dispatcher.utter_message(str(index + 1) + ". " + element)
+                    if item[1]['directors'] is not None:
+                        dispatcher.utter_message("Director(s):")
+                        for index, element in enumerate(item[1]['directors']):
+                            dispatcher.utter_message(str(index + 1) + ". " + element)
+                    else:
+                        dispatcher.utter_message("Directors not found")
                 else:
                     dispatcher.utter_message("Directors not found")
 
@@ -352,11 +355,14 @@ class ActionGetActorByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
-                if item[1]['actors'] is not None:
+                if 'actors' in item[1]:
                     dispatcher.utter_message("Movie title: " + item[0])
-                    dispatcher.utter_message("Actor(s):")
-                    for index, element in enumerate(item[1]['actors']):
-                        dispatcher.utter_message(str(index + 1) + ". " + element)
+                    if item[1]['actors'] is not None:
+                        dispatcher.utter_message("Actor(s):")
+                        for index, element in enumerate(item[1]['actors']):
+                            dispatcher.utter_message(str(index + 1) + ". " + element)
+                    else:
+                        dispatcher.utter_message("Actors not found")
                 else:
                     dispatcher.utter_message("Actors not found")
 
@@ -398,9 +404,12 @@ class ActionGetYearByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
-                if item[1]['year_start'] is not None:
+                if 'year_start' in item[1]:
                     dispatcher.utter_message("Movie title: " + item[0])
-                    dispatcher.utter_message("Year: " + item[1]['year_start'])
+                    if item[1]['year_start'] is not None:
+                        dispatcher.utter_message("Year: " + item[1]['year_start'])
+                    else:
+                        dispatcher.utter_message("Year not found")
                 else:
                     dispatcher.utter_message("Year not found")
 
@@ -442,11 +451,14 @@ class ActionGetGenreByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
-                if item[1]['genres'] is not None:
+                if 'genres' in item[1]:
                     dispatcher.utter_message("Movie title: " + item[0])
-                    dispatcher.utter_message("Genre(s):")
-                    for index, element in enumerate(item[1]['genres']):
-                        dispatcher.utter_message(str(index + 1) + ". " + element)
+                    if item[1]['genres'] is not None:
+                        dispatcher.utter_message("Genre(s):")
+                        for index, element in enumerate(item[1]['genres']):
+                            dispatcher.utter_message(str(index + 1) + ". " + element)
+                    else:
+                        dispatcher.utter_message("Genre not found")
                 else:
                     dispatcher.utter_message("Genre not found")
 
@@ -488,9 +500,12 @@ class ActionGetRatingByMovieTitle(Action):
             dispatcher.utter_message("No movie title detected. Please reformulate your search.")
         else:
             for item in response.items():
-                dispatcher.utter_message("Movie title: " + item[0])
-                if item[1]['rating'] is not None:
-                    dispatcher.utter_message("Rating: " + item[1]['rating'])
+                if 'rating' in item[1]:
+                    dispatcher.utter_message("Movie title: " + item[0])
+                    if item[1]['rating'] is not None:
+                        dispatcher.utter_message("Rating: " + item[1]['rating'])
+                    else:
+                        dispatcher.utter_message("Rating not found")
                 else:
                     dispatcher.utter_message("Rating not found")
 
