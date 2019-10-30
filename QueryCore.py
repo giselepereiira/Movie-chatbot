@@ -56,13 +56,14 @@ def get_movie():
 
     else:
         query = "SELECT \"originalTitle\" FROM title " \
-                "INNER JOIN people_title ON (title.tconst = people_title.id_titles)  " \
+                "INNER JOIN title_principals ON (title.tconst = title_principals.tconst)  " \
                 "INNER JOIN people ON (people.nconst = people_title.id_names) "
 
     if actor_name is not None:
-        filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + actor_name.replace(" ", "&") + "')")
+        filter.append("people.\"primary_name_vector\" @@ to_tsquery('english', '" + actor_name.replace(" ", "&") + "')")
     if director_name is not None:
-        filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + director_name.replace(" ", "&") + "')")
+        filter.append(
+            "people.\"primary_name_vector\" @@ to_tsquery('english', '" + director_name.replace(" ", "&") + "')")
     if year_start is not None and year_end is not None:
         filter.append("title.\"startYear\" >= " + str(year_start) +
                       " AND title.\"startYear\" <= " + str(year_end))
@@ -105,13 +106,17 @@ def get_movie_info():
 
         movie_title = request.args.get(MOVIE_TITLE)
 
-        query = "SELECT t.rating, t.\"startYear\", t.language, t.\"primaryTitle\", t.\"genres\", p.\"primaryProfession\", p.\"primaryName\" " \
+        query = "SELECT t.rating, t.\"startYear\", t.language, t.\"primaryTitle\", t.\"genres\", p.\"primaryName\", tp.category " \
                 "from title as t " \
-                "inner join people_title on (t.tconst = people_title.id_titles)  " \
-                "inner join people as p on (p.nconst = people_title.id_names) " \
-                "where t.\"primary_title_vector\" @@ to_tsquery('" + movie_title.replace(" ", "&") + "')"
+                "inner join title_principals tp on (t.tconst = tp.tconst)  " \
+                "inner join people as p on (p.nconst = tp.nconst) " \
+                "where t.\"primary_title_vector\" @@ to_tsquery('english','" + movie_title.replace(" ", "&") + "')"
 
         rs = connection.execute(query)
+
+        director_names = set(
+            ["writer", "editor", "composer", "production_designer", "cinematographer", "director", "producer"])
+        actor_names = set(["actress", "self", "actor"])
 
         result = {}
         for row_proxy in rs:
@@ -127,9 +132,10 @@ def get_movie_info():
             result.get(primary_title).update({"language": d.get("language")})
             result.get(primary_title).update({"genres": d.get("genres")})
             result.get(primary_title).update({"year_start": d.get("startYear")})
-            if 'director' in d.get("primaryProfession"):
+
+            if d.get("category") in director_names:
                 result.get(primary_title).get("directors").add(d.get("primaryName"))
-            else:
+            elif d.get("category") in actor_names:
                 result.get(primary_title).get("actors").add(d.get("primaryName"))
 
         for i in result:
@@ -159,13 +165,14 @@ def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year
 
     else:
         query = "SELECT \"originalTitle\" FROM title " + join + \
-                "INNER JOIN people_title ON (title.tconst = people_title.id_titles)  " \
-                "INNER JOIN people ON (people.nconst = people_title.id_names) "
+                "INNER JOIN title_principals ON (title.tconst = title_principals.tconst)  " \
+                "INNER JOIN people ON (people.nconst = title_principals.nconst) "
 
     if actor_name is not None:
-        filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + actor_name.replace(" ", "&") + "')")
+        filter.append("people.\"primary_name_vector\" @@ to_tsquery('english', '" + actor_name.replace(" ", "&") + "')")
     if director_name is not None:
-        filter.append("people.\"primary_name_vector\" @@ to_tsquery('" + director_name.replace(" ", "&") + "')")
+        filter.append(
+            "people.\"primary_name_vector\" @@ to_tsquery('english', '" + director_name.replace(" ", "&") + "')")
     if year_start is not None and year_end is not None:
         filter.append("title.\"startYear\" >= " + str(year_start) +
                       " AND title.\"startYear\" <= " + str(year_end))

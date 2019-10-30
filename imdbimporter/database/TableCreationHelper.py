@@ -1,5 +1,3 @@
-import io
-
 from imdbimporter.database.DatabaseConstants import connection_from
 
 
@@ -44,60 +42,18 @@ def createConnections():
     )
 
     cursor.execute(
-        '''alter table people_title add constraint title_fk FOREIGN key (id_titles) references title(tconst) ON DELETE CASCADE;'''
+        '''alter table title_principals add constraint title_fk FOREIGN key (tconst) references title(tconst) ON DELETE CASCADE;'''
     )
 
     cursor.execute(
-        '''alter table people_title add constraint people_fk FOREIGN key (id_names) references people(nconst) ON DELETE CASCADE;'''
+        '''alter table title_principals add constraint people_fk FOREIGN key (nconst) references people(nconst) ON DELETE CASCADE;'''
     )
+
+    cursor.execute('''alter table title_principals add column id SERIAL primary key''')
 
     connection.commit()
 
     print('Table and foreign keys were created')
-
-    cursor.execute("SELECT tconst FROM title")
-    titles = cursor.fetchall()
-
-    title_ids = set()
-    for i in titles:
-        title_ids.add(i[0])
-
-    print('Creating many-to-many relationships (people_title)...')
-
-    cursor.execute("SELECT count(*) FROM people")
-    nrows = cursor.fetchone()[0]
-
-    rows_to_fetch = 5000
-    counter = 0
-
-    for i in range(0, nrows, rows_to_fetch):
-        query = "SELECT nconst, \"knownForTitles\" " \
-                "FROM people " \
-                "ORDER BY nconst " \
-                "OFFSET " + str(i) + " " \
-                                     "LIMIT " + str(rows_to_fetch)
-        cursor.execute(query)
-
-        data = io.StringIO()
-
-        row = cursor.fetchall()
-        counter = counter + len(row)
-        if not row:
-            break
-
-        for column in row:
-            if column[1]:
-                for tconst in set(column[1].split(',')):
-                    if tconst in title_ids:
-                        relationship = '\t'.join([column[0], tconst]) + '\n'
-                        data.write(relationship)
-
-        data.seek(0)
-        cursor.copy_from(data, 'people_title')
-        connection.commit()
-        print(str(counter) + ' names out of ' + str(nrows) + ' have been processed.')
-
-    # Remove people that have no connections with movies
 
     print('Deleting people that had no participation in movies and are not actor/actress or director.')
 
@@ -106,8 +62,8 @@ def createConnections():
     AND "primaryProfession" NOT ILIKE '%%actress%%' 
     AND p."primaryProfession" NOT ILIKE '%%director%%')
     AND nconst IN (select nconst from people f 
-    LEFT JOIN people_title d on f.nconst = d.id_names
-    WHERE d.id_names IS NULL)''')
+    LEFT JOIN title_principals d on f.nconst = d.id_names
+    WHERE d.nconst IS NULL)''')
     connection.commit()
 
     print('Creating full text search indexes to speed up search.')

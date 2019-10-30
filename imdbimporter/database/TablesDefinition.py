@@ -45,6 +45,16 @@ title_rating_table = Table('title_ratings', metadata,
 rating = {"file": "..\\dataset\\title_ratings.tsv",
           "name": title_rating_table.name}
 
+title_principals_table = Table('title_principals', metadata,
+                               Column('tconst', String),
+                               Column('ordering', Integer),
+                               Column('nconst', String),
+                               Column('category', String),
+                               Column('job', String),
+                               Column('characters', String))
+principals = {"file": "../dataset/title.principals.tsv.tsv",
+              "name": title_principals_table.name}
+
 title_akas_table = Table('title_akas', metadata,
                          Column('titleId', String),
                          Column('ordering', String),
