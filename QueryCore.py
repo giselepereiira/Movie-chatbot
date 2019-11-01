@@ -57,7 +57,7 @@ def get_movie():
     else:
         query = "SELECT \"originalTitle\" FROM title " \
                 "INNER JOIN title_principals ON (title.tconst = title_principals.tconst)  " \
-                "INNER JOIN people ON (people.nconst = people_title.id_names) "
+                "INNER JOIN people ON (people.nconst = title_principals.nconst)"
 
     if actor_name is not None:
         filter.append("people.\"primary_name_vector\" @@ to_tsquery('english', '" + actor_name.replace(" ", "&") + "')")
