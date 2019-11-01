@@ -37,8 +37,13 @@ def call_endpoint_get_movie(tracker, dispatcher):
     filter_endpoint = []
 
     for key, value in tracker.slots.items():
+        if key == 'rating':
+            filter_endpoint.append((key, value.replace('top ', '')))
+
         if value is not None:
             filter_endpoint.append((key, value))
+
+    print(filter_endpoint)
 
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
@@ -252,7 +257,6 @@ class MovieMatchRatingForm(FormAction):
     ) -> List[Dict]:
         # utter submit template
         dispatcher.utter_template("utter_movie_match_several_criteria_result", tracker)
-
         return []
 
 
