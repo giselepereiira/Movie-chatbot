@@ -152,7 +152,7 @@ templates:
     - text: "Finding movies with Actor name: {actor}"
 
   utter_movie_match_year_result:
-    - text: "Finding movies of this Year: {year}"
+    - text: "Finding movies of this Year: {year_start}"
 
   utter_movie_match_genre_result:
     - text: "Finding movies of this Genre: {genre}"
