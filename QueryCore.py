@@ -37,10 +37,10 @@ MOVIE_ATTRIBUTE = 'movie_attribute'
 def get_movie():
     accepted_keys = [YEAR_START, GENRE, DIRECTOR_NAME, ACTOR_NAME, YEAR_END, TOP_RATED]
 
-    for key in request.args.to_dict().keys():
+    # for key in request.args.to_dict().keys():
         # the request comes with a parameter not allowed
-        if key not in accepted_keys:
-            return HTTP_REST_EMPTY
+    #   if key not in accepted_keys:
+    #      return HTTP_REST_EMPTY
 
     genre = request.args.get(GENRE)
     director_name = request.args.get(DIRECTOR_NAME)
@@ -90,6 +90,8 @@ def get_movie():
     result = []
     for row_proxy in rs:
         result.append(row_proxy.values())
+        if len(result) == 100:
+            break
 
     return Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
                     status=200,
