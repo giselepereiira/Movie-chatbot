@@ -10,9 +10,14 @@
 import json
 import urllib.parse
 import urllib.request
+from socket import timeout
 from typing import Any, Text, Dict, List
 
+from rasa.core.constants import (
+    DEFAULT_REQUEST_TIMEOUT
+)
 from rasa_sdk import Tracker, Action
+from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormAction
 
@@ -86,7 +91,10 @@ class ActionMatchDirectorSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
         call_endpoint_get_movie(tracker, dispatcher)
+        return [SlotSet("director", None)]
+
 
 
 class MovieMatchActorForm(FormAction):
@@ -118,6 +126,7 @@ class ActionMatchActorSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         call_endpoint_get_movie(tracker, dispatcher)
+        return [SlotSet("actor", None)]
 
 
 class MovieMatchYearForm(FormAction):
@@ -152,6 +161,7 @@ class ActionMatchYearSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         call_endpoint_get_movie(tracker, dispatcher)
+        return [SlotSet("year_start", None), SlotSet("time", None)]
 
 
 class MovieMatchGenreForm(FormAction):
@@ -185,6 +195,7 @@ class ActionMatchGenreSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         call_endpoint_get_movie(tracker, dispatcher)
+        return [SlotSet("genre", None)]
 
 
 class ActionMatchSeveralCriteriaSearchMovie(Action):
@@ -214,6 +225,13 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             dispatcher.utter_template("utter_movie_match_rating_result", tracker)
 
         call_endpoint_get_movie(tracker, dispatcher)
+
+        list_slot_sets = []
+        for key, value in tracker.slots.items():
+            if value is not None:
+                list_slot_sets.append(SlotSet(key, None))
+
+        return list_slot_sets
 
 
 class MovieMatchRatingForm(FormAction):
@@ -248,6 +266,7 @@ class ActionMatchRatingSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         call_endpoint_get_movie(tracker, dispatcher)
+        return [SlotSet("rating", None)]
 
 
 def call_endpoint_get_movie_info(tracker):
@@ -258,7 +277,14 @@ def call_endpoint_get_movie_info(tracker):
     if value_movie_title is not None:
 
         endpoint_path = endpoint_path + "?movie_title=" + urllib.parse.quote(value_movie_title)
-        response = urllib.request.urlopen(endpoint_path)
+
+        try:
+            print(DEFAULT_REQUEST_TIMEOUT)
+            response = urllib.request.urlopen(endpoint_path, timeout=DEFAULT_REQUEST_TIMEOUT)
+            print(response)
+        except timeout:
+            print('Timeout')
+
         response_json = json.loads(response.read().decode('utf-8'))
 
         if not response_json:
@@ -300,6 +326,7 @@ class ActionGetDirectorByMovieTitle(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         response = call_endpoint_get_movie_info(tracker)
+        print(response)
         if response == "MovieTitleNotFound":
             dispatcher.utter_message("This movie title was not found")
         elif response == "NoMovieTitleDetected":
