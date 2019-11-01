@@ -231,7 +231,6 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
         for key, value in tracker.slots.items():
             if value is not None:
                 list_slot_sets.append(SlotSet(key, None))
-
         return list_slot_sets
 
 
@@ -266,7 +265,12 @@ class ActionMatchRatingSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         call_endpoint_get_movie(tracker, dispatcher)
-        return [SlotSet("rating", None)]
+
+        list_slot_sets = []
+        for key, value in tracker.slots.items():
+            if value is not None:
+                list_slot_sets.append(SlotSet(key, None))
+        return list_slot_sets
 
 
 def call_endpoint_get_movie_info(tracker):
