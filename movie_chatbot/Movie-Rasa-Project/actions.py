@@ -324,7 +324,6 @@ class ActionGetDirectorByMovieTitle(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         response = call_endpoint_get_movie_info(tracker)
-        print(response)
         if response == "MovieTitleNotFound":
             dispatcher.utter_message("This movie title was not found")
         elif response == "NoMovieTitleDetected":
@@ -344,6 +343,8 @@ class ActionGetDirectorByMovieTitle(Action):
                         dispatcher.utter_message("Directors not found")
                 else:
                     dispatcher.utter_message("Directors not found")
+
+        return [SlotSet("movie_title", None)]
 
 
 class GetActorByMovieTitleForm(FormAction):
@@ -397,6 +398,7 @@ class ActionGetActorByMovieTitle(Action):
                         dispatcher.utter_message("Actors not found")
                 else:
                     dispatcher.utter_message("Actors not found")
+        return [SlotSet("movie_title", None)]
 
 
 class GetYearByMovieTitleForm(FormAction):
@@ -444,6 +446,7 @@ class ActionGetYearByMovieTitle(Action):
                         dispatcher.utter_message("Year not found")
                 else:
                     dispatcher.utter_message("Year not found")
+        return [SlotSet("movie_title", None)]
 
 
 class GetGenreByMovieTitleForm(FormAction):
@@ -491,6 +494,7 @@ class ActionGetGenreByMovieTitle(Action):
                         dispatcher.utter_message("Genre not found")
                 else:
                     dispatcher.utter_message("Genre not found")
+        return [SlotSet("movie_title", None)]
 
 
 class GetRatingByMovieTitleForm(FormAction):
@@ -538,6 +542,7 @@ class ActionGetRatingByMovieTitle(Action):
                         dispatcher.utter_message("Rating not found")
                 else:
                     dispatcher.utter_message("Rating not found")
+        return [SlotSet("movie_title", None)]
 
 
 def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
