@@ -1,3 +1,4 @@
+# This is to avoid to send too much information and rising time out exceptions on the client
 import json
 import operator
 import pickle
@@ -31,11 +32,14 @@ TOP_RATED = 'rating'
 MOVIE_TITLE = 'movie_title'
 MOVIE_ATTRIBUTE = 'movie_attribute'
 
+# This is to avoid to send too much information and rising time out exceptions on the client
+LEN_MAXIMUM_RESULT_RETURN = 100
+
 
 # Return a movie given criteria
 @app.route("/list-movie", methods=['GET'])
 def get_movie():
-    accepted_keys = [YEAR_START, GENRE, DIRECTOR_NAME, ACTOR_NAME, YEAR_END, TOP_RATED]
+    # accepted_keys = [YEAR_START, GENRE, DIRECTOR_NAME, ACTOR_NAME, YEAR_END, TOP_RATED]
 
     # for key in request.args.to_dict().keys():
         # the request comes with a parameter not allowed
@@ -90,7 +94,7 @@ def get_movie():
     result = []
     for row_proxy in rs:
         result.append(row_proxy.values())
-        if len(result) == 100:
+        if len(result) == LEN_MAXIMUM_RESULT_RETURN:
             break
 
     return Response(response=json.dumps(result, ensure_ascii=False).encode('utf-8'),
@@ -156,54 +160,6 @@ def get_movie_info():
                             mimetype="application/json; charset=utf-8")
 
 
-def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year_end, top_rated):
-    filter = []
-
-    join = "JOIN (VALUES " + str(movie_id).replace('[', '').replace(']', '') + \
-           ") AS x(id, ordering) ON title.tconst = x.id "
-
-    if actor_name is None and director_name is None:
-        query = "SELECT \"originalTitle\" FROM title " + join
-
-    else:
-        query = "SELECT \"originalTitle\" FROM title " + join + \
-                "INNER JOIN title_principals ON (title.tconst = title_principals.tconst)  " \
-                "INNER JOIN people ON (people.nconst = title_principals.nconst) "
-
-    if actor_name is not None:
-        filter.append("people.\"primary_name_vector\" @@ to_tsquery('english', '" + actor_name.replace(" ", "&") + "')")
-    if director_name is not None:
-        filter.append(
-            "people.\"primary_name_vector\" @@ to_tsquery('english', '" + director_name.replace(" ", "&") + "')")
-    if year_start is not None and year_end is not None:
-        filter.append("title.\"startYear\" >= " + str(year_start) +
-                      " AND title.\"startYear\" <= " + str(year_end))
-    elif year_start is not None:
-        filter.append("title.\"startYear\" = " + str(year_start))
-    if genre is not None:
-        filter.append("title.\"genres\" ilike '%%" + genre + "%%'")
-
-    count = 0
-    for i in filter:
-        if count == 0:
-            query = query + " WHERE "
-        else:
-            query = query + " AND "
-
-        query = query + i + " "
-        count = count + 1
-
-    query = query + " ORDER BY x.ordering"
-
-    rs = connection.execute(query)
-
-    result = []
-    for rowproxy in rs:
-        result.append(rowproxy.values())
-
-    return result
-
-
 @app.route("/movie-with-attribute", methods=['GET'])
 def get_movie_based_on_attribute():
     len_movies_dataset_cmu = 42303
@@ -227,8 +183,8 @@ def get_movie_based_on_attribute():
         doc_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 
         input_get_movies = list()
-        for value in doc_scores:
-            input_get_movies.append(str(value[0]))
+        for index, value in enumerate(doc_scores):
+            input_get_movies.append((str(value[0]), index))
 
         movie_list = get_movie_by_id(input_get_movies, genre, director_name, actor_name, year_start, year_end,
                                      top_rated)
@@ -284,6 +240,56 @@ def get_movie_based_on_attribute():
             return Response(response=json.dumps(result['movie_name'].tolist(), ensure_ascii=False).encode('utf-8'),
                             status=200,
                             mimetype="application/json; charset=utf-8")
+
+
+# Auxiliary  method to return the movie title given the id
+def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year_end, top_rated):
+    filter = []
+
+    join = "JOIN (VALUES " + str(movie_id).replace('[', '').replace(']', '') + \
+           ") AS x(id, ordering) ON title.tconst = x.id "
+
+    if actor_name is None and director_name is None:
+        query = "SELECT \"originalTitle\" FROM title " + join
+
+    else:
+        query = "SELECT \"originalTitle\" FROM title " + join + \
+                "INNER JOIN title_principals ON (title.tconst = title_principals.tconst)  " \
+                "INNER JOIN people ON (people.nconst = title_principals.nconst) "
+
+    if actor_name is not None:
+        filter.append("people.\"primary_name_vector\" @@ to_tsquery('english', '" + actor_name.replace(" ", "&") + "')")
+    if director_name is not None:
+        filter.append(
+            "people.\"primary_name_vector\" @@ to_tsquery('english', '" + director_name.replace(" ", "&") + "')")
+    if year_start is not None and year_end is not None:
+        filter.append("title.\"startYear\" >= " + str(year_start) +
+                      " AND title.\"startYear\" <= " + str(year_end))
+    elif year_start is not None:
+        filter.append("title.\"startYear\" = " + str(year_start))
+    if genre is not None:
+        filter.append("title.\"genres\" ilike '%%" + genre + "%%'")
+
+    count = 0
+    for i in filter:
+        if count == 0:
+            query = query + " WHERE "
+        else:
+            query = query + " AND "
+
+        query = query + i + " "
+        count = count + 1
+
+    query = query + " ORDER BY x.ordering"
+
+    rs = connection.execute(query)
+
+    result = []
+    for rowproxy in rs:
+        result.append(rowproxy.values())
+
+    return result
+
 
 
 with open('cmudatabase\\movie_plot_index' + '.pkl', 'rb') as f:
