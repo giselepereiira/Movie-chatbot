@@ -80,14 +80,14 @@
 - what movies has [richard burton](actor) worked on?
 
 ## intent:movie_match_year
-- what were the movies made in [2018](year_start)?
-- what were the movies made in [2019](year_start)?
-- what were the movies made in [1995](year_start)?
-- what were the movies made in [1999](year_start)?
-- what were the movies made in [1980](year_start)?
-- what movies have been released in [2018](year_start)?
-- what movies have been released in [1990](year_start)?
-- what movies have been released in [2000](year_start)?
+- what were the movies made in 2018?
+- what were the movies made in 1980?
+- what were the movies made in 1995?
+- what were the movies made in 1990?
+- what were the movies made in 2005?
+- what movies have been released in 2018?
+- what movies have been released in 1990?
+- what movies have been released in 2000?
 
 ## intent:movie_match_genre
 - tell me [comedy](genre) movies
@@ -100,13 +100,13 @@
 ## intent:movie_match_several_criteria
 - tell me [comedy](genre) movies that had the participation of [tom cruise](actor)
 - tell me [drama](genre) movies that had the participation of [fred astaire](actor)
-- tell me [comedy](genre) movies that were produced between [2018](year_start) and [2019](year_end)
-- tell me movies in [horror](genre) that were produced between [1990](year_start) and [2002](year_end)
+- tell me [comedy](genre) movies that were produced between 2018 and 2019
+- tell me movies in [horror](genre) that were produced between 1990 and 2002
 
 ##intent: movie_match_rating
-- what were the [top 5](rating) rated movies in [2018](year_start)?
-- what were the [top 2](rating) rated movies in [2019](year_start)?
-- what were the [top 10](rating) rated movies in [1990](year_start)?
+- what were the [top 5](rating) rated movies in 2018?
+- what were the [top 2](rating) rated movies in 2019?
+- what were the [top 10](rating) rated movies in 1990?
 
 ## lookup:actor
 - tom cruise
@@ -139,12 +139,6 @@
 - action
 - horror
 - drama
-
-## regex:year_start
-- \b(18|19|20)\d{2}\b
-
-## regex:year_end
-- \b(18|19|20)\d{2}\b
 
 ## synonym:movies
 - films

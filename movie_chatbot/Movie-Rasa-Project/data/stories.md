@@ -49,7 +49,7 @@
 ## search movie by year
 * movie_match_year
     - movie_match_year_form
-    - slot{"year_start": "1995"}
+    - slot{"time": "1995"}
     - form{"name":"movie_match_year_form"}
     - form{"name": null}
     - action_match_year_search_movie
