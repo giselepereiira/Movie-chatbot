@@ -10,7 +10,6 @@
 import json
 import urllib.parse
 import urllib.request
-from socket import timeout
 from typing import Any, Text, Dict, List
 
 from rasa.core.constants import (
@@ -37,10 +36,9 @@ def call_endpoint_get_movie(tracker, dispatcher):
     filter_endpoint = []
 
     for key, value in tracker.slots.items():
-        if key == 'rating':
+        if value is not None and key == 'rating':
             filter_endpoint.append((key, value.replace('top ', '')))
-
-        if value is not None:
+        if value is not None and key != 'rating':
             filter_endpoint.append((key, value))
 
     if len(filter_endpoint) >= 1:
@@ -282,10 +280,7 @@ def call_endpoint_get_movie_info(tracker):
 
         endpoint_path = endpoint_path + "?movie_title=" + urllib.parse.quote(value_movie_title)
 
-        try:
-            response = urllib.request.urlopen(endpoint_path, timeout=DEFAULT_REQUEST_TIMEOUT)
-        except timeout:
-            print('Timeout')
+        response = urllib.request.urlopen(endpoint_path, timeout=DEFAULT_REQUEST_TIMEOUT)
 
         response_json = json.loads(response.read().decode('utf-8'))
 
@@ -554,7 +549,7 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
     filter_endpoint = []
 
     for key, value in tracker.slots.items():
-        if key == "time":
+        if value is not None and key == "time":
             year_start = tracker.get_slot("time")['from'][0:4]
             filter_endpoint.append(("year_start", year_start))
         if value is not None and key != "time":
@@ -570,14 +565,13 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
 
         response = urllib.request.urlopen(endpoint_get_movie_path)
         response_json = json.loads(response.read().decode('utf-8'))
-
         if not response_json:
             # case the response is empty
             dispatcher.utter_message("No movies found")
         else:
             dispatcher.utter_message("Recommended movies are:")
             for idx, result in enumerate(response_json):
-                dispatcher.utter_message(str(idx + 1) + ". " + result)
+                dispatcher.utter_message(str(idx + 1) + ". " + result[0])
     else:
         dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
@@ -585,7 +579,6 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
 class GetMovieBasedAttributeForm(FormAction):
 
     def name(self):
-        # type: () -> Text
         return "get_movie_based_attribute_form"
 
     @staticmethod
@@ -600,14 +593,21 @@ class GetMovieBasedAttributeForm(FormAction):
     ) -> List[Dict]:
         return []
 
+
 class ActionGetMovieBasedAttribute(Action):
 
     def name(self):
-        # type: () -> Text
         return "action_get_movie_based_attribute"
 
     def run(self,
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
         call_endpoint_get_movie_based_on_attributes(tracker, dispatcher)
+
+        list_slot_sets = []
+        for key, value in tracker.slots.items():
+            if value is not None:
+                list_slot_sets.append(SlotSet(key, None))
+        return list_slot_sets
