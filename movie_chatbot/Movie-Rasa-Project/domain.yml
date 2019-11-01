@@ -36,8 +36,6 @@ actions:
 - utter_ask_year
 - utter_ask_genre
 - utter_ask_rating
-- utter_ask_year_start
-- utter_ask_year_end
 - utter_ask_movie_title
 
 
@@ -45,8 +43,6 @@ actions:
 - utter_movie_match_actor_result
 - utter_movie_match_year_result
 - utter_movie_match_genre_result
-- utter_movie_match_year_start_result
-- utter_movie_match_year_end_result
 - utter_movie_match_rating_result
 
 - action_match_director_search_movie
@@ -68,8 +64,6 @@ entities:
 - director
 - actor
 - genre
-- year_start
-- year_end
 - rating
 - movie_title
 - time #from duckling extractor
@@ -81,10 +75,6 @@ slots:
     actor:
       type: text
     genre:
-      type: text
-    year_start:
-      type: text
-    year_end:
       type: text
     rating:
       type: text
@@ -124,14 +114,8 @@ templates:
   utter_ask_actor:
     - text: "What is the name actor?"
 
-  utter_ask_year:
+  utter_ask_time:
     - text: "What is the year?"
-
-  utter_ask_year_start:
-    - text: "What is the year start for the range?"
-
-  utter_ask_year_end:
-    - text: "What is the year end for the range?"
 
   utter_ask_genre:
     - text: "What is the genre?"
@@ -152,16 +136,10 @@ templates:
     - text: "Finding movies with Actor name: {actor}"
 
   utter_movie_match_year_result:
-    - text: "Finding movies of this Year: {year_start}"
+    - text: "Finding movies of this Year: {time}"
 
   utter_movie_match_genre_result:
     - text: "Finding movies of this Genre: {genre}"
-
-  utter_movie_match_year_start_result:
-    - text: "Finding movies between Year start: {year_start}"
-
-  utter_movie_match_year_end_result:
-    - text: "Finding movies until Year end: {year_end}"
 
   utter_movie_match_rating_result:
     - text: "Finding movies with the Rating: {rating}"

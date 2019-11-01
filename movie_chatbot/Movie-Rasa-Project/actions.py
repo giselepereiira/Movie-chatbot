@@ -38,7 +38,13 @@ def call_endpoint_get_movie(tracker, dispatcher):
     for key, value in tracker.slots.items():
         if value is not None and key == 'rating':
             filter_endpoint.append((key, value.replace('top ', '')))
-        if value is not None and key != 'rating':
+        if value is not None and key == 'time':  # the time is given by duckling entity extractor
+            if isinstance(value, str):
+                filter_endpoint.append(("year_start", value[0:4]))
+            if isinstance(value, dict):
+                filter_endpoint.append(("year_start", value['from'][0:4]))
+                filter_endpoint.append(("year_end", value['to'][0:4]))
+        if value is not None and key != 'rating' and key != 'time':
             filter_endpoint.append((key, value))
 
     if len(filter_endpoint) >= 1:
@@ -58,7 +64,8 @@ def call_endpoint_get_movie(tracker, dispatcher):
         else:
             dispatcher.utter_message("Recommended movies are:")
             for idx, result in enumerate(response_json):
-                dispatcher.utter_message(str(idx+1) + ". " + result[0])
+                if result[0] is not None:
+                    dispatcher.utter_message(str(idx + 1) + ". " + result[0])
     else:
         dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
@@ -137,7 +144,7 @@ class MovieMatchYearForm(FormAction):
 
     @staticmethod
     def required_slots(tracker: Tracker) -> List[Text]:
-        return ["year_start"]
+        return ["time"]
 
     def submit(
             self,
@@ -145,8 +152,12 @@ class MovieMatchYearForm(FormAction):
             tracker: Tracker,
             domain: Dict[Text, Any],
     ) -> List[Dict]:
-        # utter submit template
-        dispatcher.utter_template("utter_movie_match_year_result", tracker)
+
+        if tracker.get_slot('time') is not None:
+            # Process time message
+            value_time = tracker.get_slot('time')
+            if isinstance(value_time, str):
+                dispatcher.utter_message("Finding movies of this Year :" + value_time[0:4])
         return []
 
 
@@ -161,7 +172,7 @@ class ActionMatchYearSearchMovie(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         call_endpoint_get_movie(tracker, dispatcher)
-        return [SlotSet("year_start", None), SlotSet("time", None)]
+        return [SlotSet("time", None)]
 
 
 class MovieMatchGenreForm(FormAction):
@@ -216,10 +227,14 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             dispatcher.utter_template("utter_movie_match_actor_result", tracker)
         if tracker.get_slot('genre') is not None:
             dispatcher.utter_template("utter_movie_match_genre_result", tracker)
-        if tracker.get_slot('year_start') is not None:
-            dispatcher.utter_template("utter_movie_match_year_start_result", tracker)
-        if tracker.get_slot('year_end') is not None:
-            dispatcher.utter_template("utter_movie_match_year_end_result", tracker)
+        if tracker.get_slot('time') is not None:
+            # Process time message
+            value_time = tracker.get_slot('time')
+            if isinstance(value_time, str):
+                dispatcher.utter_message("Finding movies of this Year :" + value_time[0:4])
+            if isinstance(value_time, dict):
+                dispatcher.utter_message("Finding movies between Year: " + value_time['from'][0:4])
+                dispatcher.utter_message("and Year: " + value_time['to'][0:4])
         if tracker.get_slot('rating') is not None:
             dispatcher.utter_template("utter_movie_match_rating_result", tracker)
 
@@ -262,6 +277,7 @@ class ActionMatchRatingSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
         call_endpoint_get_movie(tracker, dispatcher)
 
         list_slot_sets = []
@@ -438,7 +454,7 @@ class ActionGetYearByMovieTitle(Action):
         else:
             for item in response.items():
                 dispatcher.utter_message("Movie title: " + item[0])
-                if 'year_start' in item[1]:
+                if 'time' in item[1]:  # TODO confirm this
                     if item[1]['year_start'] is not None:
                         dispatcher.utter_message("Year: " + str(item[1]['year_start']))
                     else:
