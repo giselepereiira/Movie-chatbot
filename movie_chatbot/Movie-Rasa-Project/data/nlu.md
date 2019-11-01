@@ -135,10 +135,7 @@
 - gisele pereira
 
 ## lookup:genre
-- comedy
-- action
-- horror
-- drama
+data\lookup-tables\genres_list.txt
 
 ## synonym:movies
 - films
@@ -225,3 +222,7 @@
 - people love for the love story
 - incredible landscapes and nature scenes
 - space travel and aliens
+- cats and dogs
+- a lot of blood and war
+- super heros
+- based on a true story
