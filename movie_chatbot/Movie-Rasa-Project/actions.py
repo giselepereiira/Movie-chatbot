@@ -587,7 +587,10 @@ def call_endpoint_get_movie_based_on_attributes(tracker, dispatcher):
         else:
             dispatcher.utter_message("Recommended movies are:")
             for idx, result in enumerate(response_json):
-                dispatcher.utter_message(str(idx + 1) + ". " + result[0])
+                if isinstance(result, str):
+                    dispatcher.utter_message(str(idx + 1) + ". " + result)
+                if isinstance(result, list):
+                    dispatcher.utter_message(str(idx + 1) + ". " + result[0])
     else:
         dispatcher.utter_message("No entity was detected. Please reformulate your search.")
 
