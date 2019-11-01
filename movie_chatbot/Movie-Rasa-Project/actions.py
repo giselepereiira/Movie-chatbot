@@ -43,8 +43,6 @@ def call_endpoint_get_movie(tracker, dispatcher):
         if value is not None:
             filter_endpoint.append((key, value))
 
-    print(filter_endpoint)
-
     if len(filter_endpoint) >= 1:
         for idx, val in enumerate(filter_endpoint):
             parsed_query_parameter = val[0] + "=" + urllib.parse.quote(val[1])
@@ -99,7 +97,6 @@ class ActionMatchDirectorSearchMovie(Action):
 
         call_endpoint_get_movie(tracker, dispatcher)
         return [SlotSet("director", None)]
-
 
 
 class MovieMatchActorForm(FormAction):
@@ -213,7 +210,6 @@ class ActionMatchSeveralCriteriaSearchMovie(Action):
             dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print(tracker.slots)
 
         # These messages are for the user knowing what the chatbot is looking for
         if tracker.get_slot('director') is not None:
@@ -283,9 +279,7 @@ def call_endpoint_get_movie_info(tracker):
         endpoint_path = endpoint_path + "?movie_title=" + urllib.parse.quote(value_movie_title)
 
         try:
-            print(DEFAULT_REQUEST_TIMEOUT)
             response = urllib.request.urlopen(endpoint_path, timeout=DEFAULT_REQUEST_TIMEOUT)
-            print(response)
         except timeout:
             print('Timeout')
 
@@ -341,8 +335,11 @@ class ActionGetDirectorByMovieTitle(Action):
                 if 'directors' in item[1]:
                     if item[1]['directors'] is not None:
                         dispatcher.utter_message("Director(s):")
-                        for index, element in enumerate(item[1]['directors']):
-                            dispatcher.utter_message(str(index + 1) + ". " + element)
+                        if len(item[1]['directors']) > 0:
+                            for index, element in enumerate(item[1]['directors']):
+                                dispatcher.utter_message(str(index + 1) + ". " + element)
+                        else:
+                            dispatcher.utter_message("Directors not found")
                     else:
                         dispatcher.utter_message("Directors not found")
                 else:
@@ -390,8 +387,12 @@ class ActionGetActorByMovieTitle(Action):
                 if 'actors' in item[1]:
                     if item[1]['actors'] is not None:
                         dispatcher.utter_message("Actor(s):")
-                        for index, element in enumerate(item[1]['actors']):
-                            dispatcher.utter_message(str(index + 1) + ". " + element)
+                        if len(item[1]['actors']) > 0:
+                            for index, element in enumerate(item[1]['actors']):
+                                dispatcher.utter_message(str(index + 1) + ". " + element)
+                        else:
+                            dispatcher.utter_message("Actors not found")
+
                     else:
                         dispatcher.utter_message("Actors not found")
                 else:
@@ -486,8 +487,11 @@ class ActionGetGenreByMovieTitle(Action):
                 if 'genres' in item[1]:
                     if item[1]['genres'] is not None:
                         dispatcher.utter_message("Genre(s):")
-                        for index, element in enumerate(item[1]['genres']):
-                            dispatcher.utter_message(str(index + 1) + ". " + element)
+                        if len(item[1]['genres']) > 0:
+                            for index, element in enumerate(item[1]['genres']):
+                                dispatcher.utter_message(str(index + 1) + ". " + element)
+                        else:
+                            dispatcher.utter_message("Genre not found")
                     else:
                         dispatcher.utter_message("Genre not found")
                 else:
