@@ -486,12 +486,7 @@ class ActionGetGenreByMovieTitle(Action):
                 dispatcher.utter_message("Movie title: " + item[0])
                 if 'genres' in item[1]:
                     if item[1]['genres'] is not None:
-                        dispatcher.utter_message("Genre(s):")
-                        if len(item[1]['genres']) > 0:
-                            for index, element in enumerate(item[1]['genres']):
-                                dispatcher.utter_message(str(index + 1) + ". " + element)
-                        else:
-                            dispatcher.utter_message("Genre not found")
+                        dispatcher.utter_message("Genre(s): " + str(item[1]['genres']))
                     else:
                         dispatcher.utter_message("Genre not found")
                 else:
