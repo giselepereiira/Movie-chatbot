@@ -1,5 +1,11 @@
 # Further explanation of the approach
 
+## Table of Contents
+1. [Capability 1](#capability-1)
+2. [Capability 2](#capability-2)
+3. [Capability 3](#capability-3)
+4. [Sources](#sources)
+
 Let's explain the three capabilities of the movie chatbot claimed at the Introduction. 
 The explanation is divided into **Rasa setup**, **Endpoint specification** and **Database**.
 
@@ -11,7 +17,7 @@ Retrieve movie(s) that match one or more criteria (director name, actor name, ye
 
 - Defined intents: movie_match_director, movie_match_actor, movie_match_year, movie_match_genre, movie_match_several_criteria, movie_match_rating.
 
-- Entities: through lookup tables director, actor, genre. To populate the training dataset, the samples retrieved using the IMDB dataset. This dataset has a table with movie ratings that provides the rating and the number of votes for each movie. So, it was decided to sum the number of votes per movie title to retrieve the most known/watched movies and the actors/actresses/directs who participated in these movies (see `actor_names.txt`, `director_names.txt`, `genres_list.txt`).
+- Entities: through lookup tables director, actor, genre. To populate the training dataset, the samples were retrieved using the IMDB dataset. This dataset has a table with movie ratings that provide the rating and the number of votes for each movie. So, it was decided to sum the number of votes per movie title to retrieve the most known/watched movies and the actors/actresses/directs who participated in these movies (see `actor_names.txt`, `director_names.txt`, `genres_list.txt`).
 
 - Stories: search movie by director, search movie by actor, search movie by year, search movie by genre, search movie by several criteria, search movie with rating.
 
