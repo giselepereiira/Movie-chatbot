@@ -1,6 +1,12 @@
 # Movie Chatbot
 
-##  Introduction
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Project Structure](#project-structure)
+3. [Setup](#setup)
+4. [Sources](#sources)
+
+##  Introduction 
 This conversational AI chatbot was created to simplify the search for a movie to watch. Its capabilities are divided into three parts:
 
 1. Retrieve movie(s) that match one or more criteria (director name, actor name, year, genre and rating);
@@ -81,7 +87,7 @@ confidence. The `FallbackPolicy` invokes a fallback action if the requirements n
 
     * Actions (`actions.py`): has the custom and the form actions defined. In the form action, the bot keeps asking for more details to get all the required entities to fulfil the retrieval. In the custom action, the Movie Search API is invoked via REST API (`MovieSearchAPI.py`) for querying the database to get the information - used to simulate a third party API interaction.
 
-### Setup
+## Setup
 1. First, it is needed to install python 3, create and activate a virtual environment. Using venv:
 
 ```python
