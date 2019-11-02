@@ -27,13 +27,13 @@ These three capabilities are further explained [here](Approach.md).
 - kaggledatabase: can be obtained through https://www.kaggle.com/iarunava/imdb-movie-reviews-dataset
 This dataset contains 50,000 reviews movie reviews along with their associated binary sentiment polarity labels. A negative review has a score <= 4 out of 10, and a positive review has a score >= 7 out of 10. The review is associated with the IMDB URL, where the movie IMDB ID can be directly obtained.
 
-- cmudatabase: can be obtained through http://www.cs.cmu.edu/~ark/personas/ contains plot summaries of 42,306 movies extracted from Wikipedia, as well as, movie attributes if 81,741 movies extracted from Freebase (movie name, release date, genres, etc).
+- cmudatabase: can be obtained through http://www.cs.cmu.edu/~ark/personas/ contains plot summaries of 42,306 movies extracted from Wikipedia, as well as, movie attributes of 81,741 movies extracted from Freebase (movie name, release date, genres, etc).
 
 ### MovieSearchAPI
 
 For Rasa server to obtain the necessary data, it was decided to isolate the server that performs the necessary queries in the database. Thus, a REST API was created with endpoints that return the required information asked by a user to the bot. 
 
-For that purpose, Flask, a python web framework was used.
+For that purpose, Flask [^1] , a python web framework was used.
 
 ### Rasa description (movie_chatbot)
 
@@ -126,5 +126,5 @@ ngrok http 5002
 Now, you have no reason not to choose the best movie!
 
 ## References
-
+[^1] : https://www.fullstackpython.com/flask.html
 

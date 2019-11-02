@@ -1,7 +1,7 @@
 # Further explanation of the approach
 
 Let's explain the three capabilities of the movie chatbot claimed at the Introduction. 
-The explanation is divided into Rasa setup, MovieSearchAPI and Database.
+The explanation is divided into **Rasa setup**, **Endpoint specification** and **Database**.
 
 ## Capability 1:
 
