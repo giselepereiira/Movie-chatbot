@@ -45,13 +45,13 @@ All of these parameters are optional.
 
 The available datasets from IMDB, have been chosen to implement the capabilities 1 and 2 since they gather the following needed entities:
 
-- Title.basics - (Movie) titles;
+- Title.basics - movie titles;
 
-- Name.basics- People (actor, actress and directors);
+- Name.basics - people as actor, actress and directors;
 
-- Title_ratings- (movie) ratings;
+- Title_ratings - movie ratings;
 
-- Title.principals-Relation between titles and people.
+- Title.principals - relation between titles and people.
 
 Given a large amount of data, the data was imported into a dataset since it would bring more performance of chatbot. For this purpose, a relational database - Postgres - was chosen since it can be easily tuned to answer any query in a timely manner [1] (1 second). The application ETL used was the Python SQLAlchemy library [2] to create and managed the tables listed above.
 
@@ -130,7 +130,7 @@ Suggest movies based on their characteristics.
     
     - top_rated: integer representing the number of movies that should be returned, sorted by highest rating.
 
-All of these parameters are optional except for movie_attribute.
+All of these parameters are optional except for movie_attribute.g
 
 
 ### Database
