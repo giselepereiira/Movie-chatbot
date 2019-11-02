@@ -1,0 +1,15 @@
+{
+  "films": "movies",
+  "leaded": "directed",
+  "coordinated": "directed",
+  "orchestrated": "directed",
+  "involvement": "participation",
+  "part": "participation",
+  "engagement": "participation",
+  "contribution": "participation",
+  "released": "made",
+  "filmed": "made",
+  "produced": "made",
+  "created": "made",
+  "formed": "made"
+}

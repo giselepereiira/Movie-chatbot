@@ -5,7 +5,7 @@
     },
     {
         "name": "director",
-        "pattern": "(?i)(\\bquentin\\ tarantino\\b)"
+        "pattern": "(?i)(\\bquentin\\ tarantino\\b|\\bingmar\\ bergman\\b)"
     },
     {
         "name": "actor",
@@ -13,10 +13,10 @@
     },
     {
         "name": "movie_type",
-        "pattern": "(?i)(\\bcomedy\\b|\\bdrama\\b)"
+        "pattern": "(?i)(\\bcomedy\\b|\\baction\\b)"
     },
     {
         "name": "movie_language",
-        "pattern": "(?i)(\\bfrench\\b|\\benglish\\b)"
+        "pattern": "(?i)(\\bfrench\\b)"
     }
 ]

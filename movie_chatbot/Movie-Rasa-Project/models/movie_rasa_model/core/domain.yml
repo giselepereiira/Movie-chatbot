@@ -14,6 +14,7 @@ actions:
   - utter_ask_actor
 - utter_ask_director
   - utter_ask_genre
+  - utter_ask_movie_attribute
   - utter_ask_movie_title
   - utter_ask_rating
   - utter_ask_time
