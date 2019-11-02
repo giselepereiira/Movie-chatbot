@@ -6,145 +6,113 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-
   - movie_match_director
   - movie_match_actor
   - movie_match_year
   - movie_match_genre
   - movie_match_several_criteria
   - movie_match_rating
-
   - get_director_by_movie_title
   - get_actor_by_movie_title
   - get_year_by_movie_title
   - get_genre_by_movie_title
   - get_rating_by_movie_title
-
   - get_movie_attributes
-
-actions:
-- utter_greet
-- utter_cheer_up
-- utter_did_that_help
-- utter_happy
-- utter_goodbye
-- utter_iamabot
-- utter_default
-
-- utter_ask_director
-- utter_ask_actor
-- utter_ask_time
-- utter_ask_genre
-- utter_ask_rating
-- utter_ask_movie_title
-
-
-- utter_movie_match_director_result
-- utter_movie_match_actor_result
-- utter_movie_match_year_result
-- utter_movie_match_genre_result
-- utter_movie_match_rating_result
-
-- action_match_director_search_movie
-- action_match_actor_search_movie
-- action_match_year_search_movie
-- action_match_genre_search_movie
-- action_match_several_criteria_search_movie
-- action_match_rating_search_movie
-
-- action_get_director_by_movie_title
-- action_get_actor_by_movie_title
-- action_get_year_by_movie_title
-- action_get_genre_by_movie_title
-- action_get_rating_by_movie_title
-
-- action_get_movie_based_attribute
-
 entities:
 - director
 - actor
 - genre
 - rating
 - movie_title
-- time #from duckling extractor
+- time
 - movie_attribute
-
 slots:
-    director:
-      type: text
-    actor:
-      type: text
-    genre:
-      type: text
-    rating:
-      type: text
-    movie_title:
-      type: text
-    time:
-      type: text
-    movie_attribute:
-      type: text
-
+  actor:
+    type: text
+  director:
+    type: text
+  genre:
+    type: text
+  movie_attribute:
+    type: text
+  movie_title:
+    type: text
+  rating:
+    type: text
+  time:
+    type: text
 templates:
   utter_greet:
-  - text: "Hey! How are you?"
-
+    - text: Hey! How are you?
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+    - text: 'Here is something to cheer you up:'
+      image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
-  - text: "Did that help you?"
-
+    - text: Did that help you?
   utter_happy:
-  - text: "Great, carry on!"
-
+    - text: Great, carry on!
   utter_goodbye:
-  - text: "Bye"
-
+    - text: Bye
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
-  utter_default:   # utterance sent by action_default_fallback
-    - text: "sorry, I didn't get that, can you rephrase it?"
-
+    - text: I am a bot, powered by Rasa.
+  utter_default:
+    - text: sorry, I didn't get that, can you rephrase it?
   utter_ask_director:
-    - text: "What is the name director?"
-
+    - text: What is the name director?
   utter_ask_actor:
-    - text: "What is the name actor?"
-
+    - text: What is the name actor?
   utter_ask_time:
-    - text: "What is the year?"
-
+    - text: What is the year?
   utter_ask_genre:
-    - text: "What is the genre?"
-
+    - text: What is the genre?
   utter_ask_rating:
-    - text: "What is the rating?"
-
+    - text: What is the rating?
   utter_ask_movie_title:
-    - text: "What is the title of the movie?"
-
+    - text: What is the title of the movie?
   utter_ask_movie_attribute:
-    - text: "What is the attributes of the movie?"
-
+    - text: What is the attributes of the movie?
   utter_movie_match_director_result:
-    - text: "Finding movies with Director name: {director}"
-
+    - text: 'Finding movies with Director name: {director}'
   utter_movie_match_actor_result:
-    - text: "Finding movies with Actor name: {actor}"
-
+    - text: 'Finding movies with Actor name: {actor}'
   utter_movie_match_year_result:
-    - text: "Finding movies of this Year: {time}"
-
+    - text: 'Finding movies of this Year: {time}'
   utter_movie_match_genre_result:
-    - text: "Finding movies of this Genre: {genre}"
-
+    - text: 'Finding movies of this Genre: {genre}'
   utter_movie_match_rating_result:
-    - text: "Finding movies with the Rating: {rating}"
-
-
+    - text: 'Finding movies with the Rating: {rating}'
+actions:
+  - utter_greet
+  - utter_cheer_up
+  - utter_did_that_help
+  - utter_happy
+  - utter_goodbye
+  - utter_iamabot
+  - utter_default
+  - utter_ask_director
+  - utter_ask_actor
+  - utter_ask_time
+  - utter_ask_genre
+  - utter_ask_rating
+  - utter_ask_movie_title
+  - utter_ask_movie_attribute
+  - utter_movie_match_director_result
+  - utter_movie_match_actor_result
+  - utter_movie_match_year_result
+  - utter_movie_match_genre_result
+  - utter_movie_match_rating_result
+  - action_match_director_search_movie
+  - action_match_actor_search_movie
+  - action_match_year_search_movie
+  - action_match_genre_search_movie
+  - action_match_several_criteria_search_movie
+  - action_match_rating_search_movie
+  - action_get_director_by_movie_title
+  - action_get_actor_by_movie_title
+  - action_get_year_by_movie_title
+  - action_get_genre_by_movie_title
+  - action_get_rating_by_movie_title
+  - action_get_movie_based_attribute
 forms:
   - movie_match_director_form
   - movie_match_actor_form

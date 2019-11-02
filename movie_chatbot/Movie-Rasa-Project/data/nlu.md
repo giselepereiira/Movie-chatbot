@@ -101,7 +101,10 @@
 - tell me [comedy](genre) movies that had the participation of [tom cruise](actor)
 - tell me [drama](genre) movies that had the participation of [fred astaire](actor)
 - tell me [comedy](genre) movies that were produced between 2018 and 2019
-- tell me movies in [horror](genre) that were produced between 1990 and 2002
+- tell me [horror](genre)  movies that were produced between 1990 and 2002
+- tell me [action](genre) movies that were directed by [tony scott](director)
+- tell me movies that were directed by [tony scott](director) and had [tom cruise](actor) as an actor
+- tell me movies that were directed by [tony scott](director) produced between 1990 and 2002
 
 ##intent: movie_match_rating
 - what were the [top 5](rating) rated movies in 2018?
@@ -133,6 +136,7 @@
 - gene kelly
 - stanley kubrick
 - gisele pereira
+- tony scott
 
 ## lookup:genre
 data\lookup-tables\genres_list.txt
@@ -143,18 +147,18 @@ data\lookup-tables\genres_list.txt
 ## regex:rating
 - top \b[0-9]+\b
 
-## synonyms:directed
+## synonym:directed
 - leaded
 - coordinated
 - orchestrated
 
-##synonyms:participation
+##synonym:participation
 - involvement
 - part
 - engagement
 - contribution
 
-##synonyms:made
+##synonym:made
 - released
 - filmed
 - produced
@@ -216,6 +220,8 @@ data\lookup-tables\genres_list.txt
 - tell me [drama](genre) movie that [people love for the love story](movie_attribute)
 - tell me movies that have [incredible landscapes and nature scenes](movie_attribute)
 - what films do you have that include [space travel and aliens](movie_attribute)?
+- tell me movies that have [awesome special effect](movie_attribute)
+- tell me movies that have [cats and dogs](movie_attribute)
 
 ##lookup:movie_attribute
 - awesome special effect
@@ -224,5 +230,5 @@ data\lookup-tables\genres_list.txt
 - space travel and aliens
 - cats and dogs
 - a lot of blood and war
-- super heros
+- super hero
 - based on a true story
