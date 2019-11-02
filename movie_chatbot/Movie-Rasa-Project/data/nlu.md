@@ -57,27 +57,29 @@
 
 ## intent:movie_match_director 
 - what movies were directed by [quentin tarantino](director)?
-- what movies were directed by [ingmar bergman](director)?
-- what movies were directed by [marlon brando](director)?
-- what movies were directed by [james cagney](director)?
-- what movies were directed by [federico fellini](director)?
-- what movies were directed by [john gielgud](director)?
+- what movies were directed by [steven spielberg](director)?
+- what movies were directed by [christopher nolan](director)?
+- what movies were directed by [charles roven](director)?
+- what movies were directed by [martin scorsese](director)?
+- what movies were directed by [scott rudin](director)?
 - what are the movies by [stanley kubrick](director)?
-- what are the movies by [quentin tarantino](director)?
-- what are the movies by [gene kelly](director)?
-- what is [gene kelly](director) known for?
-- what did [gene kelly](director) create?
+- what are the movies by [peter jackson](director)?
+- what are the movies by [joel silver](director)?
+- what is [quentin tarantino](director) known for?
+- what did [ridley scott](director) create?
+
 
 ## intent:movie_match_actor
 - what movies had the participation of [tom cruise](actor)?
-- what movies had the participation of [fred astaire](actor)?
-- what movies had the participation of [brigitte bardot](actor)?
-- what movies had the participation of [richard burton](actor)?
-- what movies had the participation of [humphrey bogart](actor)?
-- what movies had the participation of [lauren bacall](actor)?
-- what movies has [lauren bacall](actor) worked on?
-- what movies has [brigitte bardot](actor) worked on?
-- what movies has [richard burton](actor) worked on?
+- what movies had the participation of [brad pitt](actor)?
+- what movies had the participation of [tom hanks](actor)?
+- what movies had the participation of [leonardo dicaprio](actor)?
+- what movies had the participation of [morgan freeman](actor)?
+- what movies had the participation of [johnny depp](actor)?
+- what movies has [christian bale](actor) worked on?
+- what movies has [robert de niro](actor) worked on?
+- what movies has [matt damon](actor) worked on?
+
 
 ## intent:movie_match_year
 - what were the movies made in 2018?
@@ -99,11 +101,11 @@
 
 ## intent:movie_match_several_criteria
 - tell me [comedy](genre) movies that had the participation of [tom cruise](actor)
-- tell me [drama](genre) movies that had the participation of [fred astaire](actor)
+- tell me [drama](genre) movies that had the participation of [brad pitt](actor)
 - tell me [comedy](genre) movies that were produced between 2018 and 2019
 - tell me [horror](genre)  movies that were produced between 1990 and 2002
 - tell me [action](genre) movies that were directed by [tony scott](director)
-- tell me movies that were directed by [tony scott](director) and had [tom cruise](actor) as an actor
+- tell me movies that were directed by [steven spielberg](director) and had [tom cruise](actor) as an actor
 - tell me movies that were directed by [tony scott](director) produced between 1990 and 2002
 
 ##intent: movie_match_rating
@@ -112,31 +114,10 @@
 - what were the [top 10](rating) rated movies in 1990?
 
 ## lookup:actor
-- tom cruise
-- fred astaire
-- lauren bacall
-- brigitte bardot
-- john belushi
-- ingmar bergman
-- humphrey bogart
-- marlon brando
-- richard burton
-- miguel oliveira
+data\lookup-tables\actor_names.txt
 
 ## lookup:director
-- quentin tarantino
-- ingmar bergman
-- marlon brando
-- james cagney
-- federico fellini
-- john gielgud
-- charlton heston
-- alfred hitchcock
-- buster keaton
-- gene kelly
-- stanley kubrick
-- gisele pereira
-- tony scott
+data\lookup-tables\director_names.txt
 
 ## lookup:genre
 data\lookup-tables\genres_list.txt
@@ -167,50 +148,44 @@ data\lookup-tables\genres_list.txt
 
 ##intent:get_director_by_movie_title
 - who was the director of [the godfather](movie_title)?
-- who was the director of [miss jerry](movie_title)?
-- who was the director of [soldiers of the cross](movie_title)?
-- who was the director of [the story of the kelly gang](movie_title)?
-- who was the director of [robbery under arms](movie_title)?
-- who created [miss jerry](movie_title)?
+- who was the director of [inception](movie_title)?
+- who was the director of [fight club](movie_title)?
+- who was the director of [interstellar](movie_title)?
+- who was the director of [the matrix](movie_title)?
+- who created [top gun](movie_title)?
 
 ##intent:get_actor_by_movie_title
 - who were the star actors in [the godfather](movie_title)?
-- who were the star actors in [miss jerry](movie_title)?
-- who were the star actors in [soldiers of the cross](movie_title)?
-- who were the star actors in [the story of the kelly gang](movie_title)?
-- who were the star actors in [robbery under arms](movie_title)?
+- who were the star actors in [star wars](movie_title)?
+- who were the star actors in [inception](movie_title)?
+- who were the star actors in [interstellar](movie_title)?
+- who were the star actors in [the matrix](movie_title)?
 
 ##intent:get_year_by_movie_title
 - when was released [the godfather](movie_title)?
-- when was released [miss jerry](movie_title)?
-- when was released [soldiers of the cross](movie_title)?
-- when was released [the story of the kelly gang](movie_title)?
-- when was released [robbery under arms](movie_title)?
+- when was released [star wars](movie_title)?
+- when was released [fight club](movie_title)?
+- when was released [interstellar](movie_title)?
+- when was released [inception](movie_title)?
 - what year did [miss jerry](movie_title) come out?
 
 ##intent:get_genre_by_movie_title
 - what is the genre of [the godfather](movie_title)?
 - what is the genre of [miss jerry](movie_title)?
-- what is the genre of [soldiers of the cross](movie_title)?
-- what is the genre of [the story of the kelly gang](movie_title)?
-- what is the genre of [robbery under arms](movie_title)?
+- what is the genre of [fight club](movie_title)?
+- what is the genre of [interstellar](movie_title)?
+- what is the genre of [inception](movie_title)?
 
 ##intent:get_rating_by_movie_title
 - what is the rating of [the godfather](movie_title)?
 - what is the rating of [miss jerry](movie_title)?
-- what is the rating of [soldiers of the cross](movie_title)?
-- what is the rating of [the story of the kelly gang](movie_title)?
-- what is the rating of [robbery under arms](movie_title)?
-- what is [miss jerry](movie_title) rated?
+- what is the rating of [fight club](movie_title)?
+- what is the rating of [interstellar](movie_title)?
+- what is the rating of [inception](movie_title)?
+- what is [the incredibles](movie_title) rated?
 
 ##lookup:movie_title
-- the godfather
-- miss jerry
-- soldiers of the cross
-- the story of the kelly gang
-- robbery under arms
-- joker
-- top gun
+data\lookup-tables\movie_titles.txt
 
 
 ##intent:get_movie_attributes
