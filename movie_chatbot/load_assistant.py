@@ -1,47 +1,44 @@
 import asyncio
 import logging
 
-from IPython.display import Image
-from IPython.display import display
 from rasa.core.agent import Agent
 from rasa.core.interpreter import NaturalLanguageInterpreter
 from rasa.utils.endpoints import EndpointConfig
 
 logging.basicConfig(level="CRITICAL")
 
-example_project = "Movie-Rasa-Project"
-example_config_path = example_project + "\\config.yml"
-example_training_files = example_project + "\\data\\"
-example_training_file_nlu = example_project + "\\data\\nlu.md"
-example_training_file_stories = example_project + "\\data\\stories.md"
-example_domain_path = example_project + "\\domain.yml"
-example_models_output = example_project + "\\models\\"
-example_actions_file = example_project + "\\actions.py"
-example_endpoints_file = example_project + "\\endpoints.yml"
-example_model_name = "movie_rasa_model"
+# Project paths
+project = "Movie-Rasa-Project"
+movie_config_path = project + "\\config.yml"
+movie_training_files = project + "\\data\\"
+movie_training_file_nlu = project + "\\data\\nlu.md"
+movie_training_file_stories = project + "\\data\\stories.md"
+movie_domain_path = project + "\\domain.yml"
+movie_models_output = project + "\\models\\"
+movie_actions_file = project + "\\actions.py"
+movie_endpoints_file = project + "\\endpoints.yml"
+movie_model_name = "movie_rasa_model"
 
-# example_model_path = "Movie-Rasa-project\\models\\20191101-151805.tar.gz"
-example_model_path = example_models_output + example_model_name + "\\"
+example_model_path = movie_models_output + movie_model_name + "\\"
 
-PORT=5055
+PORT_ACTIONS = 5055
 
 
-# tar = tarfile.open(example_models_output + "20191101-151805" + ".tar.gz", "r:gz")
-# tar.extractall(example_models_output + example_model_name)
+# Uncomment this is you trained a new model
+# name_of_new_model="dummy-name"
+# tar = tarfile.open(movie_models_output + name_of_new_model + ".tar.gz", "r:gz")
+# tar.extractall(movie_models_output + movie_model_name)
 # tar.close()
-
-#interpreter = Interpreter.load(example_models_output + example_model_name + "/nlu/")
 
 
 def load_assistant():
-    messages = ["Hi! you can chat in this window. Type 'stop' to end the conversation."]
-    interpreter = NaturalLanguageInterpreter.create(example_models_output + example_model_name + "\\nlu\\")
-    endpoint = EndpointConfig('http://localhost:{}/webhook'.format(PORT))
+    interpreter = NaturalLanguageInterpreter.create(movie_models_output + movie_model_name + "\\nlu\\")
+    endpoint = EndpointConfig('http://localhost:{}/webhook'.format(PORT_ACTIONS))
     agent = Agent.load(example_model_path, interpreter=interpreter, action_endpoint=endpoint)
 
     print("Your bot is ready to talk! Type your messages here or send 'stop'")
     while True:
-        user_message = input()
+        user_message = input("---> ")
         if user_message == 'stop':
             break
 
@@ -52,7 +49,5 @@ def load_assistant():
                 if response_type == "text":
                     print(value)
 
-                if response_type == "image":
-                    image = Image(url=value)
-                    display(image)
+
 load_assistant()
