@@ -103,11 +103,11 @@ To use this component you need to run a duckling server. The easiest option is t
 
 Great! Now you have everything ready to search movies!
 
-5. run `MovieSearchAPI.py`, defined host is '127.0.0.1' and port is 9001. 
+5. Run `MovieSearchAPI.py`. The default host is 127.0.0.1 and the port is 9001. 
 
-6. run the action server in port 5055.
+6. Run the action server in port 5055.
 ```python python -m rasa_sdk --actions actions --port 5055```
- If you want change the port 5055 please change on `endpoint.yml`.
+ If you want to change the port 5055, change `endpoint.yml`.
 
 7. To interact with the chatbot run `load_assitant.py`
 
