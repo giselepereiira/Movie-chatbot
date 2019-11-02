@@ -126,7 +126,7 @@ ngrok http 5002
 Now, you have no reason not to choose the best movie!
 
 ## Sources
-1. [Flask] (https://www.fullstackpython.com/flask.html)
-2. [Rasa] (https://rasa.com/)
-3. [Rasa X] (https://rasa.com/docs/rasa-x/)
+1. [Flask](https://www.fullstackpython.com/flask.html)
+2. [Rasa](https://rasa.com/)
+3. [Rasa X](https://rasa.com/docs/rasa-x/)
 
