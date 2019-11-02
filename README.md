@@ -20,7 +20,7 @@ These three capabilities are further explained [here](Approach.md).
 
 ##  Architecture  
 
-![Architecture](ArchitectureDiagram.png)
+![Architecture](images/ArchitectureDiagram.png)
 
 ## Project Structure
 - cmudatabase
@@ -82,7 +82,7 @@ For dialogue training, Rasa has four main components:
     
     * Stories (`stories.md`):  define the interaction/paths between the user and the chatbot. When an intent is detected by Rasa NLU, the following actions that should be taken by the bot are described in this file.
     
-    ![Diagram](StoryExample.jpg)
+    ![Diagram](images/StoryExample.jpg)
 
     Like in the above example, the bot got the intent of getting the director name given the movie title. Until a valid director name is not detected to fill the required slot of the form, the bot will keep asking for a valid one. When it gets it, the bot will continue to the action.
    

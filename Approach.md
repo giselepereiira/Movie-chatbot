@@ -67,7 +67,7 @@ To improve query performance, it has been found that for this project, some data
 Besides this data shrunk, resulting in a smaller amount of data, two full-text-search indexes have been created (Generalized Inverted Index) on two columns: name of (movie) title and name of people (actors, actresses and directors), to make name search faster.
 After all this data processing, the entity-relationship model is the following:
 
-![Diagram](ER.png)
+![Diagram](images/ER.png)
 
  
 
