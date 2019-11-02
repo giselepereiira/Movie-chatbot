@@ -46,19 +46,35 @@ The training data is written to `nlu.md` file. This file is composed by the inte
 
 Rasa NLU has a number of different components, which together make a pipeline. This pipeline defines the flow of data processing and intent classification and entity extraction (`config.yml`).
 
-TODO FOTO AND DESCRIBE CONPONENTS
+```yaml
+language: en
 
-OBS: There are to entities extractor on the pipeline. The `CRFEntityExtractor` component can learn custom entities in any language, given some training data. `DucklingHTTPExtractor` lets you extract common entities like dates, amounts of money, distances, and others in a number of languages. It has the capability of turning expressions like “from last year” into actual datetime objects. 
+pipeline:
+    - name: SpacyNLP
+    - name: SpacyTokenizer
+    - name: SpacyFeaturizer
+    - name: RegexFeaturizer
+    - name: CRFEntityExtractor
+    - name: DucklingHTTPExtractor
+      url: http://localhost:8000
+      dimensions:
+      - time
+    - name: EntitySynonymMapper
+    - name: SklearnIntentClassifier
+```
+
+OBS: There are two entities extractor on the pipeline. The `CRFEntityExtractor` component can learn custom entities in any language, given some training data. `DucklingHTTPExtractor` lets you extract common entities like dates, amounts of money, distances, and others in a number of languages. It has the capability of turning expressions like “from last year” into actual datetime objects. 
 
 - *Rasa Core* is a dialogue management engine with the purpose of holding conversations and deciding what to do next. For that, it uses a machine learning model trained on example conversations to decide what to do next (trigger Rasa Action Server), using a probabilistic model like LSTM neural network. 
 For dialogue training, Rasa has four main components:
 
     * Domain (`domain.yml`): This file lists all the intents, entities, actions, templates and slots.
     
-    * Stories (`stories.md`):  define the interaction/paths between the user and the chatbot. When an intent is detected by Rasa NLU the actions that should be taken by the bot are described in this file.
-Example: FOTO
-Rasa (Core) creates a probable model of interaction from each story. FOTO?
-Like in the example the bot got the intent of getting the director name given the movie title. Until a valid director name is not detected to fill the required slot of the form, the bot will keep asking for a valid one. When it gets it, the bot will continue to the action.
+    * Stories (`stories.md`):  define the interaction/paths between the user and the chatbot. When an intent is detected by Rasa NLU, the following actions that should be taken by the bot are described in this file.
+    
+    ![Diagram](StoryExample.jpg)
+
+    Like in the above example, the bot got the intent of getting the director name given the movie title. Until a valid director name is not detected to fill the required slot of the form, the bot will keep asking for a valid one. When it gets it, the bot will continue to the action.
    
     * Policies (`policy.yml`): decide which action to take at every step. At every turn of the conversation, each policy defined will predict the next action with a certain confidence level. The next action is decided by the policy with the highest 
 confidence. The `FallbackPolicy` invokes a fallback action if the requirements nlu_threshold and core_threshold are not met. In this case, the bot will respond with “utter_default”.
@@ -66,3 +82,49 @@ confidence. The `FallbackPolicy` invokes a fallback action if the requirements n
     * Actions (`actions.py`): has the custom and the form actions defined. In the form action, the bot keeps asking for more details to get all the required entities to fulfil the retrieval. In the custom action, the Movie Search API is invoked via REST API (`MovieSearchAPI.py`) for querying the database to get the information - used to simulate a third party API interaction.
 
 ### Setup
+1. First, it is needed to install python 3, create and activate a virtual environment. Using venv:
+
+```python
+python -m venv <DIR>
+source <DIR>/bin/activate
+```
+
+2. Once the environment is active, at the same directory, clone this repository.
+
+3. Install the list of requirements specified in `movie-chatbot-requirements.txt`
+
+```python
+pip install -r movie-chatbot-requirements.txt
+```
+(Note: In case you are working on windows, make sure you have installed the Visual c++ build tool. This is a requirement for Rasa installation).
+
+4. After you need to install Duckling for Rasa NLU entity extraction (`DucklingHTTPExtractor`). 
+To use this component you need to run a duckling server. The easiest option is to spin up a docker container using `docker run -p 8000:8000 rasa/duckling`. Please obtain docker container on https://hub.docker.com/r/rasa/duckling. 
+
+Great! Now you have everything ready to search movies!
+
+5. run `MovieSearchAPI.py`, defined host is '127.0.0.1' and port is 9001. 
+
+6. run the action server in port 5055.
+```python python -m rasa_sdk --actions actions --port 5055```
+ If you want change the port 5055 please change on `endpoint.yml`.
+
+7. To interact with the chatbot run `load_assitant.py`
+
+OR
+
+To use Rasa assistant, run
+```python
+rasa x
+```
+The server will run on  http://localhost:5002/
+
+For exposing your local web server, please install ngrok and run 
+```
+ngrok http 5002
+```
+Now, you have no reason to not choose the best movie!
+
+## References
+
+
