@@ -22,21 +22,21 @@ Retrieve movie(s) that match one or more criteria (director name, actor name, ye
 ### MovieSearchAPI - endpoint specification: Get Movie given a criteria
 
 
-Url: GET HOST:PORT/list-movie
+- Url: _GET HOST:PORT/list-movie_
 
-Url Parameters (Query Parameters):
+- Url Parameters:
 
-genre: the movie genre;
+    - genre: the movie genre;
 
-director_name: the movie’s director name;
+    - director_name: the movie’s director name;
 
-actor_name: the actor that represents on that movie;
+    - actor_name: the actor that represents on that movie;
 
-year_start: the year that the movie was released;
+    - year_start: the year that the movie was released;
 
-year_end: if present, the year_start is mandatory and should behave like a between;
+    - year_end: if present, the year_start is mandatory and should behave like a between;
 
-top_rated: number of movies that should be returned, sorted by highest rating.
+    - top_rated: number of movies that should be returned, sorted by highest rating.
 
 All of these parameters are optional.
 
@@ -83,15 +83,15 @@ Answer general questions about movies.
 
 ### MovieSearchAPI - endpoint specification: Get Movie Information given its title
 
-Url: GET HOST:PORT/movie-info
+- Url: _GET HOST:PORT/movie-info_
  
-Url Parameters (Query Parameters):
+- Url Parameters:
 
-movie_title: the movie title we want to obtain information
+    - movie_title: the movie title we want to obtain information
 
 ### Database
 
-See Database capability 1
+See Database capability 1.
 
 
 ## Capability 3
@@ -112,23 +112,25 @@ Suggest movies based on their characteristics.
 
 ### MovieSearchAPI  - endpoint specification: Get Movie given an attribute
 
-Url: GET HOST:PORT/movie-with-attribute
+- Url: _GET HOST:PORT/movie-with-attribute_
 
-Url Parameters (Query Parameters):
-genre: the movie genre;
+- Url Parameters:
 
-movie_attribute: the characteristic of the movie;
+    - movie_attribute: the characteristic of the movie;
+    
+    - genre: the movie genre;
+    
+    - director_name: the movie’s director name;
+    
+    - actor_name: the actor that represents on that movie;
+    
+    - year_start: the year that the movie was released;
+    
+    - year_end: if present, the year_start is mandatory and should behave like a between;
+    
+    - top_rated: integer representing the number of movies that should be returned, sorted by highest rating.
 
-director_name: the movie’s director name;
-
-actor_name: the actor that represents on that movie;
-
-year_start: the year that the movie was released;
-
-year_end: if present, the year_start is mandatory and should behave like a between;
-
-top_rated: integer representing the number of movies that should be returned, sorted by highest rating.
-All of these parameters are optional.
+All of these parameters are optional except for movie_attribute.
 
 
 ### Database
