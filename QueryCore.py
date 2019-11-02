@@ -120,8 +120,7 @@ def get_movie_info():
 
         rs = connection.execute(query)
 
-        director_names = set(
-            ["writer", "editor", "composer", "production_designer", "cinematographer", "director", "producer"])
+        director_names = set(["director", "producer"])
         actor_names = set(["actress", "self", "actor"])
 
         result = {}
