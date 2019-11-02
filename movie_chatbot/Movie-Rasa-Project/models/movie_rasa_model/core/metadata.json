@@ -1,0 +1,125 @@
+{
+  "action_fingerprints": {
+    "action_listen": {
+      "slots": []
+    },
+    "get_director_by_movie_title_form": {
+      "slots": [
+        "movie_title"
+      ]
+    },
+    "get_year_by_movie_title_form": {
+      "slots": [
+        "movie_title"
+      ]
+    },
+    "movie_match_rating_form": {
+      "slots": [
+        "rating"
+      ]
+    },
+    "get_actor_by_movie_title_form": {
+      "slots": [
+        "movie_title"
+      ]
+    },
+    "movie_match_director_form": {
+      "slots": [
+        "director"
+      ]
+    },
+    "get_movie_based_attribute_form": {
+      "slots": [
+        "movie_attribute"
+      ]
+    },
+    "get_rating_by_movie_title_form": {
+      "slots": [
+        "movie_title"
+      ]
+    },
+    "movie_match_actor_form": {
+      "slots": [
+        "actor"
+      ]
+    },
+    "movie_match_year_form": {
+      "slots": [
+        "time"
+      ]
+    },
+    "get_genre_by_movie_title_form": {
+      "slots": [
+        "movie_title"
+      ]
+    },
+    "movie_match_genre_form": {
+      "slots": [
+        "genre"
+      ]
+    },
+    "action_match_several_criteria_search_movie": {
+      "slots": []
+    },
+    "action_get_year_by_movie_title": {
+      "slots": []
+    },
+    "action_match_director_search_movie": {
+      "slots": []
+    },
+    "utter_iamabot": {
+      "slots": []
+    },
+    "utter_goodbye": {
+      "slots": []
+    },
+    "action_get_movie_based_attribute": {
+      "slots": []
+    },
+    "action_get_actor_by_movie_title": {
+      "slots": []
+    },
+    "action_match_genre_search_movie": {
+      "slots": []
+    },
+    "action_get_rating_by_movie_title": {
+      "slots": []
+    },
+    "action_match_actor_search_movie": {
+      "slots": []
+    },
+    "action_match_rating_search_movie": {
+      "slots": []
+    },
+    "action_match_year_search_movie": {
+      "slots": []
+    },
+    "utter_happy": {
+      "slots": []
+    },
+    "action_get_director_by_movie_title": {
+      "slots": []
+    },
+    "action_get_genre_by_movie_title": {
+      "slots": []
+    }
+  },
+  "python": "3.7.5",
+  "max_histories": [
+    5,
+    5,
+    null,
+    2
+  ],
+  "ensemble_name": "rasa.core.policies.ensemble.SimplePolicyEnsemble",
+  "policy_names": [
+    "rasa.core.policies.memoization.MemoizationPolicy",
+    "rasa.core.policies.keras_policy.KerasPolicy",
+    "rasa.core.policies.mapping_policy.MappingPolicy",
+    "rasa.core.policies.form_policy.FormPolicy"
+  ],
+  "trained_at": "20191102-191914",
+  "rasa": "1.4.3",
+  "tensorflow": "1.14.0",
+  "sklearn": "0.20.4"
+}

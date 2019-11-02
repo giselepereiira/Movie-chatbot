@@ -1,0 +1,185 @@
+actions:
+  - action_get_actor_by_movie_title
+  - action_get_director_by_movie_title
+  - action_get_genre_by_movie_title
+  - action_get_movie_based_attribute
+  - action_get_rating_by_movie_title
+  - action_get_year_by_movie_title
+  - action_match_actor_search_movie
+  - action_match_director_search_movie
+  - action_match_genre_search_movie
+  - action_match_rating_search_movie
+  - action_match_several_criteria_search_movie
+  - action_match_year_search_movie
+  - utter_ask_actor
+- utter_ask_director
+  - utter_ask_genre
+  - utter_ask_movie_attribute
+  - utter_ask_movie_title
+  - utter_ask_rating
+  - utter_ask_time
+- utter_cheer_up
+- utter_default
+- utter_did_that_help
+- utter_goodbye
+- utter_greet
+- utter_happy
+- utter_iamabot
+  - utter_movie_match_actor_result
+  - utter_movie_match_director_result
+  - utter_movie_match_genre_result
+  - utter_movie_match_rating_result
+  - utter_movie_match_year_result
+config:
+  store_entities_as_slots: true
+entities:
+  - actor
+- director
+  - genre
+  - movie_attribute
+  - movie_title
+  - rating
+  - time
+forms:
+  - get_actor_by_movie_title_form
+  - get_director_by_movie_title_form
+  - get_genre_by_movie_title_form
+  - get_movie_based_attribute_form
+  - get_rating_by_movie_title_form
+  - get_year_by_movie_title_form
+  - movie_match_actor_form
+  - movie_match_director_form
+  - movie_match_genre_form
+  - movie_match_rating_form
+  - movie_match_year_form
+intents:
+- greet:
+    ignore_entities: []
+    use_entities: true
+- goodbye:
+    ignore_entities: []
+    use_entities: true
+- affirm:
+    ignore_entities: []
+    use_entities: true
+- deny:
+    ignore_entities: []
+    use_entities: true
+- mood_great:
+    ignore_entities: []
+    use_entities: true
+- mood_unhappy:
+    ignore_entities: []
+    use_entities: true
+- bot_challenge:
+    ignore_entities: []
+    use_entities: true
+- movie_match_director:
+    ignore_entities: []
+    use_entities: true
+- movie_match_actor:
+    ignore_entities: []
+    use_entities: true
+- movie_match_year:
+    ignore_entities: []
+    use_entities: true
+- movie_match_genre:
+    ignore_entities: []
+    use_entities: true
+- movie_match_several_criteria:
+    ignore_entities: []
+    use_entities: true
+- movie_match_rating:
+    ignore_entities: []
+    use_entities: true
+- get_director_by_movie_title:
+    ignore_entities: []
+    use_entities: true
+- get_actor_by_movie_title:
+    ignore_entities: []
+    use_entities: true
+- get_year_by_movie_title:
+    ignore_entities: []
+    use_entities: true
+- get_genre_by_movie_title:
+    ignore_entities: []
+    use_entities: true
+- get_rating_by_movie_title:
+    ignore_entities: []
+    use_entities: true
+- get_movie_attributes:
+    ignore_entities: []
+    use_entities: true
+slots:
+  actor:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  director:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  genre:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  movie_attribute:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  movie_title:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  rating:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+  requested_slot:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.UnfeaturizedSlot
+  time:
+    auto_fill: true
+    initial_value: null
+    type: rasa.core.slots.TextSlot
+templates:
+  utter_ask_actor:
+    - text: What is the name actor?
+  utter_ask_director:
+  - text: What is the name director?
+  utter_ask_genre:
+    - text: What is the genre?
+  utter_ask_movie_attribute:
+    - text: What is the attributes of the movie?
+  utter_ask_movie_title:
+    - text: What is the title of the movie?
+  utter_ask_rating:
+    - text: What is the rating?
+  utter_ask_time:
+    - text: What is the year?
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_default:
+  - text: sorry, I didn't get that, can you rephrase it?
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_goodbye:
+  - text: Bye
+  utter_greet:
+  - text: Hey! How are you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_movie_match_actor_result:
+    - text: 'Finding movies with Actor name: {actor}'
+  utter_movie_match_director_result:
+    - text: 'Finding movies with Director name: {director}'
+  utter_movie_match_genre_result:
+    - text: 'Finding movies of this Genre: {genre}'
+  utter_movie_match_rating_result:
+    - text: 'Finding movies with the Rating: {rating}'
+  utter_movie_match_year_result:
+    - text: 'Finding movies of this Year: {time}'

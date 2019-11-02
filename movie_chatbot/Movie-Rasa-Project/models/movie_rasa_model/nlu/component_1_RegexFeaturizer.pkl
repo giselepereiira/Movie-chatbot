@@ -1,0 +1,22 @@
+[
+    {
+        "name": "year_of_movie",
+        "pattern": "\\b(19|20)\\d{2}\\b"
+    },
+    {
+        "name": "director",
+        "pattern": "(?i)(\\bquentin\\ tarantino\\b|\\bingmar\\ bergman\\b)"
+    },
+    {
+        "name": "actor",
+        "pattern": "(?i)(\\btom\\ cruise\\b|\\beddie\\ murphy\\b)"
+    },
+    {
+        "name": "movie_type",
+        "pattern": "(?i)(\\bcomedy\\b|\\baction\\b)"
+    },
+    {
+        "name": "movie_language",
+        "pattern": "(?i)(\\bfrench\\b)"
+    }
+]

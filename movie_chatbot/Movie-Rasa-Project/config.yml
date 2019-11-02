@@ -1,0 +1,18 @@
+language: en
+pipeline:
+  - name: SpacyNLP
+  - name: SpacyTokenizer
+  - name: SpacyFeaturizer
+  - name: RegexFeaturizer
+  - name: CRFEntityExtractor
+  - name: DucklingHTTPExtractor
+    url: http://localhost:8000
+    dimensions:
+      - time
+  - name: EntitySynonymMapper
+  - name: SklearnIntentClassifier
+policies:
+  - name: MemoizationPolicy
+  - name: KerasPolicy
+  - name: MappingPolicy
+  - name: FormPolicy
