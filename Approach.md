@@ -9,13 +9,13 @@ Retrieve movie(s) that match one or more criteria (director name, actor name, ye
 
 ### Rasa setup
 
-- Defined intents: movie_match_director, movie_match_actor, movie_match_year, movie_match_genre, movie_match_several_criteria, movie_match_rating
+- Defined intents: movie_match_director, movie_match_actor, movie_match_year, movie_match_genre, movie_match_several_criteria, movie_match_rating.
 
-- Entities: through lookup tables director, actor, genre. To populate the training dataset, the samples retrieved using the IMDB dataset. This dataset has a table with movie ratings that provides the rating and the number of votes for each movie. So, it was decided to sum the number of votes per movie title to retrieve the most known/watched movies and the actors/actresses/directs who participated in these movies.  (see `actor_names.txt`, `director_names.txt`, `genres_list.txt`)
+- Entities: through lookup tables director, actor, genre. To populate the training dataset, the samples retrieved using the IMDB dataset. This dataset has a table with movie ratings that provides the rating and the number of votes for each movie. So, it was decided to sum the number of votes per movie title to retrieve the most known/watched movies and the actors/actresses/directs who participated in these movies (see `actor_names.txt`, `director_names.txt`, `genres_list.txt`).
 
-- Stories: search movie by director, search movie by actor, search movie by year, search movie by genre, search movie by several criteria, search movie with rating
+- Stories: search movie by director, search movie by actor, search movie by year, search movie by genre, search movie by several criteria, search movie with rating.
 
-- Form actions: movie_match_director_form, movie_match_actor_form, movie_match_year_form, movie_match_genre_form, action_match_several_criteria_search_movie, movie_match_rating_form
+- Form actions: movie_match_director_form, movie_match_actor_form, movie_match_year_form, movie_match_genre_form, action_match_several_criteria_search_movie, movie_match_rating_form.
 
 - Custom actions: action_match_director_search_movie, action_match_actor_search_movie, action_match_year_search_movie, action_match_genre_search_movie, action_match_several_criteria_search_movie, action_match_rating_search_movie.
 
@@ -71,13 +71,13 @@ Answer general questions about movies.
 
 ### Rasa Setup
 
-- Defined intents: get_director_by_movie_title, get_actor_by_movie_title, get_year_by_movie_title, get_genre_by_movie_title, get_rating_by_movie_title
+- Defined intents: get_director_by_movie_title, get_actor_by_movie_title, get_year_by_movie_title, get_genre_by_movie_title, get_rating_by_movie_title.
 
-- Entities: through lookup table movie title (see `movie_titles.txt`)
+- Entities: through lookup table movie title (see `movie_titles.txt`).
 
-- Stories: search director with movie title, search actor with movie title, search year with movie title, search genre with movie title, search rating with movie title
+- Stories: search director with movie title, search actor with movie title, search year with movie title, search genre with movie title, search rating with movie title.
 
-- Form actions: get_director_by_movie_title_form, get_actor_by_movie_title_form, get_year_by_movie_title_form, get_genre_by_movie_title_form, get_rating_by_movie_title_form
+- Form actions: get_director_by_movie_title_form, get_actor_by_movie_title_form, get_year_by_movie_title_form, get_genre_by_movie_title_form, get_rating_by_movie_title_form.
 
 - Custom actions: action_get_director_by_movie_title, action_get_actor_by_movie_title, action_get_year_by_movie_title, action_get_genre_by_movie_title, action_get_rating_by_movie_title.
 
@@ -87,7 +87,7 @@ Answer general questions about movies.
  
 - Url Parameters:
 
-    - movie_title: the movie title we want to obtain information
+    - movie_title: the movie title we want to obtain information.
 
 ### Database
 
@@ -100,15 +100,15 @@ Suggest movies based on their characteristics.
 
 ### Rasa setup
 
-- Defined intents: get_movie_attributes
+- Defined intents: get_movie_attributes.
 
-- Entities: through lookup tables  of movie_attribute
+- Entities: through lookup tables  of movie_attribute.
 
-- Stories: search for movies based on its attributes
+- Stories: search for movies based on its attributes.
 
-- Form actions: get_movie_based_attribute_form
+- Form actions: get_movie_based_attribute_form.
 
-- Custom actions: action_get_movie_based_attribute
+- Custom actions: action_get_movie_based_attribute.
 
 ### MovieSearchAPI  - endpoint specification: Get Movie given an attribute
 
@@ -130,7 +130,7 @@ Suggest movies based on their characteristics.
     
     - top_rated: integer representing the number of movies that should be returned, sorted by highest rating.
 
-All of these parameters are optional except for movie_attribute.g
+All of these parameters are optional except for movie_attribute.
 
 
 ### Database
@@ -143,9 +143,9 @@ Before searching the query words, it was done a  sentiment analysis on the movie
 
 - If the sentiment is negative: search on inverted index calculated on kaggle database negative reviews;
 
-- If the sentiment is positive:  search on inverted index calculated on kaggle database positive reviews
+- If the sentiment is positive:  search on inverted index calculated on kaggle database positive reviews;
 
-- If the sentiment is neutral:  search on inverted index calculated on cmu database plot summaries
+- If the sentiment is neutral:  search on inverted index calculated on cmu database plot summaries.
 
 
 ## Sources
