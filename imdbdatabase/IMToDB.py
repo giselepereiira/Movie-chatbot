@@ -1,9 +1,9 @@
-from imdbdatabase.database.DatabaseConstants import session, connection_from
-from imdbdatabase.database.TableCreationHelper import createConnections
-from imdbdatabase.database.TablesDefinition import title, people, rating, akas, principals
+from imdbdatabase.DatabaseConstants import session, connection_from
+from imdbdatabase.TableCreationHelper import createConnections
+from imdbdatabase.TablesDefinition import title, people, rating, principals
 
 # Define which tables should be imported
-to_import = [title, people, rating, akas, principals]
+to_import = [title, people, rating, principals]
 
 def copy_from(file, table):
     file.readline()

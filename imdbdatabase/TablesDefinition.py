@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Table, MetaData, String, Integer, Boolean, Text, Float
 
-from imdbdatabase.database.DatabaseConstants import engine
+from imdbdatabase.DatabaseConstants import engine
 
 metadata = MetaData()
 
@@ -15,7 +15,7 @@ title_table = Table('title', metadata,
   Column('runtimeMinutes', Integer),
   Column('genres', Text),)
 
-title = {"file": "C:\\Users\\Gisele\\git\\TDX-UC-NLP-DSAcademy\\dataset\\title.basics.tsv",
+title = {"file": "..\\dataset\\title.basics.tsv",
          "name": title_table.name}
 
 people_table = Table('people', metadata,
@@ -26,7 +26,7 @@ people_table = Table('people', metadata,
                      Column('primaryProfession', Text),
                      Column('knownForTitles', Text),)
 
-people = {"file": "C:\\Users\\Gisele\\git\\TDX-UC-NLP-DSAcademy\\dataset\\name.basics.tsv",
+people = {"file": "..\\dataset\\name.basics.tsv",
          "name": people_table.name}
 
 title_crew_table = Table('title_crew', metadata,
@@ -34,7 +34,7 @@ title_crew_table = Table('title_crew', metadata,
                            Column('directors', String),
                            Column('writers', String))
 
-crew = {"file": "C:\\Users\\Gisele\\git\\TDX-UC-NLP-DSAcademy\\dataset\\title.crew.tsv",
+crew = {"file": "..\\dataset\\title.crew.tsv",
          "name": title_crew_table.name}
 
 title_rating_table = Table('title_ratings', metadata,
@@ -54,19 +54,5 @@ title_principals_table = Table('title_principals', metadata,
                                Column('characters', String))
 principals = {"file": "../dataset/title.principals.tsv.tsv",
               "name": title_principals_table.name}
-
-title_akas_table = Table('title_akas', metadata,
-                         Column('titleId', String),
-                         Column('ordering', String),
-                         Column('title', String),
-                         Column('region', String),
-                         Column('language', String),
-                         Column('types', String),
-                         Column('attributes', String),
-                         Column('isOriginalType', Integer))
-
-akas = {"file": "..\\dataset\\title.akas.tsv.tsv",
-        "name": title_akas_table.name}
-
 
 metadata.create_all(engine)
