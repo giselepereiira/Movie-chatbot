@@ -17,6 +17,9 @@ sid = SentimentIntensityAnalyzer()
 
 app = Flask(__name__)
 
+HOST = '127.0.0.1'
+PORT = 9001
+
 # used in every method
 HTTP_REST_EMPTY = Response(response=json.dumps([], ensure_ascii=False).encode('utf-8'),
                            status=200,
@@ -304,4 +307,4 @@ with open('kaggledatabase\\review_neg_index' + '.pkl', 'rb') as f:
     inverted_index_kaggle_neg = pickle.load(f)
 
 connection = engine.connect()
-app.run(host='127.0.0.1', port=9001)
+app.run(host=HOST, port=PORT)
