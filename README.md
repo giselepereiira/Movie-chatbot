@@ -33,7 +33,7 @@ This dataset contains 50,000 reviews movie reviews along with their associated b
 
 For Rasa server to obtain the necessary data, it was decided to isolate the server that performs the necessary queries in the database. Thus, a REST API was created with endpoints that return the required information asked by a user to the bot. 
 
-For that purpose, Flask [^1] , a python web framework was used.
+For that purpose, Flask, a python web framework was used.
 
 ### Rasa description (movie_chatbot)
 
@@ -125,6 +125,8 @@ ngrok http 5002
 ```
 Now, you have no reason not to choose the best movie!
 
-## References
-[^1] : https://www.fullstackpython.com/flask.html
+## Sources
+1. [Flask] (https://www.fullstackpython.com/flask.html)
+2. [Rasa] (https://rasa.com/)
+3. [Rasa X] (https://rasa.com/docs/rasa-x/)
 
