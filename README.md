@@ -123,7 +123,7 @@ For exposing your local web server, please install ngrok and run
 ```
 ngrok http 5002
 ```
-Now, you have no reason to not choose the best movie!
+Now, you have no reason not to choose the best movie!
 
 ## References
 
