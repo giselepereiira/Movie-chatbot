@@ -59,7 +59,7 @@ The available datasets from IMDB, have been chosen to implement the capabilities
 
 - Title.principals - relation between titles and people.
 
-Given a large amount of data, the data was imported into a dataset since it would bring more performance of chatbot. For this purpose, a relational database - Postgres - was chosen since it can be easily tuned to answer any query in a timely manner [1] (1 second). The application ETL used was the Python SQLAlchemy library [2] to create and managed the tables listed above.
+Given a large amount of data, the data was imported into a dataset since it would bring more performance of chatbot. For this purpose, a relational database - Postgres - was chosen since it can be easily tuned to answer any query in a timely manner (1 second). The application ETL used was the Python SQLAlchemy library to create and managed the tables listed above.
 
 **Database tuning**
 

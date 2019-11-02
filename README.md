@@ -2,9 +2,10 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Project Structure](#project-structure)
-3. [Setup](#setup)
-4. [Sources](#sources)
+2. [Architecture](#architecture)
+3. [Project Structure](#project-structure)
+4. [Setup](#setup)
+5. [Sources](#sources)
 
 ##  Introduction 
 This conversational AI chatbot was created to simplify the search for a movie to watch. Its capabilities are divided into three parts:
@@ -17,6 +18,9 @@ This conversational AI chatbot was created to simplify the search for a movie to
 
 These three capabilities are further explained [here](Approach.md).
 
+##  Architecture  
+
+![Architecture](ArchitectureDiagram.png)
 
 ## Project Structure
 - cmudatabase
