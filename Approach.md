@@ -58,7 +58,7 @@ Given a large amount of data, the data was imported into a dataset since it woul
 **Database tuning**
 
 To improve query performance, it has been found that for this project, some data would have not been necessary, and should be discarded. There was a need to clear and shorten the dataset as it contains, for example, series episodes. Thus, for this purpose, titles other than films were not considered. As well as all people and ratings not linked to any of the films that resulted from the previous dataset cleanup. Also, it has been decided to merge the rating column to the title table, once its relation is one-to-one.
-Besides this data shrunk, resulting in a smaller amount of data, two full-text-search indexes have been created (Generalized Inverted Index)[1] on two columns: name of (movie) title and name of people (actors, actresses and directors), to make name search faster.
+Besides this data shrunk, resulting in a smaller amount of data, two full-text-search indexes have been created (Generalized Inverted Index) on two columns: name of (movie) title and name of people (actors, actresses and directors), to make name search faster.
 After all this data processing, the entity-relationship model is the following:
 
 ![Diagram](ER.png)
@@ -147,5 +147,13 @@ Before searching the query words, it was done a  sentiment analysis on the movie
 
 - If the sentiment is neutral:  search on inverted index calculated on cmu database plot summaries
 
+
+## Sources
+
+1. [SQLAlchemy](https://www.sqlalchemy.org/)
+ 
+2. [Generalized Inverted Index Postgres](https://www.postgresql.org/docs/9.5/gin-intro.html)
+
+3. [Simplifying Sentiment Analysis using VADER in Python](https://medium.com/analytics-vidhya/simplifying-social-media-sentiment-analysis-using-vader-in-python-f9e6ec6fc52f)
 
 
