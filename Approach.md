@@ -11,7 +11,7 @@ Retrieve movie(s) that match one or more criteria (director name, actor name, ye
 
 - Defined intents: movie_match_director, movie_match_actor, movie_match_year, movie_match_genre, movie_match_several_criteria, movie_match_rating
 
-- Entities: through lookup tables director, actor, genre. To populate the training dataset, the samples retrieved using the IMDB dataset. This dataset has a table with movie ratings that provides the rating and the number of votes for each movie. So, it was decided to sum the number of votes per movie title to retrieve the most known/watched movies and the actors/actresses/directs who participated in these movies.  (see files …)
+- Entities: through lookup tables director, actor, genre. To populate the training dataset, the samples retrieved using the IMDB dataset. This dataset has a table with movie ratings that provides the rating and the number of votes for each movie. So, it was decided to sum the number of votes per movie title to retrieve the most known/watched movies and the actors/actresses/directs who participated in these movies.  (see `actor_names.txt`, `director_names.txt`, `genres_list.txt`)
 
 - Stories: search movie by director, search movie by actor, search movie by year, search movie by genre, search movie by several criteria, search movie with rating
 
@@ -73,7 +73,7 @@ Answer general questions about movies.
 
 - Defined intents: get_director_by_movie_title, get_actor_by_movie_title, get_year_by_movie_title, get_genre_by_movie_title, get_rating_by_movie_title
 
-- Entities: through lookup table movie title (see files …)
+- Entities: through lookup table movie title (see `movie_titles.txt`)
 
 - Stories: search director with movie title, search actor with movie title, search year with movie title, search genre with movie title, search rating with movie title
 
