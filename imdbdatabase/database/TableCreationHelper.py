@@ -1,4 +1,4 @@
-from imdbimporter.database.DatabaseConstants import connection_from
+from imdbdatabase.database.DatabaseConstants import connection_from
 
 
 def createConnections():

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Integer
 
-from imdbimporter.database.DatabaseConstants import Base
+from imdbdatabase.database.DatabaseConstants import Base
+
 
 class Title(Base):
     __tablename__ = 'title'

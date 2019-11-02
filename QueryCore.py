@@ -8,7 +8,7 @@ import pandas as pd
 from flask import Flask, Response, request
 
 from InvertedIndexUtils import ranked_retrieval
-from imdbimporter.database.DatabaseConstants import engine
+from imdbdatabase.database.DatabaseConstants import engine
 
 nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer

@@ -1,6 +1,6 @@
-from imdbimporter.database.DatabaseConstants import session, connection_from
-from imdbimporter.database.TableCreationHelper import createConnections
-from imdbimporter.database.TablesDefinition import title, people, rating, akas, principals
+from imdbdatabase.database.DatabaseConstants import session, connection_from
+from imdbdatabase.database.TableCreationHelper import createConnections
+from imdbdatabase.database.TablesDefinition import title, people, rating, akas, principals
 
 # Define which tables should be imported
 to_import = [title, people, rating, akas, principals]

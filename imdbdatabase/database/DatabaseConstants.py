@@ -6,10 +6,10 @@ from sqlalchemy.orm import sessionmaker
 metadata = MetaData()
 
 db_config = {'drivername': 'postgres',
-             'username': 'tdx',
-             'password': 'challenge_nlp',
+             'username': 'postgres',
+             'password': 'farejinhas',
              'host': 'localhost',
-             'database': 'chatbot',
+             'database': 'chatbot_database',
              'port': 5432}
 db_string = URL(**db_config)
 # Create all tables defined before.

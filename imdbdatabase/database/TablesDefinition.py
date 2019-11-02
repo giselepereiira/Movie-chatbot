@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Table, MetaData, String, Integer, Boolean, Text, Float
 
-from imdbimporter.database.DatabaseConstants import engine
+from imdbdatabase.database.DatabaseConstants import engine
 
 metadata = MetaData()
 

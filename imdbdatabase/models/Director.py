@@ -1,7 +1,7 @@
 from sqlalchemy import Text, Column, Integer, String
-from sqlalchemy.orm import relationship
 
-from imdbimporter.database.DatabaseConstants import Base
+from imdbdatabase.database.DatabaseConstants import Base
+
 
 class People(Base):
     id = Column('nconst', String, primary_key=True),
