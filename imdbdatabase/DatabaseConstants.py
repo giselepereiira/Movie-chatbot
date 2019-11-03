@@ -7,7 +7,7 @@ metadata = MetaData()
 
 db_config = {'drivername': 'postgres',
              'username': 'postgres',
-             'password': 'farejinhas',
+             'password': 'postgres',
              'host': 'localhost',
              'database': 'chatbot_database',
              'port': 5432}

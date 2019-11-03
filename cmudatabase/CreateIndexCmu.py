@@ -1,6 +1,6 @@
 import pickle
 
-from cmudatabase.Importer import get_data
+from cmudatabase.ImporterCmu import get_data
 
 save_index = False
 

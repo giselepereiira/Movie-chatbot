@@ -5,7 +5,7 @@ import pandas as pd
 
 from TextProcessingUtils import clean_text
 
-path = "C:\\Users\\Gisele\\Downloads\\aclImdb\\"
+path = "C:\\Users\\Gisele\\Downloads\\aclImdb\\"  # Your path here
 
 url_pos = []
 with open(path + "train\\urls_pos.txt", encoding="latin1") as f:
