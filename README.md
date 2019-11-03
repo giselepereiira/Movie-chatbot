@@ -27,17 +27,28 @@ These three capabilities are further explained [here](Approach.md).
 - imdbdatabase
 - kaggledatabase
 - movie_chatbot
-- Utility functions: InvertedIndexUtils.py and TextProcessingUtils.py
+- InvertedIndexUtils.py and TextProcessingUtils.py (Utility functions)
 - MovieSearchAPI.py 
 
-### Database description 
 
-- imdbdatabase: can be obtained through https://www.imdb.com/interfaces/. This dataset contains title information, rating, and people information.
+### Database description and setup
 
-- kaggledatabase: can be obtained through https://www.kaggle.com/iarunava/imdb-movie-reviews-dataset
-This dataset contains 50,000 reviews movie reviews along with their associated binary sentiment polarity labels. A negative review has a score <= 4 out of 10, and a positive review has a score >= 7 out of 10. The review is associated with the IMDB URL, where the movie IMDB ID can be directly obtained.
+- folder **imdbdatabase**:  The IMDB dataset contains title information, rating, and people information. 
 
-- cmudatabase: can be obtained through http://www.cs.cmu.edu/~ark/personas/ contains plot summaries of 42,306 movies extracted from Wikipedia, as well as, movie attributes of 81,741 movies extracted from Freebase (movie name, release date, genres, etc).
+To setup this dataset, download the files available at https://www.imdb.com/interfaces/ and extract them in a new folder named “dataset” on the root of the project. 
+
+Install PostgreSQL (https://www.postgresql.org/download/) and create a new database of your choice. After, it is needed to define the database configurations on variable db_config on `DatabaseConstants.py`. To import the data, just run `IMToDB.py` (Disclaimer: this process takes a long time).
+
+- folder **kaggledatabase**: The kaggle dataset contains 50,000 movie reviews along with their associated binary sentiment polarity labels. A negative review has a score <= 4 out of 10, and a positive review has a score >= 7 out of 10. The review is associated with the IMDB URL, where the movie IMDB ID can be directly obtained. 
+
+To setup this dataset, download the files available at https://www.kaggle.com/iarunava/imdb-movie-reviews-dataset and extract them to kaggledatabase folder. Run `ImporterKaggle.py` and change the variable path. Then, run `CreateIndexKaggle.py` for positive reviews and negative reviews.
+
+
+- folder **cmudatabase**: The CMU database contains plot summaries of 42,306 movies extracted from Wikipedia, as well as, movie attributes if 81,741 movies extracted from Freebase (movie name, release date, genres, etc).
+
+To setup this dataset, download the files available at  http://www.cs.cmu.edu/~ark/personas/ and extract them on cmudatabase folder. Following, run `ImporterCmu.py` and `CreateIndexCmu.py`.
+
+
 
 ### MovieSearchAPI
 
@@ -90,6 +101,7 @@ For dialogue training, Rasa has four main components:
 confidence. The `FallbackPolicy` invokes a fallback action if the requirements nlu_threshold and core_threshold are not met. In this case, the bot will respond with “utter_default”.
 
     * Actions (`actions.py`): has the custom and the form actions defined. In the form action, the bot keeps asking for more details to get all the required entities to fulfil the retrieval. In the custom action, the Movie Search API is invoked via REST API (`MovieSearchAPI.py`) for querying the database to get the information - used to simulate a third party API interaction.
+
 
 ## Setup
 1. First, it is needed to install python 3, create and activate a virtual environment. Using venv:
