@@ -31,7 +31,7 @@ These three capabilities are further explained [here](Approach.md).
 - kaggledatabase
 - movie_chatbot
 - utils
-- MovieSearchAPI.py 
+- api
 
 
 ### Database description and setup
@@ -46,20 +46,19 @@ Install PostgreSQL (https://www.postgresql.org/download/) and create a new datab
 
 To setup this dataset, download the files available at https://www.kaggle.com/iarunava/imdb-movie-reviews-dataset and extract them to kaggledatabase folder. Run `ImporterKaggle.py` and change the variable path. Then, run `CreateIndexKaggle.py` for positive reviews and negative reviews.
 
-
 - folder **cmudatabase**: The CMU database contains plot summaries of 42,306 movies extracted from Wikipedia, as well as, movie attributes if 81,741 movies extracted from Freebase (movie name, release date, genres, etc).
 
-To setup this dataset, download the files available at  http://www.cs.cmu.edu/~ark/personas/ and extract them on cmudatabase folder. Following, run `ImporterCmu.py` and `CreateIndexCmu.py`.
+To setup this dataset, download the files available at http://www.cs.cmu.edu/~ark/personas/ and extract them on cmudatabase folder. Following, run `ImporterCmu.py` and `CreateIndexCmu.py`.
 
 
 
-### MovieSearchAPI
+### MovieSearchAPI (folder api)
 
 For Rasa server to obtain the necessary data, it was decided to isolate the server that performs the necessary queries in the database. Thus, a REST API was created with endpoints that return the required information asked by a user to the bot. 
 
 For that purpose, Flask, a python web framework was used.
 
-### Rasa description (movie_chatbot)
+### Rasa description (folder movie_chatbot)
 
 The machine learning framework used in this project was Rasa (open source).
 Rasa has two main modules:
