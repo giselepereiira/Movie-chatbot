@@ -7,7 +7,8 @@ import nltk
 import pandas as pd
 from flask import Flask, Response, request
 
-from InvertedIndexUtils import ranked_retrieval
+from Utils.InvertedIndexUtils import ranked_retrieval
+from Utils.TextProcessingUtils import clean_text
 from imdbdatabase.DatabaseConstants import engine
 
 nltk.download('vader_lexicon')
@@ -177,7 +178,7 @@ def get_movie_based_on_attribute():
     actor_name = request.args.get(ACTOR_NAME)
     top_rated = request.args.get(TOP_RATED)
 
-    sentiment_scores = sid.polarity_scores(movie_attribute)
+    sentiment_scores = sid.polarity_scores(clean_text(movie_attribute))
 
     if sentiment_scores['neg'] > sentiment_scores['pos'] and sentiment_scores['neg'] > sentiment_scores['neu']:
         # This is negative feeling
