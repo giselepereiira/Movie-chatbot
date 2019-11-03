@@ -2,8 +2,17 @@
 
 ## Table of Contents
 1. [Capability 1](#capability-1)
+    - [Rasa setup](#1--rasa-setup)
+    - [Endpoint specification](#1---moviesearchapi---endpoint-specification-get-movie-given-a-criteria)
+    - [Database](#1---database)
 2. [Capability 2](#capability-2)
+    - [Rasa setup](#2--rasa-setup)
+    - [Endpoint specification](#2---moviesearchapi---endpoint-specification-get-movie-information-given-its-title)
+    - [Database](#2---database)
 3. [Capability 3](#capability-3)
+    - [Rasa setup](#3--rasa-setup)
+    - [Endpoint specification](#3---moviesearchapi----endpoint-specification-get-movie-given-an-attribute)
+    - [Database](#3---database)
 4. [Sources](#sources)
 
 Let's explain the three capabilities of the movie chatbot claimed at the Introduction. 
@@ -13,7 +22,7 @@ The explanation is divided into **Rasa setup**, **Endpoint specification** and *
 
 Retrieve movie(s) that match one or more criteria (director name, actor name, year, genre and rating).
 
-### Rasa setup
+### 1 - Rasa setup
 
 - Defined intents: movie_match_director, movie_match_actor, movie_match_year, movie_match_genre, movie_match_several_criteria, movie_match_rating.
 
@@ -25,7 +34,7 @@ Retrieve movie(s) that match one or more criteria (director name, actor name, ye
 
 - Custom actions: action_match_director_search_movie, action_match_actor_search_movie, action_match_year_search_movie, action_match_genre_search_movie, action_match_several_criteria_search_movie, action_match_rating_search_movie.
 
-### MovieSearchAPI - endpoint specification: Get Movie given a criteria
+### 1 - MovieSearchAPI - endpoint specification: Get Movie given a criteria
 
 
 - Url: _GET HOST:PORT/list-movie_
@@ -47,7 +56,7 @@ Retrieve movie(s) that match one or more criteria (director name, actor name, ye
 All of these parameters are optional.
 
 
-### Database
+### 1 - Database
 
 The available datasets from IMDB, have been chosen to implement the capabilities 1 and 2 since they gather the following needed entities:
 
@@ -75,7 +84,7 @@ After all this data processing, the entity-relationship model is the following:
 
 Answer general questions about movies.
 
-### Rasa Setup
+### 2 - Rasa Setup
 
 - Defined intents: get_director_by_movie_title, get_actor_by_movie_title, get_year_by_movie_title, get_genre_by_movie_title, get_rating_by_movie_title.
 
@@ -87,7 +96,7 @@ Answer general questions about movies.
 
 - Custom actions: action_get_director_by_movie_title, action_get_actor_by_movie_title, action_get_year_by_movie_title, action_get_genre_by_movie_title, action_get_rating_by_movie_title.
 
-### MovieSearchAPI - endpoint specification: Get Movie Information given its title
+###  2 - MovieSearchAPI - endpoint specification: Get Movie Information given its title
 
 - Url: _GET HOST:PORT/movie-info_
  
@@ -95,7 +104,7 @@ Answer general questions about movies.
 
     - movie_title: the movie title we want to obtain information.
 
-### Database
+### 2 - Database
 
 See Database capability 1.
 
@@ -104,7 +113,7 @@ See Database capability 1.
 
 Suggest movies based on their characteristics.
 
-### Rasa setup
+### 3 -  Rasa setup
 
 - Defined intents: get_movie_attributes.
 
@@ -116,7 +125,7 @@ Suggest movies based on their characteristics.
 
 - Custom actions: action_get_movie_based_attribute.
 
-### MovieSearchAPI  - endpoint specification: Get Movie given an attribute
+### 3 - MovieSearchAPI  - endpoint specification: Get Movie given an attribute
 
 - Url: _GET HOST:PORT/movie-with-attribute_
 
@@ -139,7 +148,7 @@ Suggest movies based on their characteristics.
 All of these parameters are optional except for movie_attribute.
 
 
-### Database
+### 3 - Database
 
 For this stage, the corpus was composed by plots summaries (from cmu database) and movie reviews (from kaggle database). To all these documents, a text processing pipeline was applied to clean the text in order to reduce the vocabulary (Case folding, Special chars cleanup, Tokenization, Stop word removal, Stemming). For all the plots and reviews, it was created an inverted index. Conceptually, the index will consist of rows with one word per row and each entry should be another dictionary by document id with a list of word positions in that document. Next, each document (plot/review) in the corpus were represented as a word vector. The value of a word in a document was calculated recurring to TF-IDF metric, where the TF represents the relative frequency of the term in the document and IDF, the logarithm base 10 of the inverse document frequency.
 
