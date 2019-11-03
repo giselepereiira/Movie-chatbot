@@ -4,7 +4,7 @@ import json
 import pandas as pd
 from tqdm import tqdm
 
-from Utils.TextProcessingUtils import clean_text
+from utils.TextProcessingUtils import clean_text
 
 
 def get_data():

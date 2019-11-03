@@ -3,7 +3,7 @@ import re
 
 import pandas as pd
 
-from Utils.TextProcessingUtils import clean_text
+from utils.TextProcessingUtils import clean_text
 
 path = "C:\\Users\\Gisele\\Downloads\\aclImdb\\"  # Your path here
 

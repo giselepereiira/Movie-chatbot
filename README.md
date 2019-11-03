@@ -30,7 +30,7 @@ These three capabilities are further explained [here](Approach.md).
 - imdbdatabase
 - kaggledatabase
 - movie_chatbot
-- InvertedIndexUtils.py and TextProcessingUtils.py (Utility functions)
+- utils
 - MovieSearchAPI.py 
 
 

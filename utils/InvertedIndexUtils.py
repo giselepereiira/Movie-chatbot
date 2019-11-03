@@ -1,6 +1,6 @@
 from math import log10
 
-from Utils.TextProcessingUtils import clean_text
+from utils.TextProcessingUtils import clean_text
 
 
 def TFIDF(term, document, d, number_of_docs):
