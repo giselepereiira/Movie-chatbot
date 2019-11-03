@@ -4,6 +4,9 @@
 1. [Introduction](#introduction)
 2. [Architecture](#architecture)
 3. [Project Structure](#project-structure)
+    - [Database description and setup](#database-description-and-setup)
+    - [MovieSearchAPI](#moviesearchapi)
+    - [Rasa description (movie_chatbot)](#rasa-description-movie_chatbot)
 4. [Setup](#setup)
 5. [Sources](#sources)
 
