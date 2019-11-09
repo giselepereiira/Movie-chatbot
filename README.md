@@ -58,6 +58,8 @@ For Rasa server to obtain the necessary data, it was decided to isolate the serv
 
 For that purpose, Flask, a python web framework was used.
 
+![APIDiagram](images/APIDiagram.png)
+
 ### Rasa description (folder movie_chatbot)
 
 The machine learning framework used in this project was Rasa (open source).

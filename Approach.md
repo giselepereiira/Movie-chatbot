@@ -78,7 +78,9 @@ After all this data processing, the entity-relationship model is the following:
 
 ![Diagram](images/ER.png)
 
+Example of Capability 1 flow:
  
+![Level1](images/Level1Diagram.png)
 
 ## Capability 2:
 
@@ -108,6 +110,10 @@ Answer general questions about movies.
 
 See Database capability 1.
 
+
+Example of Capability 2 flow:
+
+![Level2](images/Level2Diagram.png)
 
 ## Capability 3
 
@@ -162,6 +168,9 @@ Before searching the query words, it was done a  sentiment analysis on the movie
 
 - If the sentiment is neutral:  search on inverted index calculated on cmu database plot summaries.
 
+Example of Capability 3 flow:
+
+![Level3](images/Level3Diagram.png)
 
 ## Sources
 
