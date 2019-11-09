@@ -294,17 +294,16 @@ def get_movie_by_id(movie_id, genre, director_name, actor_name, year_start, year
     return result
 
 
-
-with open('cmudatabase\\movie_plot_index' + '.pkl', 'rb') as f:
+with open('..\\cmudatabase\\movie_plot_index' + '.pkl', 'rb') as f:
     inverted_index_cmu = pickle.load(f)
 
-with open('cmudatabase\\movie_all_data' + '.pkl', 'rb') as f:
+with open('..\\cmudatabase\\movie_all_data' + '.pkl', 'rb') as f:
     movie_data = pickle.load(f)
 
-with open('kaggledatabase\\review_pos_index' + '.pkl', 'rb') as f:
+with open('..\\kaggledatabase\\review_pos_index' + '.pkl', 'rb') as f:
     inverted_index_kaggle_pos = pickle.load(f)
 
-with open('kaggledatabase\\review_neg_index' + '.pkl', 'rb') as f:
+with open('..\\kaggledatabase\\review_neg_index' + '.pkl', 'rb') as f:
     inverted_index_kaggle_neg = pickle.load(f)
 
 connection = engine.connect()
