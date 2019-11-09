@@ -196,10 +196,12 @@ data\lookup-tables\movie_titles.txt
 - tell me movies that have [incredible landscapes and nature scenes](movie_attribute)
 - what films do you have that include [space travel and aliens](movie_attribute)?
 - tell me movies that have [awesome special effect](movie_attribute)
+- tell me movies that have [no special effect](movie_attribute)
 - tell me movies that have [cats and dogs](movie_attribute)
 
 ##lookup:movie_attribute
 - awesome special effect
+- no special effect
 - people love for the love story
 - incredible landscapes and nature scenes
 - space travel and aliens
